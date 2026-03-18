@@ -204,7 +204,7 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   return (
     <svg
       className="map-svg"
-      viewBox="0 0 840 340"
+      viewBox="-10 0 817 340"
       preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
       role="img"

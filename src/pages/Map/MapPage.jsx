@@ -9,8 +9,10 @@ export default function MapPage() {
   const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [selectedRegionName, setSelectedRegionName] = useState(null);
   const [zoom, setZoom] = useState(1);
-  const [zoomCenterX, setZoomCenterX] = useState(420); // Default center of SVG viewBox
+  const [zoomCenterX, setZoomCenterX] = useState(420);
   const [zoomCenterY, setZoomCenterY] = useState(170);
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
   
   const hoveredRegion = hoveredRegionId ? regionData[regionToIslandMap[hoveredRegionId]] : null;
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
@@ -20,12 +22,19 @@ export default function MapPage() {
   };
 
   const closeDetail = () => {
-    setHoveredRegionId(null);
-    setSelectedRegionId(null);
-    setSelectedRegionName(null);
+    // Smooth zoom out
     setZoom(1);
-    setZoomCenterX(420);
-    setZoomCenterY(170);
+    setPanX(0);
+    setPanY(0);
+    
+    // Reset state setelah animasi selesai
+    setTimeout(() => {
+      setHoveredRegionId(null);
+      setSelectedRegionId(null);
+      setSelectedRegionName(null);
+      setZoomCenterX(420);
+      setZoomCenterY(170);
+    }, 600);
   };
 
   const handleRegionClick = (regionId, regionName, centerX, centerY) => {
@@ -37,19 +46,31 @@ export default function MapPage() {
     });
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
-    setZoom(3);
+    
+    // Smooth zoom dengan center ke region yang diklik
+    const targetZoom = 2.5;
+    const viewBoxCenterX = 420;
+    const viewBoxCenterY = 170;
+    
+    // Hitung offset untuk center ke region
+    const offsetX = (viewBoxCenterX - centerX) * targetZoom;
+    const offsetY = (viewBoxCenterY - centerY) * targetZoom;
+    
+    setZoom(targetZoom);
     setZoomCenterX(centerX);
     setZoomCenterY(centerY);
+    setPanX(offsetX);
+    setPanY(offsetY);
   };
 
   return (
     <div className="map-page">
       <div className="map-hero">
+        <div className="map-hero-header">
+          <div className="section-label">Peta Interaktif</div>
+          <h2 className="map-info-title">Jelajahi <em>Indonesia</em></h2>
+        </div>
         <div className="map-hero-inner">
-          <div>
-            <div className="section-label">Peta Interaktif</div>
-            <h2 className="map-info-title">Jelajahi <em>Indonesia</em></h2>
-          </div>
           <div className="map-container full-map">
             <MapSVG 
               onRegionHover={showRegion} 
@@ -59,6 +80,8 @@ export default function MapPage() {
               zoom={zoom}
               zoomCenterX={zoomCenterX}
               zoomCenterY={zoomCenterY}
+              panX={panX}
+              panY={panY}
             />
           </div>
         </div>
