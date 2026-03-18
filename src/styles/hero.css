@@ -1,0 +1,110 @@
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 48px 60px;
+  gap: 60px;
+  position: relative; overflow: hidden;
+}
+[data-theme="dark"] .hero {
+  background: radial-gradient(ellipse at 80% 50%, rgba(45,106,79,0.15) 0%, transparent 55%),
+              radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+}
+[data-theme="light"] .hero {
+  background: radial-gradient(ellipse at 80% 50%, rgba(45,106,79,0.08) 0%, transparent 55%),
+              radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.06) 0%, transparent 50%);
+}
+.hero-left { position: relative; z-index: 2; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+  opacity: 0; animation: fadeUp .6s .2s forwards;
+}
+.hero-eyebrow::before { content:''; width: 28px; height: 1px; background: var(--gold); }
+.hero-title {
+  font-size: clamp(44px, 5.5vw, 78px);
+  font-weight: 800; line-height: 1.0;
+  color: var(--text); margin-bottom: 16px;
+  opacity: 0; animation: fadeUp .7s .35s forwards;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-title .outline { -webkit-text-stroke: 1.5px var(--gold); color: transparent; }
+.hero-desc {
+  font-size: 16px; line-height: 1.75;
+  color: var(--text2); max-width: 480px;
+  margin-bottom: 36px;
+  opacity: 0; animation: fadeUp .7s .5s forwards;
+}
+.hero-actions {
+  display: flex; gap: 14px; align-items: center;
+  margin-bottom: 48px;
+  opacity: 0; animation: fadeUp .7s .65s forwards;
+}
+.hero-stats {
+  display: flex; gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  opacity: 0; animation: fadeUp .7s .8s forwards;
+}
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; font-weight: 800; color: var(--gold); line-height: 1;
+}
+.stat-label { font-size: 12px; color: var(--text2); margin-top: 3px; }
+
+.hero-right {
+  position: relative; height: 540px;
+  opacity: 0; animation: fadeUp .8s .4s forwards;
+}
+.hero-img-main {
+  position: absolute; right: 0; top: 0;
+  width: 72%; height: 380px;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.hero-img-sm1 {
+  position: absolute; left: 0; bottom: 40px;
+  width: 48%; height: 220px;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--bg);
+}
+.hero-img-sm2 {
+  position: absolute; right: 0; bottom: 0;
+  width: 38%; height: 160px;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 3px solid var(--bg);
+}
+.img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; font-size: 13px;
+  font-weight: 600; color: rgba(255,255,255,0.7);
+}
+.img-placeholder.p1 { background: linear-gradient(135deg,#1A2F1E,#2D6A4F); }
+.img-placeholder.p2 { background: linear-gradient(135deg,#2A1A10,#6B3A1A); }
+.img-placeholder.p3 { background: linear-gradient(135deg,#1A1A35,#3A2A6A); }
+[data-theme="light"] .img-placeholder.p1 { background: linear-gradient(135deg,#C8E6C9,#81C784); color: #1B5E20; }
+[data-theme="light"] .img-placeholder.p2 { background: linear-gradient(135deg,#FFE0B2,#FFAB40); color: #4E2A00; }
+[data-theme="light"] .img-placeholder.p3 { background: linear-gradient(135deg,#E8EAF6,#9FA8DA); color: #1A237E; }
+.img-tag {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
+  color: #fff; font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+[data-theme="light"] .img-tag { background: rgba(255,255,255,0.75); color: #1A1408; border-color: rgba(0,0,0,0.1); }
+.hero-badge {
+  position: absolute; top: 24px; left: -16px;
+  background: var(--gold); color: #1A1408;
+  font-size: 11px; font-weight: 700;
+  padding: 8px 14px; border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.4);
+}
+[data-theme="light"] .hero-desc { color: var(--text2); }
+[data-theme="light"] .stat-label { color: var(--text2); }

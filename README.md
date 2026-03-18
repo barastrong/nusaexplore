@@ -1,16 +1,84 @@
-# React + Vite
+# NusaExplore - Platform Edukasi Budaya Indonesia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Platform interaktif untuk menjelajahi kekayaan budaya Indonesia dengan peta interaktif dan game edukatif.
 
-Currently, two official plugins are available:
+## 🚀 Teknologi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19.2.4
+- React Router DOM 7.13.1
+- Vite 8.0.0
 
-## React Compiler
+## 📁 Struktur Project
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+src/
+├── components/          # Komponen reusable
+│   ├── Map/            # Komponen peta
+│   ├── Navbar.jsx
+│   ├── Hero.jsx
+│   ├── Marquee.jsx
+│   ├── CultureGrid.jsx
+│   ├── Features.jsx
+│   ├── Quote.jsx
+│   ├── CTA.jsx
+│   └── Footer.jsx
+├── pages/              # Halaman utama
+│   ├── HomePage.jsx
+│   ├── Map/
+│   │   └── MapPage.jsx
+│   └── Games/
+│       ├── GamesPage.jsx
+│       ├── QuizGame.jsx
+│       └── PuzzleGame.jsx
+├── data/               # Data dummy
+│   ├── regionData.js
+│   ├── quizData.js
+│   └── puzzleData.js
+└── styles/             # CSS per komponen
+    ├── theme.css
+    ├── navbar.css
+    ├── hero.css
+    ├── marquee.css
+    ├── culture.css
+    ├── features.css
+    ├── map.css
+    ├── games.css
+    └── sections.css
+```
 
-## Expanding the ESLint configuration
+## 🎨 Fitur
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Peta Interaktif** - Jelajahi budaya Indonesia per wilayah
+2. **Quiz Budaya** - Uji pengetahuan tentang budaya Indonesia
+3. **Puzzle Nusantara** - Susun kepingan gambar budaya
+4. **Dark/Light Mode** - Toggle tema sesuai preferensi
+
+## 🛠️ Instalasi
+
+```bash
+# Install dependencies
+npm install
+
+# Jalankan development server
+npm run dev
+
+# Build untuk production
+npm run build
+```
+
+## 📝 Catatan
+
+- Data yang digunakan adalah data dummy untuk demonstrasi
+- Peta menggunakan SVG sederhana untuk representasi wilayah Indonesia
+- Semua komponen sudah terpisah untuk memudahkan maintenance
+
+## 🎯 Cara Penggunaan
+
+1. **Beranda** - Lihat overview platform
+2. **Jelajah** - Klik wilayah di peta untuk melihat detail budaya
+3. **Games** - Pilih Quiz atau Puzzle untuk bermain
+4. **Theme Toggle** - Klik icon bulan/matahari di navbar
+
+## 📄 License
+
+MIT
