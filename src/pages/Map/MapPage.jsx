@@ -29,9 +29,15 @@ export default function MapPage() {
   };
 
   const handleRegionClick = (regionId, regionName, centerX, centerY) => {
+    console.log('Path yang ditekan:', {
+      id: regionId,
+      name: regionName,
+      centerX,
+      centerY
+    });
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
-    setZoom(1.5);
+    setZoom(3);
     setZoomCenterX(centerX);
     setZoomCenterY(centerY);
   };

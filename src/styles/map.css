@@ -78,6 +78,11 @@
   stroke-width: 2.5 !important;
   filter: drop-shadow(0 0 8px rgba(255,140,20,0.6)) !important;
 }
+.unselected-province {
+  fill: #808080 !important;
+  stroke: #666666 !important;
+  opacity: 0.4 !important;
+}
 .map-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; fill: rgba(255,255,255,0.9); pointer-events: none; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
 [data-theme="light"] .map-label { fill: rgba(255,255,255,0.9); }
 [data-theme="light"] .map-container { background: var(--bg3); }

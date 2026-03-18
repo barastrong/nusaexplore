@@ -210,14 +210,14 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
       role="img"
       aria-label="Peta Indonesia interaktif"
     >
-      <g className="map-islands" stroke="rgba(201,168,76,0.55)" strokeWidth="1.6" style={{ transformOrigin: `${zoomCenterX}px ${zoomCenterY}px`, transform: `scale(${zoom})`, transition: `transform 0.3s ease-in-out` }}>
+      <g className="map-islands" stroke="rgba(201,168,76,0.55)" strokeWidth="1.6" style={{ transformOrigin: `${zoomCenterX}px ${zoomCenterY}px`, transform: `scale(${zoom})`, transition: `transform 0.8s ease-in-out` }}>
         {regions.map((region) => (
           <path
             key={region.id}
             d={region.d}
             data-id={region.id}
             data-name={region.name}
-            className={`island ${hoveredRegionId === region.id ? 'active-province' : ''} ${selectedRegionId === region.id ? 'selected-province' : ''}`}
+            className={`island ${hoveredRegionId === region.id ? 'active-province' : ''} ${selectedRegionId === region.id ? 'selected-province' : ''} ${selectedRegionId && selectedRegionId !== region.id ? 'unselected-province' : ''}`}
             onMouseEnter={(e) => handleMouseEnter(e, region.id)}
             onMouseLeave={() => onRegionHover(null)}
             onClick={(e) => handleRegionClick(region.id, region.name, e)}
