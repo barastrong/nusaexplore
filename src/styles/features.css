@@ -18,3 +18,64 @@
 [data-theme="light"] .feat-card { background: var(--card-bg); border-color: var(--border); }
 [data-theme="light"] .feat-title { color: var(--text); }
 [data-theme="light"] .feat-desc { color: var(--text2); }
+
+@media (max-width: 968px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  
+  .feat-card {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .feat-card {
+    padding: 20px 16px;
+  }
+  
+  .feat-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .feat-title {
+    font-size: 18px;
+  }
+  
+  .feat-desc {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .features-grid {
+    gap: 10px;
+    margin-top: 24px;
+  }
+  
+  .feat-card {
+    padding: 18px 14px;
+  }
+  
+  .feat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .feat-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .feat-desc {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}

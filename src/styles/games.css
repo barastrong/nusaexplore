@@ -157,3 +157,332 @@
 [data-theme="light"] .puzzle-img-sub { color: var(--text2); }
 [data-theme="light"] .puzzle-moves { color: var(--text2); }
 [data-theme="light"] .puzzle-piece { color: var(--text); background: var(--bg3); border-color: var(--border); }
+
+@media (max-width: 968px) {
+  .games-select {
+    grid-template-columns: 1fr;
+    padding: 32px 20px;
+  }
+  
+  .quiz-game,
+  .puzzle-game {
+    padding: 32px 20px;
+  }
+  
+  .quiz-card,
+  .puzzle-board {
+    padding: 28px 20px;
+  }
+  
+  .gsc-top {
+    padding: 32px;
+    min-height: 180px;
+  }
+  
+  .gsc-body {
+    padding: 0 32px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .games-header {
+    padding: 32px 20px 40px;
+  }
+  
+  .games-title {
+    font-size: clamp(24px, 6vw, 32px);
+  }
+  
+  .games-sub {
+    font-size: 14px;
+  }
+  
+  .games-select {
+    padding: 24px 16px;
+    gap: 16px;
+  }
+  
+  .gsc-top {
+    padding: 28px 20px;
+    min-height: 160px;
+  }
+  
+  .gsc-body {
+    padding: 0 20px 28px;
+  }
+  
+  .gsc-title {
+    font-size: 22px;
+  }
+  
+  .gsc-desc {
+    font-size: 13px;
+  }
+  
+  .quiz-game,
+  .puzzle-game {
+    padding: 24px 16px;
+  }
+  
+  .quiz-card {
+    padding: 24px 16px;
+  }
+  
+  .quiz-question {
+    font-size: 20px;
+  }
+  
+  .quiz-options {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .quiz-opt {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+  
+  .puzzle-board {
+    padding: 20px 16px;
+  }
+  
+  .puzzle-img-label {
+    font-size: 16px;
+  }
+  
+  .puzzle-piece {
+    font-size: 20px;
+  }
+  
+  .result-emoji {
+    font-size: 48px;
+  }
+  
+  .result-score {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .games-header {
+    padding: 28px 16px 32px;
+  }
+  
+  .games-title {
+    font-size: clamp(22px, 7vw, 28px);
+    margin-bottom: 8px;
+  }
+  
+  .games-sub {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  .games-select {
+    padding: 20px 16px;
+    gap: 14px;
+  }
+  
+  .gsc-top {
+    padding: 24px 16px;
+    min-height: 140px;
+  }
+  
+  .gsc-badge {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+  
+  .gsc-body {
+    padding: 0 16px 24px;
+  }
+  
+  .gsc-title {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  
+  .gsc-desc {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .gsc-pills {
+    margin-bottom: 20px;
+  }
+  
+  .gsc-pill {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+  
+  .gsc-cta {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+  
+  .quiz-game,
+  .puzzle-game {
+    padding: 20px 16px;
+  }
+  
+  .quiz-header,
+  .puzzle-header {
+    margin-bottom: 28px;
+  }
+  
+  .quiz-back {
+    padding: 7px 14px;
+    font-size: 12px;
+  }
+  
+  .quiz-title {
+    font-size: 18px;
+  }
+  
+  .quiz-card {
+    padding: 20px 16px;
+  }
+  
+  .quiz-num {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .quiz-question {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+  
+  .quiz-opt {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+  
+  .quiz-result {
+    padding: 32px 20px;
+  }
+  
+  .result-emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+  
+  .result-score {
+    font-size: 36px;
+  }
+  
+  .result-label {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .result-msg {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  
+  .result-btn {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+  
+  .puzzle-board {
+    padding: 20px 16px;
+  }
+  
+  .puzzle-img-label {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .puzzle-img-sub {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .puzzle-grid {
+    gap: 5px;
+    margin-bottom: 16px;
+  }
+  
+  .puzzle-piece {
+    font-size: 18px;
+  }
+  
+  .puzzle-actions {
+    gap: 10px;
+  }
+  
+  .puz-btn {
+    padding: 9px 18px;
+    font-size: 12px;
+  }
+  
+  .puzzle-info {
+    margin-bottom: 16px;
+  }
+  
+  .puzzle-moves {
+    font-size: 12px;
+  }
+  
+  .puzzle-complete {
+    padding: 28px 20px;
+  }
+  
+  .puzzle-complete-title {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  
+  .puzzle-complete-sub {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-header {
+    padding: 24px 16px 28px;
+  }
+  
+  .games-title {
+    font-size: clamp(20px, 8vw, 24px);
+  }
+  
+  .games-sub {
+    font-size: 12px;
+  }
+  
+  .gsc-top {
+    padding: 20px 14px;
+    min-height: 120px;
+  }
+  
+  .gsc-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .gsc-body {
+    padding: 0 14px 20px;
+  }
+  
+  .gsc-title {
+    font-size: 18px;
+  }
+  
+  .quiz-card,
+  .puzzle-board {
+    padding: 18px 14px;
+  }
+  
+  .quiz-question {
+    font-size: 16px;
+  }
+  
+  .puzzle-piece {
+    font-size: 16px;
+  }
+}

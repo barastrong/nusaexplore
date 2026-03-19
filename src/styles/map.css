@@ -20,6 +20,31 @@
   z-index: 10;
 }
 
+.map-back-btn {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 10;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.map-back-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #1A1408;
+  transform: translateX(-2px);
+}
+
 .map-info-title { 
   font-size: clamp(28px,3vw,40px);
   font-weight: 800;
@@ -431,4 +456,112 @@
 
 .region-popup::-webkit-scrollbar-thumb:hover {
   background: var(--gold);
+}
+
+@media (max-width: 768px) {
+  .map-page {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height untuk mobile */
+  }
+  
+  .map-hero {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .map-hero-inner {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .map-container,
+  .full-map,
+  .full-map .map-svg {
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  .map-hero-header { 
+    top: 16px; 
+    left: 16px;
+  }
+  
+  .map-back-btn { 
+    top: 16px; 
+    right: 16px; 
+    padding: 8px 14px; 
+    font-size: 12px;
+  }
+  
+  .map-info-title { 
+    font-size: clamp(18px, 5vw, 24px); 
+  }
+  
+  .section-label {
+    font-size: 10px;
+  }
+  
+  .region-popup-overlay { 
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    animation: slideUp 0.3s ease;
+  }
+  
+  .region-popup { 
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 70vh;
+  }
+  
+  .popup-banner {
+    height: 150px;
+  }
+  
+  .popup-emoji {
+    font-size: 60px;
+  }
+  
+  .popup-title {
+    font-size: 20px;
+  }
+  
+  .popup-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .region-tooltip {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-hero-header {
+    top: 12px;
+    left: 12px;
+  }
+  
+  .map-back-btn {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .map-info-title {
+    font-size: clamp(16px, 5vw, 20px);
+  }
+  
+  .popup-title {
+    font-size: 18px;
+  }
+  
+  .popup-content {
+    padding: 12px;
+  }
+  
+  .popup-title-section {
+    padding: 12px;
+  }
 }

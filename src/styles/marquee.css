@@ -15,3 +15,15 @@
 }
 .marquee-dot { width: 4px; height: 4px; background: #1A1408; border-radius: 50%; opacity: .4; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+@media (max-width: 640px) {
+  .marquee-wrap {
+    padding: 8px 0;
+  }
+  
+  .marquee-item {
+    font-size: 10px;
+    gap: 10px;
+    padding: 0 20px;
+  }
+}

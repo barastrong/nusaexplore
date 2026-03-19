@@ -1,20 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { regionData, regionToIslandMap } from '../../data/regionData';
 import MapSVG from '../../components/Map/MapSVG';
 import RegionPopup from '../../components/Map/RegionPopup';
 import '../../styles/map.css';
 
 export default function MapPage() {
+  const navigate = useNavigate();
   const [hoveredRegionId, setHoveredRegionId] = useState(null);
   const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [selectedRegionName, setSelectedRegionName] = useState(null);
   const [zoom, setZoom] = useState(1);
-  const [zoomCenterX, setZoomCenterX] = useState(420);
+  const [zoomCenterX, setZoomCenterX] = useState(403.5);
   const [zoomCenterY, setZoomCenterY] = useState(170);
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
   
-  const hoveredRegion = hoveredRegionId ? regionData[regionToIslandMap[hoveredRegionId]] : null;
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
 
   const showRegion = (id) => {
@@ -32,7 +33,7 @@ export default function MapPage() {
       setHoveredRegionId(null);
       setSelectedRegionId(null);
       setSelectedRegionName(null);
-      setZoomCenterX(420);
+      setZoomCenterX(403.5);
       setZoomCenterY(170);
     }, 600);
   };
@@ -49,12 +50,12 @@ export default function MapPage() {
     
     // Smooth zoom dengan center ke region yang diklik
     const targetZoom = 2.5;
-    const viewBoxCenterX = 420;
-    const viewBoxCenterY = 170;
+    const viewBoxCenterX = 403.5; // Center of viewBox (-10 to 807) = (807 - 10) / 2 = 403.5
+    const viewBoxCenterY = 170; // Center of viewBox (0 to 340) = 340 / 2 = 170
     
     // Hitung offset untuk center ke region
-    const offsetX = (viewBoxCenterX - centerX) * targetZoom;
-    const offsetY = (viewBoxCenterY - centerY) * targetZoom;
+    const offsetX = (viewBoxCenterX - centerX) / targetZoom;
+    const offsetY = (viewBoxCenterY - centerY) / targetZoom;
     
     setZoom(targetZoom);
     setZoomCenterX(centerX);
@@ -70,6 +71,9 @@ export default function MapPage() {
           <div className="section-label">Peta Interaktif</div>
           <h2 className="map-info-title">Jelajahi <em>Indonesia</em></h2>
         </div>
+        <button className="map-back-btn" onClick={() => navigate('/')} title="Kembali ke Beranda">
+          ← Kembali
+        </button>
         <div className="map-hero-inner">
           <div className="map-container full-map">
             <MapSVG 

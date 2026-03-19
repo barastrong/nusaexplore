@@ -37,3 +37,91 @@
 .c3 { background: linear-gradient(135deg, #0A1A14,#1A4A30); }
 .c4 { background: linear-gradient(135deg, #1A1218,#4A1030); }
 .c5 { background: linear-gradient(135deg, #1A0A0A,#4A1010); }
+
+@media (max-width: 968px) {
+  .culture-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .culture-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+  
+  .culture-card.main {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+  
+  .cc-content {
+    padding: 18px;
+  }
+  
+  .cc-title {
+    font-size: 18px;
+  }
+  
+  .main .cc-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .culture-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .culture-card.main {
+    grid-column: span 1;
+  }
+  
+  .culture-card {
+    min-height: 200px;
+  }
+  
+  .cc-content {
+    padding: 16px;
+  }
+  
+  .cc-title {
+    font-size: 18px;
+  }
+  
+  .main .cc-title {
+    font-size: 22px;
+  }
+  
+  .cc-tag {
+    font-size: 9px;
+  }
+  
+  .cc-sub {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .culture-card {
+    min-height: 180px;
+  }
+  
+  .cc-content {
+    padding: 14px;
+  }
+  
+  .cc-title {
+    font-size: 16px;
+  }
+  
+  .main .cc-title {
+    font-size: 20px;
+  }
+  
+  .cc-bg .big-emoji {
+    font-size: 60px;
+  }
+}

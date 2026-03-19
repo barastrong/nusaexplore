@@ -120,3 +120,52 @@ footer {
 .footer-links a:hover { color: var(--gold); }
 [data-theme="light"] .footer-copy { color: var(--text3); }
 [data-theme="light"] .footer-links a { color: var(--text2); }
+
+/* ==============================
+RESPONSIVE - TABLET
+============================== */
+@media (max-width: 1024px) {
+  .section { padding: 64px 32px; }
+  .section-title { font-size: clamp(26px, 4vw, 38px); }
+  .section-sub { font-size: 14px; }
+  footer { padding: 24px 32px; }
+}
+
+/* ==============================
+RESPONSIVE - MOBILE
+============================== */
+@media (max-width: 768px) {
+  .section { padding: 48px 20px; }
+  .section-label { font-size: 10px; gap: 8px; }
+  .section-label::before { width: 20px; }
+  .section-title { font-size: clamp(24px, 6vw, 32px); margin-bottom: 10px; }
+  .section-sub { font-size: 14px; line-height: 1.6; }
+  
+  .btn-gold { padding: 12px 24px; font-size: 13px; }
+  .btn-outline { padding: 11px 22px; font-size: 13px; }
+  
+  footer {
+    padding: 20px;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .footer-logo { font-size: 16px; }
+  .footer-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .footer-copy { order: 3; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 40px 16px; }
+  .section-title { font-size: clamp(22px, 7vw, 28px); }
+  .section-sub { font-size: 13px; }
+  
+  .btn-gold { padding: 10px 20px; font-size: 12px; }
+  .btn-outline { padding: 9px 18px; font-size: 12px; }
+  
+  footer { padding: 16px; }
+  .footer-logo { font-size: 15px; }
+  .footer-links a { font-size: 11px; }
+  .footer-copy { font-size: 11px; }
+}
