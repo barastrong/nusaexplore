@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 import { regionData, regionToIslandMap } from '../../data/regionData';
 import MapSVG from '../../components/Map/MapSVG';
 import RegionPopup from '../../components/Map/RegionPopup';
@@ -7,6 +8,7 @@ import '../../styles/map.css';
 
 export default function MapPage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [hoveredRegionId, setHoveredRegionId] = useState(null);
   const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [selectedRegionName, setSelectedRegionName] = useState(null);
@@ -17,6 +19,13 @@ export default function MapPage() {
   const [panY, setPanY] = useState(0);
   
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const showRegion = (id) => {
     setHoveredRegionId(id);
@@ -39,14 +48,16 @@ export default function MapPage() {
   };
 
   const handleRegionClick = (regionId, regionName, centerX, centerY) => {
-    console.log('Path yang ditekan:', {
-      id: regionId,
-      name: regionName,
-      centerX,
-      centerY
-    });
+    console.log('=== MAP PAGE - REGION CLICKED ===');
+    console.log('Region ID:', regionId);
+    console.log('Region Name:', regionName);
+    console.log('Center X:', centerX);
+    console.log('Center Y:', centerY);
+    
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
+    
+    console.log('State updated - selectedRegionName:', regionName);
     
     // Smooth zoom dengan center ke region yang diklik
     const targetZoom = 2.5;
@@ -63,6 +74,20 @@ export default function MapPage() {
     setPanX(offsetX);
     setPanY(offsetY);
   };
+
+  if (loading) {
+    return (
+      <div className="map-loading">
+        <ClipLoader
+          color="#f7b24f"
+          loading={loading}
+          size={60}
+          aria-label="Loading Spinner"
+        />
+        <p className="map-loading-text">Memuat Peta...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="map-page">
