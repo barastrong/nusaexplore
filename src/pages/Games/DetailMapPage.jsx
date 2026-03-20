@@ -2,12 +2,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { provinceDetailData } from '../../data/provinceDetailData';
 import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineMap, HiOutlineChatAlt2 } from 'react-icons/hi';
+import { FiKey, FiCheckCircle } from 'react-icons/fi';
+import { claimProvinceReward, hasClaimedReward } from '../../utils/localStorage';
+import { getDifficultyInfo } from '../Games/MapPage';
 import '../../styles/detailmap.css';
 
 export default function DetailMapPage() {
   const { name } = useParams();
   const navigate = useNavigate();
   const [province, setProvince] = useState(null);
+  const [claimed, setClaimed] = useState(false);
+  const [showClaimAnim, setShowClaimAnim] = useState(false);
 
   useEffect(() => {
     const foundProvince = provinceDetailData.find(
@@ -15,10 +20,21 @@ export default function DetailMapPage() {
     );
     if (foundProvince) {
       setProvince(foundProvince);
+      setClaimed(hasClaimedReward(name));
     } else {
       setTimeout(() => navigate('/map-games'), 2000);
     }
   }, [name, navigate]);
+
+  const handleClaim = () => {
+    const { keyReward } = getDifficultyInfo(name);
+    const success = claimProvinceReward(name, keyReward);
+    if (success) {
+      setClaimed(true);
+      setShowClaimAnim(true);
+      setTimeout(() => setShowClaimAnim(false), 2000);
+    }
+  };
 
   if (!province) {
     return (
@@ -186,6 +202,25 @@ export default function DetailMapPage() {
           <div className="cta-content">
             <h2>Jelajahi Provinsi Lainnya</h2>
             <p>Temukan keunikan dan kekayaan budaya dari setiap provinsi di Indonesia</p>
+
+            {/* Claim reward button */}
+            <div className="claim-reward-box">
+              {claimed ? (
+                <div className="claim-reward-done">
+                  <FiCheckCircle />
+                  <span>Reward sudah diklaim</span>
+                </div>
+              ) : (
+                <button className="claim-reward-btn" onClick={handleClaim}>
+                  <FiKey />
+                  <span>Klaim Reward +{getDifficultyInfo(name).keyReward} Kunci</span>
+                </button>
+              )}
+              {showClaimAnim && (
+                <div className="claim-reward-anim">+{getDifficultyInfo(name).keyReward} <FiKey /> Kunci berhasil diklaim!</div>
+              )}
+            </div>
+
             <button className="btn-gold" onClick={() => navigate('/map-games')}>
               Kembali ke Peta Indonesia
             </button>
