@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { FiLock, FiKey } from 'react-icons/fi';
 
 const regions = [
   {
@@ -117,21 +118,6 @@ const regions = [
     d: 'm 755.55571,272.15789 -2.51,-0.14 -2.81,-0.49 -0.36,-0.18 -0.21,-0.57 0.08,-0.21 2.73,-2.39 1.71,-0.48 0.23,0.05 0.27,0.88 1.28,2.71 0.02,0.34 -0.43,0.48 z m -4.89,-2.73 -2.6,2.13 -1.27,0.57 -1.38,0.28 -0.47,-0.05 -0.39,-0.32 -0.65,-0.18 -5.96,-0.4 -2.85,0.69 -0.51,0.35 -0.5,0.06 -0.24,-0.42 0.06,-0.52 1.62,-4.23 3.07,-5.93 1.96,-2.96 0.53,-0.57 2.98,-2.1 2.44,-0.96 4.78,-0.89 2.12,0.11 0.79,0.22 0.37,0.33 1.08,1.81 0.59,0.62 1.32,0.25 0.62,0.98 -0.96,2.7 -1.18,1.89 -0.54,2.73 -0.57,0.73 -1.15,1.06 -1.99,0.44 -1.12,1.58 z m 0.44,-26.51 0.61,0.5 1.3,0.24 0.82,1.21 -0.99,0.62 -0.75,-0.28 -1.16,-1.53 -0.13,-0.51 0.3,-0.25 z m -40.39,-86.82 2.86,0.57 5.96,0.44 1.59,0.67 0.09,0.16 -0.43,0.46 -3.22,0.55 -2.54,0.83 -5.61,-0.5 -4.02,-0.96 -0.89,-0.65 -1.03,-0.45 -2.55,-0.77 -1.02,-0.2 -1.13,0.08 -2.09,-0.34 -1.08,-1.28 0.93,-0.28 1.17,0.38 11.08,0.79 1.93,0.5 z m 44.47,4.67 1.2,0.01 1.96,0.66 6.25,2.86 6.46,3.36 1.79,0.26 2.55,-0.31 1.28,-0.61 0.99,0.06 0.17,0.54 0.69,0.85 1.91,0.88 0.92,-0.17 0.1,-0.27 1.66,0.03 2.67,0.39 1.57,0.56 0.34,0.26 0.12,0.41 -0.25,0.63 -0.47,0.49 -0.11,0.35 0.46,0.38 1.67,-0.47 2.48,-0.1 0.61,0.05 0.06,0.12 0,64.11 -0.68,0.07 -0.67,1.97 0.4,0.51 -0.07,0.34 -0.92,1.75 -0.53,0.53 -0.07,0.81 0.21,1.87 0.55,1.2 0.81,0.83 0.55,0.05 0.43,-0.23 0.02,38.79 -1.09,-0.68 -1.17,-0.32 -0.6,-0.42 -1.46,-1.85 -2.57,-2.39 -1.82,-2.97 -4.75,-4.06 -3.07,-2.25 -1.15,-1.31 -0.18,-0.29 0.12,-0.68 1.38,-1.15 1.25,-2.29 0.24,-0.93 -1.63,0.71 -0.28,1.17 0.05,1.05 -1.29,0.74 -0.86,0.31 -3.52,-0.01 -1.59,0.19 -1.58,0.91 -1.92,0.46 -0.9,0.05 -0.7,-0.08 -0.87,-0.55 -1,-1.4 -2.32,0.88 -1.91,1.4 -0.6,1.29 -0.5,0.06 -1.07,-2.05 -0.2,-0.87 1.17,-1.61 0.12,-2.16 0.2,-0.22 1.2,-0.57 0.24,-0.82 -0.04,-1.04 0.89,-2.23 0.66,-0.7 0.02,-0.51 -0.44,-0.44 -1.08,-0.4 -1.25,-0.87 -0.63,-1.45 -0.61,-0.75 -1.71,-1.13 -1.61,-0.82 -0.15,-0.4 0.21,-0.14 4.5,0.17 1.04,0.63 0.96,0.22 2.17,-0.22 0.81,-1.32 -0.81,0.36 -0.25,0.34 -2.06,0.19 -3.37,-1.03 -1.71,-0.78 -2.89,-2.55 -0.31,-0.4 -0.02,-0.55 0.61,-0.49 0.8,-0.02 0.95,0.33 0.73,0.02 1.1,-0.71 1.8,-0.22 1.28,0.44 1.12,1.12 1.02,0.64 0.51,0.14 0.86,-0.19 -1,-0.23 -0.7,-0.37 -1.24,-1.12 -0.53,-0.3 -0.85,-0.33 -0.95,-0.12 -3.47,-1.82 -0.26,-1.09 0.66,-0.19 -0.49,-0.66 -3.38,-3.24 -0.76,-1.01 -0.51,-1.14 -0.32,-1.1 0.05,-0.85 -0.48,-1.44 -1.2,-2.22 0.02,-2.02 -1.48,-0.41 -0.76,-0.66 0.41,-0.6 2.77,-1.35 -0.18,-0.15 -0.47,-0.01 -1.61,0.25 -0.99,0.57 -1.35,0.38 -0.25,-0.15 -0.32,-1.8 0.36,-3.26 -0.14,-0.5 -0.5,0.88 -1.52,-0.57 -2.95,-1.94 -0.49,-0.59 -1.51,-0.98 -0.94,-0.25 -0.58,-0.36 -0.08,-0.2 0.4,-0.36 -1.3,-0.01 -1.89,-0.85 -1.81,-1.31 -0.62,-0.74 -1,0.44 -3.58,-1.01 -3.13,-0.41 -0.41,-0.42 -2.9,-1.34 -4.7,-2.5 -1.76,0.02 -3.86,-1.56 -0.47,-0.42 -0.62,-0.92 -0.76,-0.31 -2.2,-0.11 -1.33,0.16 -5.17,-1.12 -1.66,0.14 -1.68,0.38 -0.96,-0.34 -3.7,-2.11 -1.63,-0.69 0,0 1.64,-2.37 1.06,-0.81 0.65,-1.38 1.06,-1.63 2.29,-2.84 -0.9,-0.41 -0.49,0 -1.22,-0.57 -2.86,-0.89 -3.02,-1.22 -6.45,-1.87 -1.96,-0.97 -1.39,-0.41 1.14,-2.52 0.98,-1.22 1.63,-0.97 0.24,-0.81 0,-1.14 1.55,-0.81 2.48,-2.27 0,0 0.61,2.49 0.47,0.36 0.71,-0.15 0.67,-0.48 0.09,-0.5 0.31,-0.37 0.45,0.04 0.12,0.65 -0.18,1.21 -0.49,0.45 -0.17,1.43 1.11,2.15 2.05,1.51 2.13,0.55 3.73,0.43 2.22,-0.42 0.95,-0.47 0.67,-0.64 0.26,-0.6 -0.03,-0.4 0.64,-0.78 0.49,-0.34 1.37,-0.4 0.92,-0.73 -0.03,-0.26 -0.42,-0.32 0.4,-0.51 2.48,-1.07 0.51,-0.79 0.32,-2.73 1.23,-1.46 0.4,-0.05 2.31,-1.08 1.25,-1.01 0.43,-0.75 1.09,-2.85 0.05,-0.66 -0.19,-0.79 0.39,-0.49 0.91,-0.63 1.27,-0.1 0.87,0.05 0.06,0.29 0.18,0.12 0.96,0.24 1.14,0.1 1.49,-0.13 1.46,-0.83 2.65,-1.17 1.31,-0.41 0.8,0.11 1.3,-0.22 0.78,-0.52 0.04,-0.29 -0.64,-1.8 -0.63,-0.29 -0.91,-1.04 0.19,-1.23 1.22,-0.64 1.25,-0.31 1.4,-0.61 2.5,-1.32 0.44,-0.53 1.55,-0.75 4.17,-1.47 0.52,-0.02 0.96,0.28 0.81,0.92 1.43,1.1 6.1,2.16 4.19,1 1.53,0.96 0.76,1.02 0.96,0.82 0.38,0.07 z m -68.19,-14.13 -0.97,-0.01 -1.13,-1.66 0.19,-1 0.5,-0.67 0.81,-0.05 0.73,0.35 1.08,1.11 -0.08,1.04 -0.49,0.69 -0.64,0.2 z m 9.63,-8.01 1.79,0.04 1.52,0.24 1.62,1.07 0.97,-0.75 0.54,-0.07 0.66,0.38 3.03,2.55 2.23,3.23 1.25,-0.22 1.72,0.77 0.36,0.36 -0.81,0.72 -1.29,0.72 -1.85,0.4 -1.04,-0.02 -0.87,-0.65 -0.48,-0.15 -1,0.05 -0.75,0.27 -0.59,-0.12 -0.88,-0.87 -0.78,-3.16 0.03,-0.92 -0.57,-1.23 -0.5,-0.05 -1.81,0.86 -1.79,-1.52 -0.66,-0.15 0.08,0.54 -0.42,-0.16 -1,-0.95 -0.62,-1.33 0.26,-0.49 1.65,0.61 z',
   },
   {
-    id: 'papua-tengah',
-    name: 'Papua Tengah',
-    d: 'm 700,195 5,1 4,2 3,3 2,4 0,5 -2,4 -4,3 -5,1 -5,-1 -4,-3 -2,-4 0,-5 2,-4 4,-3 5,-1 z m -15,10 2,0.5 1.5,1.5 0,2 -1.5,1.5 -2,0.5 -2,-0.5 -1.5,-1.5 0,-2 1.5,-1.5 2,-0.5 z',
-  },
-  {
-    id: 'papua-selatan',
-    name: 'Papua Selatan',
-    d: 'm 710,240 4,1 3,2 2,3 0,4 -2,3 -3,2 -4,1 -4,-1 -3,-2 -2,-3 0,-4 2,-3 3,-2 4,-1 z m 15,5 2,0.5 1,1.5 0,2 -1,1.5 -2,0.5 -2,-0.5 -1,-1.5 0,-2 1,-1.5 2,-0.5 z',
-  },
-  {
-    id: 'papua-pegunungan',
-    name: 'Papua Pegunungan',
-    d: 'm 720,175 4,1 3,2 2,3 1,4 -1,4 -2,3 -3,2 -4,1 -4,-1 -3,-2 -2,-3 -1,-4 1,-4 2,-3 3,-2 4,-1 z',
-  },
-  {
     id: 'papua-barat-daya',
     name: 'Papua Barat Daya',
     d: 'm 444.9 491.04l-.19.15-.01.01-.29.08-.2.18-.23-.08-.35.01-.18.21-.19.16-.16-.24-.29.15-.17.31-.13.43-.19.28-.04.3.25.07-.07.26.06.37.1.24.29.18.15.23.2.29.14.21.44.27.49.09.23.09.35.15.67.4.45.21.62.27.3-.02.52.37.22.31.32.04.29.07.22.29.31.09-.07.58-.27.14.07.31-.21.21-.25.03.01.3.1.28.04.31-.09.28-.04.32.24.14.07.28.1.27-.01.37-.09.35.16.33-.16.23.16.2.26.14.4.09.28.13.21.29.19.18.12.27.32.17.16.3-.05.37.05.25.27.19.24.07.28.04.41-.04.29-.08.32-.09.33.02.32-.18.32-.19.34-.09.02-.29.02-.29.28.02.09-.25.02-.25.12-.35-.19-.4 0-.39-.09-.24.23-.14-.19-.18-.04-.28.02-.27-.1-.3-.23-.29-.57-.22-.11-.19-.02-.03.31-.16-.15-.24-.18-.28-.18-.34-.25-.07-.25-.12.08-.26-.3-.17.11-.27-.32-.24-.44-.16-.43-.07-.44-.21-.3-.11-.28.17-.2-.19-.26-.27-.2-.28.23-.16-.04-.3-.16-.43.03-.35.13-.26.23-.19-.19-.24-.3-.41-.03-.3-.14-.25-.34.03 0-.01-.1-.22-.09-.24-.23-.23-.59-.49-.34-.35-.58-.43-.72-.34-.33-.12-.24-.13-.31.01-.22-.18 z',
@@ -188,14 +174,51 @@ const regions = [
   },
 ];
 
-export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0 }) {
-  const computedStyle = useMemo(() => ({}), []);
+export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, unlockedRegions = ['jawa-timur'], keyValue = 10000000000 }) {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const [lockPositions, setLockPositions] = useState({});
+  const svgRef = useRef(null);
+
+  // =====================================
+  // SISTEM KUNCI MAPS
+  // =====================================
+  // Daftar region yang terkunci: SEMUA KECUALI YANG SUDAH DI-UNLOCK
+  // User hanya bisa mengakses region yang di-unlock
+  // =====================================
+  const lockedRegions = regions.filter(r => !unlockedRegions.includes(r.id)).map(r => r.id);
 
   // Find the hovered region's name
   const hoveredRegion = hoveredRegionId
     ? regions.find(r => r.id === hoveredRegionId)
     : null;
+
+  // Hitung posisi gembok setelah render
+  useEffect(() => {
+    if (!svgRef.current) return;
+    
+    console.log(`🔐 Sistem Kunci Aktif: ${lockedRegions.length} region terkunci, ${unlockedRegions.length} region terbuka`);
+    console.log(`   Unlocked: ${unlockedRegions.join(', ')}`);
+    
+    const positions = {};
+    regions.forEach((region) => {
+      if (lockedRegions.includes(region.id)) {
+        const pathElement = svgRef.current.querySelector(`path[data-id="${region.id}"]`);
+        if (pathElement) {
+          const bbox = pathElement.getBBox();
+          positions[region.id] = {
+            x: bbox.x + bbox.width / 2,
+            y: bbox.y + bbox.height / 2
+          };
+        }
+      }
+    });
+    // Update lock positions to reflect current locked regions
+    if (Object.keys(positions).length !== Object.keys(lockPositions).length || 
+        Object.keys(positions).some(key => !lockPositions[key])) {
+      setLockPositions(positions);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lockedRegions, unlockedRegions]);
 
   const handleMouseEnter = (e, regionId) => {
     const pathElement = e.target;
@@ -207,17 +230,28 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   };
 
   const handleRegionClick = (regionId, regionName, e) => {
+    // Cek apakah region terkunci
+    if (lockedRegions.includes(regionId)) {
+      console.log(`🔑 Region "${regionName}" membutuhkan key untuk diakses`);
+      if (onLockedRegionClick) {
+        onLockedRegionClick(regionId, regionName);
+      }
+      return;
+    }
+    
     if (onRegionClick) {
       const pathElement = e.target;
       const bbox = pathElement.getBBox();
       const centerX = bbox.x + bbox.width / 2;
       const centerY = bbox.y + bbox.height / 2;
+      console.log(`✅ Membuka region: ${regionName}`);
       onRegionClick(regionId, regionName, centerX, centerY);
     }
   };
 
   return (
     <svg
+      ref={svgRef}
       className="map-svg"
       viewBox="-10 0 817 340"
       preserveAspectRatio="xMidYMid meet"
@@ -226,19 +260,44 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
       aria-label="Peta Indonesia interaktif"
     >
       <g className="map-islands" stroke="rgba(201,168,76,0.55)" strokeWidth="1.6" style={{ transformOrigin: `${zoomCenterX}px ${zoomCenterY}px`, transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`, transition: `transform 0.6s ease-in-out` }}>
-        {regions.map((region) => (
-          <path
-            key={region.id}
-            d={region.d}
-            data-id={region.id}
-            data-name={region.name}
-            className={`island ${hoveredRegionId === region.id ? 'active-province' : ''} ${selectedRegionId === region.id ? 'selected-province' : ''} ${selectedRegionId && selectedRegionId !== region.id ? 'unselected-province' : ''}`}
-            onMouseEnter={(e) => handleMouseEnter(e, region.id)}
-            onMouseLeave={() => onRegionHover(null)}
-            onClick={(e) => handleRegionClick(region.id, region.name, e)}
-            fill="none"
-            style={{ cursor: 'pointer' }}
-          />
+        {regions.map((region) => {
+          const isLocked = lockedRegions.includes(region.id);
+          return (
+            <path
+              key={region.id}
+              d={region.d}
+              data-id={region.id}
+              data-name={region.name}
+              className={`island ${hoveredRegionId === region.id ? 'active-province' : ''} ${selectedRegionId === region.id ? 'selected-province' : ''} ${selectedRegionId && selectedRegionId !== region.id ? 'unselected-province' : ''} ${isLocked ? 'locked-region' : ''}`}
+              onMouseEnter={(e) => handleMouseEnter(e, region.id)}
+              onMouseLeave={() => onRegionHover(null)}
+              onClick={(e) => handleRegionClick(region.id, region.name, e)}
+              fill="none"
+              style={{ cursor: isLocked ? 'not-allowed' : 'pointer', opacity: isLocked ? 0.5 : 1 }}
+            />
+          );
+        })}
+      </g>
+      
+      {/* Icon gembok untuk region yang terkunci - menggunakan FiLock */}
+      <g className="lock-icons" style={{ transformOrigin: `${zoomCenterX}px ${zoomCenterY}px`, transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`, transition: `transform 0.6s ease-in-out` }}>
+        {Object.entries(lockPositions).map(([regionId, pos]) => (
+          <foreignObject
+            key={`lock-${regionId}`}
+            x={pos.x - 8}
+            y={pos.y - 8}
+            width="16"
+            height="16"
+            style={{ 
+              pointerEvents: 'none',
+              transition: 'opacity 0.6s ease-out',
+              cursor: 'pointer'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+              <FiLock size={12} color="#C9A84C" strokeWidth={2} />
+            </div>
+          </foreignObject>
         ))}
       </g>
       
@@ -255,6 +314,93 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
           {hoveredRegion.name}
         </text>
       )}
+      
+      <g style={{ pointerEvents: 'none' }}>
+        {(() => {
+          const iconX = 10;
+          const iconSize = 32;
+          
+          const containerStartX = 50; // Fixed gap from key
+          const containerY = 300;
+          const containerHeight = 32;
+          const padding = 10; // Consistent padding on left/right
+          
+          const keyValueStr = typeof keyValue === 'number' ? keyValue.toString() : keyValue;
+          const valueLength = keyValueStr.length;
+          // Dynamic font size: larger numbers get smaller font
+          const baseFontSize = 14;
+          const minFontSize = 10;
+          
+          // Calculate font size based on value length
+          let fontSize = baseFontSize;
+          if (valueLength > 8) {
+            fontSize = Math.max(minFontSize, baseFontSize - (valueLength - 8) * 0.4);
+          }
+          
+          // Calculate container width with padding
+          // Estimate: ~0.6em per digit at max font size
+          const estimatedTextWidth = valueLength * (fontSize * 0.6);
+          const containerWidth = estimatedTextWidth + padding * 2;
+          
+          const containerCenterX = containerStartX + containerWidth / 2;
+          
+          return (
+            <>
+              {/* Key icon using FiKey */}
+              <foreignObject
+                x={iconX}
+                y={containerY}
+                width={iconSize}
+                height={iconSize}
+                style={{ pointerEvents: 'none' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                  <FiKey size={24} color="#C9A84C" strokeWidth={2} />
+                </div>
+              </foreignObject>
+              
+              {/* Modern rounded container background - NO BORDER */}
+              <rect
+                x={containerStartX}
+                y={containerY + 2}
+                width={containerWidth}
+                height={containerHeight - 4}
+                rx="6"
+                ry="6"
+                fill="#1a1f3a"
+                stroke="none"
+              />
+              
+              {/* Subtle top highlight for depth */}
+              <rect
+                x={containerStartX}
+                y={containerY + 2}
+                width={containerWidth}
+                height={2}
+                rx="6"
+                ry="2"
+                fill="#C9A84C"
+                opacity="0.2"
+              />
+              
+              {/* Responsive key value text */}
+              <text
+                x={containerCenterX}
+                y={containerY + containerHeight / 2}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill="#C9A84C"
+                fontSize={fontSize}
+                fontWeight="600"
+                fontFamily="Arial, sans-serif"
+                letterSpacing="0.5"
+              >
+                {keyValueStr}
+              </text>
+            </>
+          );
+        })()}
+      </g>
     </svg>
   );
 }

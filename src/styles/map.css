@@ -470,6 +470,30 @@
   color: var(--gold);
 }
 
+.key-requirement-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.key-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.key-amount {
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: 700;
+}
+
 /* Scrollbar styling */
 .region-popup::-webkit-scrollbar {
   width: 6px;

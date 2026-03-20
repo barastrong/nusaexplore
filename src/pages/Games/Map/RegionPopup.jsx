@@ -47,7 +47,7 @@ export default function RegionPopup({ regionName, onClose }) {
     };
 
     const slug = nameToSlug[regionName] || regionName.toLowerCase().replace(/\s+/g, '-');
-    const targetUrl = `/detailmap/${slug}`;
+    const targetUrl = `/map-games-detail/${slug}`;
     onClose();
     setTimeout(() => navigate(targetUrl), 100);
   };

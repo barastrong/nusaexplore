@@ -1,0 +1,171 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
+import { regionData, regionToIslandMap } from '../../data/regionData';
+import MapSVG from './/Map/MapSVG';
+import RegionPopup from './Map/RegionPopup';
+import LockedRegionPopup from './Map/LockedRegionPopup';
+import '../../styles/map.css';
+
+export default function MapPage() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [hoveredRegionId, setHoveredRegionId] = useState(null);
+  const [selectedRegionId, setSelectedRegionId] = useState(null);
+  const [selectedRegionName, setSelectedRegionName] = useState(null);
+  const [lockedRegionNamePopup, setLockedRegionNamePopup] = useState(null);
+  const [lockedRegionIdPopup, setLockedRegionIdPopup] = useState(null);
+  const [zoom, setZoom] = useState(1);
+  const [zoomCenterX, setZoomCenterX] = useState(403.5);
+  const [zoomCenterY, setZoomCenterY] = useState(170);
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
+  const [unlockedRegions, setUnlockedRegions] = useState(['jawa-timur']); // Jawa Timur already unlocked
+  const [keyValue, setKeyValue] = useState(10000000000);
+  
+  const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const showRegion = (id) => {
+    setHoveredRegionId(id);
+  };
+
+  const closeDetail = () => {
+    // Smooth zoom out
+    setZoom(1);
+    setPanX(0);
+    setPanY(0);
+    
+    // Reset state setelah animasi selesai
+    setTimeout(() => {
+      setHoveredRegionId(null);
+      setSelectedRegionId(null);
+      setSelectedRegionName(null);
+      setZoomCenterX(403.5);
+      setZoomCenterY(170);
+    }, 600);
+  };
+
+  const handleRegionClick = (regionId, regionName, centerX, centerY) => {
+    console.log('=== MAP PAGE - REGION CLICKED ===');
+    console.log('Region ID:', regionId);
+    console.log('Region Name:', regionName);
+    console.log('Center X:', centerX);
+    console.log('Center Y:', centerY);
+    
+    setSelectedRegionId(regionId);
+    setSelectedRegionName(regionName);
+    
+    console.log('State updated - selectedRegionName:', regionName);
+    
+    // Smooth zoom dengan center ke region yang diklik
+    const targetZoom = 2.5;
+    const viewBoxCenterX = 403.5; // Center of viewBox (-10 to 807) = (807 - 10) / 2 = 403.5
+    const viewBoxCenterY = 170; // Center of viewBox (0 to 340) = 340 / 2 = 170
+    
+    // Hitung offset untuk center ke region
+    const offsetX = (viewBoxCenterX - centerX) / targetZoom;
+    const offsetY = (viewBoxCenterY - centerY) / targetZoom;
+    
+    setZoom(targetZoom);
+    setZoomCenterX(centerX);
+    setZoomCenterY(centerY);
+    setPanX(offsetX);
+    setPanY(offsetY);
+  };
+
+  const handleLockedRegionClick = (regionId, regionName) => {
+    console.log('=== MAP PAGE - LOCKED REGION CLICKED ===');
+    console.log('Region Name:', regionName);
+    setLockedRegionNamePopup(regionName);
+    setLockedRegionIdPopup(regionId);
+  };
+
+  const handleUnlockRegion = (regionId, keyCost = 100) => {
+    if (keyValue >= keyCost) {
+      // Deduct keys and unlock region
+      setKeyValue(keyValue - keyCost);
+      setUnlockedRegions([...unlockedRegions, regionId]);
+      
+      // Close the popup
+      setLockedRegionNamePopup(null);
+      setLockedRegionIdPopup(null);
+      
+      console.log(`✅ Region "${regionId}" unlocked! Keys spent: ${keyCost}, Remaining: ${keyValue - keyCost}`);
+    } else {
+      console.log(`❌ Not enough keys! Needed: ${keyCost}, Have: ${keyValue}`);
+      // You could show an error toast/notification here
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="map-loading">
+        <ClipLoader
+          color="#f7b24f"
+          loading={loading}
+          size={60}
+          aria-label="Loading Spinner"
+        />
+        <p className="map-loading-text">Memuat Peta...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="map-page">
+      <div className="map-hero">
+        <div className="map-hero-header">
+          <div className="section-label">Peta Interaktif</div>
+          <h2 className="map-info-title">Jelajahi <em>Indonesia</em></h2>
+        </div>
+        <button className="map-back-btn" onClick={() => navigate('/')} title="Kembali ke Beranda">
+          ← Kembali
+        </button>
+        <div className="map-hero-inner">
+          <div className="map-container full-map">
+            <MapSVG 
+              onRegionHover={showRegion} 
+              hoveredRegionId={hoveredRegionId}
+              onRegionClick={handleRegionClick}
+              onLockedRegionClick={handleLockedRegionClick}
+              selectedRegionId={selectedRegionId}
+              zoom={zoom}
+              zoomCenterX={zoomCenterX}
+              zoomCenterY={zoomCenterY}
+              panX={panX}
+              panY={panY}
+              unlockedRegions={unlockedRegions}
+              keyValue={keyValue}
+            />
+          </div>
+        </div>
+      </div>
+
+      {selectedRegion && selectedRegionName && (
+        <RegionPopup 
+          regionName={selectedRegionName}
+          onClose={closeDetail}
+        />
+      )}
+
+      {lockedRegionNamePopup && (
+        <LockedRegionPopup
+          regionName={lockedRegionNamePopup}
+          onClose={() => setLockedRegionNamePopup(null)}
+          onUnlock={() => handleUnlockRegion(lockedRegionIdPopup, 100)}
+          keyValue={keyValue}
+          keyRequired={100}
+        />
+      )}
+
+
+    </div>
+  );
+}
