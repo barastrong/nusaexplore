@@ -1,11 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { getDifficultyInfo } from '../MapPage';
+import { getUserData, updateUserData } from '../../../utils/localStorage';
 
 export default function RegionPopup({ regionName, regionId, onClose, onComplete }) {
   const navigate = useNavigate();
   const { label, color, keyReward } = getDifficultyInfo(regionId);
   
   const handleDetailClick = () => {
+    // Cek apakah provinsi ini sudah pernah dikunjungi
+    const userData = getUserData();
+    const visitedKey = `visited_${regionId}`;
+    
+    // Hanya berikan reward jika belum pernah dikunjungi
+    if (!userData[visitedKey]) {
+      console.log('🎁 [RegionPopup] First visit to', regionId, '- giving reward');
+      if (onComplete) onComplete(regionId);
+      // Tandai sebagai sudah dikunjungi
+      updateUserData({ [visitedKey]: true });
+    } else {
+      console.log('🔄 [RegionPopup] Already visited', regionId, '- no reward');
+    }
     // Map nama provinsi ke slug yang sesuai dengan provinceDetailData
     const nameToSlug = {
       'Aceh': 'aceh',
@@ -77,7 +91,7 @@ export default function RegionPopup({ regionName, regionId, onClose, onComplete 
           </p>
 
           <div className="popup-actions">
-            <button className="popup-btn-primary" onClick={() => { if (onComplete) onComplete(regionId); handleDetailClick(); }}>
+            <button className="popup-btn-primary" onClick={() => { handleDetailClick(); }}>
               Lihat Detail Provinsi →
             </button>
             <button className="popup-btn-secondary" onClick={onClose}>

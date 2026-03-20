@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { FiKey, FiInfo, FiX, FiAward, FiMap, FiGift, FiSearch, FiUnlock, FiBookOpen, FiStar } from 'react-icons/fi';
 import { regionData, regionToIslandMap } from '../../data/regionData';
+import { getUserData, updateUserData, unlockRegion as unlockRegionLS, addKeys } from '../../utils/localStorage';
 import MapSVG from './/Map/MapSVG';
 import RegionPopup from './Map/RegionPopup';
 import LockedRegionPopup from './Map/LockedRegionPopup';
@@ -55,12 +56,22 @@ export default function MapPage() {
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
   const [unlockedRegions, setUnlockedRegions] = useState([]);
-  const [keyValue, setKeyValue] = useState(1); // 1 free key on start
+  const [keyValue, setKeyValue] = useState(() => {
+    const userData = getUserData();
+    return userData.keys;
+  });
   const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
   const [showHowToPlay, setShowHowToPlay] = useState(true);
   const [freeKeyUsed, setFreeKeyUsed] = useState(false);
 
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
+
+  // Load data from localStorage on mount
+  useEffect(() => {
+    const userData = getUserData();
+    console.log('🎮 [MapPage] Loading user data on mount:', userData);
+    setUnlockedRegions(userData.unlockedRegions);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -112,19 +123,28 @@ export default function MapPage() {
   };
 
   const handleUnlockRegion = (regionId, keyCost) => {
-    if (keyValue >= keyCost) {
-      setKeyValue(prev => prev - keyCost);
-      setUnlockedRegions(prev => [...prev, regionId]);
+    console.log('🔓 [MapPage] Attempting to unlock:', regionId, 'Cost:', keyCost);
+    const success = unlockRegionLS(regionId, keyCost);
+    if (success) {
+      const userData = getUserData();
+      setKeyValue(userData.keys);
+      setUnlockedRegions(userData.unlockedRegions);
       if (!freeKeyUsed) setFreeKeyUsed(true);
       setLockedRegionNamePopup(null);
       setLockedRegionIdPopup(null);
+      console.log('✅ [MapPage] Region unlocked successfully');
+    } else {
+      console.log('❌ [MapPage] Failed to unlock region');
     }
   };
 
   // Called when user completes/visits a province — reward keys
   const handleProvinceComplete = (regionId) => {
     const { keyReward } = getDifficultyInfo(regionId);
-    setKeyValue(prev => prev + keyReward);
+    console.log('🎁 [MapPage] Province completed:', regionId, 'Reward:', keyReward);
+    addKeys(keyReward);
+    const userData = getUserData();
+    setKeyValue(userData.keys);
   };
 
   if (loading) {

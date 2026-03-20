@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getTheme, saveTheme } from '../utils/localStorage';
 import '../styles/navbar.css';
 
 export default function Navbar() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => getTheme());
   const [activeLink, setActiveLink] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    saveTheme(theme);
   }, [theme]);
 
   useEffect(() => {
@@ -32,7 +34,11 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [isMenuOpen]);
 
-  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    saveTheme(newTheme);
+  };
   const toggleMenu  = () => setIsMenuOpen(v => !v);
 
   // Scroll ke section di landing page
