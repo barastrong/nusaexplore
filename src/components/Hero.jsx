@@ -22,8 +22,8 @@ export default function Hero() {
         </div>
         <div className="hero-stats">
           <div><div className="stat-num">1,340+</div><div className="stat-label">Suku Bangsa</div></div>
-          <div><div className="stat-num">746</div><div className="stat-label">Bahasa Daerah</div></div>
-          <div><div className="stat-num">34</div><div className="stat-label">Provinsi</div></div>
+          <div><div className="stat-num">718 </div><div className="stat-label">Bahasa Daerah</div></div>
+          <div><div className="stat-num">38</div><div className="stat-label">Provinsi</div></div>
         </div>
       </div>
       <div className="hero-right">
