@@ -21,7 +21,8 @@ export default function MapPage() {
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
   const [unlockedRegions, setUnlockedRegions] = useState(['jawa-timur']); // Jawa Timur already unlocked
-  const [keyValue, setKeyValue] = useState(10000000000);
+  const [keyValue, setKeyValue] = useState(1);
+  const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
   
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
 
@@ -80,14 +81,20 @@ export default function MapPage() {
     setPanY(offsetY);
   };
 
-  const handleLockedRegionClick = (regionId, regionName) => {
+  const handleLockedRegionClick = (regionId, regionName, keyCost = 1) => {
     console.log('=== MAP PAGE - LOCKED REGION CLICKED ===');
     console.log('Region Name:', regionName);
+    console.log('Key Cost:', keyCost);
+    // Close RegionPopup to prevent multiple popups
+    setSelectedRegionName(null);
+    setSelectedRegionId(null);
+    // Open LockedRegionPopup with cost
     setLockedRegionNamePopup(regionName);
     setLockedRegionIdPopup(regionId);
+    setLockedRegionKeyCost(keyCost);
   };
 
-  const handleUnlockRegion = (regionId, keyCost = 100) => {
+  const handleUnlockRegion = (regionId, keyCost) => {
     if (keyValue >= keyCost) {
       // Deduct keys and unlock region
       setKeyValue(keyValue - keyCost);
@@ -159,9 +166,9 @@ export default function MapPage() {
         <LockedRegionPopup
           regionName={lockedRegionNamePopup}
           onClose={() => setLockedRegionNamePopup(null)}
-          onUnlock={() => handleUnlockRegion(lockedRegionIdPopup, 100)}
+          onUnlock={() => handleUnlockRegion(lockedRegionIdPopup, lockedRegionKeyCost)}
           keyValue={keyValue}
-          keyRequired={100}
+          keyRequired={lockedRegionKeyCost}
         />
       )}
 

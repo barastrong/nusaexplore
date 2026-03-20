@@ -174,7 +174,65 @@ const regions = [
   },
 ];
 
-export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, unlockedRegions = ['jawa-timur'], keyValue = 10000000000 }) {
+// Mapping kesulitan region dan biaya kunci
+const regionDifficulty = {
+  // Mudah (1 kunci) - Daerah Yang Mudah Diakses & Populer
+  'aceh': 'mudah',
+  'sumatera-utara': 'mudah',
+  'dki-jakarta': 'mudah',
+  'jawa-barat': 'mudah',
+  'jawa-timur': 'mudah',
+  'bali': 'mudah',
+  'yogyakarta': 'mudah',
+  'riau': 'mudah',
+  'jawa-tengah': 'mudah',
+  
+  // Sedang (1 kunci) - Daerah Standar
+  'sumatera-barat': 'sedang',
+  'sumatera-selatan': 'sedang',
+  'bengkulu': 'sedang',
+  'lampung': 'sedang',
+  'jambi': 'sedang',
+  'banten': 'sedang',
+  'bangka-belitung': 'sedang',
+  'kepulauan-riau': 'sedang',
+  'nusa-tenggara-barat': 'sedang',
+  'nusa-tenggara-timur': 'sedang',
+  'kalimantan-barat': 'sedang',
+  'kalimantan-selatan': 'sedang',
+  'sulawesi-utara': 'sedang',
+  'sulawesi-tengah': 'sedang',
+  'sulawesi-selatan': 'sedang',
+  'sulawesi-tenggara': 'sedang',
+  'sulawesi-barat': 'sedang',
+  'maluku': 'sedang',
+  
+  // Susah (2 kunci) - Daerah Terpencil & Sulit Diakses
+  'kalimantan-tengah': 'susah',
+  'kalimantan-timur': 'susah',
+  'kalimantan-utara': 'susah',
+  'maluku-utara': 'susah',
+  'gorontalo': 'susah',
+  'papua-barat': 'susah',
+  'papua-barat-daya': 'susah',
+  'papua-tengah': 'susah',
+  'papua-selatan': 'susah',
+  'papua-pegunungan': 'susah',
+  'papua': 'susah'
+};
+
+// Konversi kesulitan ke biaya kunci
+const getDifficultyCost = (regionId) => {
+  const difficulty = regionDifficulty[regionId] || 'sedang';
+  const costMap = {
+    'mudah': 1,
+    'sedang': 1,
+    'susah': 2
+  };
+  return costMap[difficulty];
+};
+
+export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, unlockedRegions = ['jawa-timur'], keyValue = 1 }) {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [lockPositions, setLockPositions] = useState({});
   const svgRef = useRef(null);
@@ -232,9 +290,10 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   const handleRegionClick = (regionId, regionName, e) => {
     // Cek apakah region terkunci
     if (lockedRegions.includes(regionId)) {
-      console.log(`🔑 Region "${regionName}" membutuhkan key untuk diakses`);
+      const cost = getDifficultyCost(regionId);
+      console.log(`🔑 Region "${regionName}" membutuhkan key untuk diakses (Biaya: ${cost})`);
       if (onLockedRegionClick) {
-        onLockedRegionClick(regionId, regionName);
+        onLockedRegionClick(regionId, regionName, cost);
       }
       return;
     }
