@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { provinceDetailData } from '../../data/provinceDetailData';
+import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineMap, HiOutlineChatAlt2 } from 'react-icons/hi';
 import '../../styles/detailmap.css';
 
 export default function DetailMapPage() {
@@ -68,28 +69,28 @@ export default function DetailMapPage() {
         <div className="detail-container">
           <div className="quick-info-grid">
             <div className="quick-info-card">
-              <div className="quick-info-icon">🏛️</div>
+              <div className="quick-info-icon"><HiOutlineOfficeBuilding /></div>
               <div className="quick-info-content">
                 <h3>Ibu Kota</h3>
                 <p>{province.capital}</p>
               </div>
             </div>
             <div className="quick-info-card">
-              <div className="quick-info-icon">👥</div>
+              <div className="quick-info-icon"><HiOutlineUsers /></div>
               <div className="quick-info-content">
                 <h3>Populasi</h3>
                 <p>{province.population}</p>
               </div>
             </div>
             <div className="quick-info-card">
-              <div className="quick-info-icon">📏</div>
+              <div className="quick-info-icon"><HiOutlineMap /></div>
               <div className="quick-info-content">
                 <h3>Luas Wilayah</h3>
                 <p>{province.area}</p>
               </div>
             </div>
             <div className="quick-info-card">
-              <div className="quick-info-icon">🗣️</div>
+              <div className="quick-info-icon"><HiOutlineChatAlt2 /></div>
               <div className="quick-info-content">
                 <h3>Bahasa Daerah</h3>
                 <p>{province.language}</p>
@@ -119,12 +120,15 @@ export default function DetailMapPage() {
             <span className="section-label">Budaya</span>
             <h2>Kekayaan Budaya</h2>
           </div>
-          <div className="culture-grid">
+          <div className="media-grid">
             {province.culture.map((item, index) => (
-              <div key={index} className="culture-card">
-                <div className="culture-card-icon">{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+              <div key={index} className="media-card">
+                <div className="media-img" style={{ backgroundImage: `url(${item.image})` }}>
+                  <div className="media-overlay">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -138,11 +142,11 @@ export default function DetailMapPage() {
             <span className="section-label">Wisata</span>
             <h2>Destinasi Populer</h2>
           </div>
-          <div className="tourism-grid">
+          <div className="media-grid">
             {province.tourism.map((place, index) => (
-              <div key={index} className="tourism-card">
-                <div className="tourism-image" style={{ backgroundImage: `url(${place.image})` }}>
-                  <div className="tourism-overlay">
+              <div key={index} className="media-card">
+                <div className="media-img" style={{ backgroundImage: `url(${place.image})` }}>
+                  <div className="media-overlay">
                     <h3>{place.name}</h3>
                     <p>{place.location}</p>
                   </div>
@@ -160,12 +164,15 @@ export default function DetailMapPage() {
             <span className="section-label">Kuliner</span>
             <h2>Makanan Khas</h2>
           </div>
-          <div className="culinary-grid">
+          <div className="media-grid">
             {province.culinary.map((food, index) => (
-              <div key={index} className="culinary-card">
-                <div className="culinary-emoji">{food.emoji}</div>
-                <h3>{food.name}</h3>
-                <p>{food.description}</p>
+              <div key={index} className="media-card">
+                <div className="media-img" style={{ backgroundImage: `url(${food.image})` }}>
+                  <div className="media-overlay">
+                    <h3>{food.name}</h3>
+                    <p>{food.description}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -182,7 +189,8 @@ export default function DetailMapPage() {
           <div className="facts-grid">
             {province.facts.map((fact, index) => (
               <div key={index} className="fact-card">
-                <div className="fact-number">{index + 1}</div>
+                <div className="fact-icon">✦</div>
+                <div className="fact-index">{String(index + 1).padStart(2, '0')}</div>
                 <p>{fact}</p>
               </div>
             ))}

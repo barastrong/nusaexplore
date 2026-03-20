@@ -96,8 +96,8 @@
 .img-tag {
   position: absolute; bottom: 12px; left: 12px;
   background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
-  color: #fff; font-size: 11px; font-weight: 600;
-  padding: 4px 10px; border-radius: 20px;
+  color: #fff; font-size: 13px; font-weight: 600;
+  padding: 4px 15px; border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.15);
 }
 [data-theme="light"] .img-tag { background: rgba(255,255,255,0.75); color: #1A1408; border-color: rgba(0,0,0,0.1); }
@@ -112,12 +112,18 @@
 [data-theme="light"] .stat-label { color: var(--text2); }
 
 @media (max-width: 968px) {
-  .hero { grid-template-columns: 1fr; padding: 80px 20px 40px; gap: 40px; }
-  .hero-right { height: 400px; }
-  .hero-img-main { width: 80%; height: 300px; }
-  .hero-img-sm1 { width: 50%; height: 180px; bottom: 20px; }
-  .hero-img-sm2 { width: 40%; height: 140px; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 90px 24px 48px;
+    gap: 40px;
+    min-height: auto;
+  }
+  .hero-right { height: 380px; }
+  .hero-img-main { width: 78%; height: 280px; }
+  .hero-img-sm1 { width: 50%; height: 170px; bottom: 20px; }
+  .hero-img-sm2 { width: 40%; height: 130px; }
   .hero-actions { margin-bottom: 32px; }
+  .hero-stats { gap: 24px; }
 }
 
 @media (max-width: 768px) {

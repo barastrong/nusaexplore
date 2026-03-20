@@ -1,6 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/hero.css';
 
+import batikImg from '../assets/batik.jpg';
+import wayangImg from '../assets/wayang.jpg';     
+import candiImg from '../assets/candi.jpg';       
+
 export default function Hero() {
   const navigate = useNavigate();
 
@@ -23,26 +27,43 @@ export default function Hero() {
         <div className="hero-stats">
           <div><div className="stat-num">1,340+</div><div className="stat-label">Suku Bangsa</div></div>
           <div><div className="stat-num">746</div><div className="stat-label">Bahasa Daerah</div></div>
-          <div><div className="stat-num">34</div><div className="stat-label">Provinsi</div></div>
+          <div><div className="stat-num">38</div><div className="stat-label">Provinsi</div></div>
         </div>
       </div>
+
       <div className="hero-right">
+        {/* Gambar utama (besar) */}
         <div className="hero-img-main">
           <div className="img-placeholder p1">
-            <div>Batik Nusantara</div>
+            <img
+              src={batikImg}
+              alt="Batik Nusantara"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
           </div>
           <div className="img-tag">Seni Tekstil · Warisan UNESCO</div>
         </div>
-        <div className="hero-badge">Warisan Dunia</div>
+
+        {/* Gambar kecil kiri bawah */}
         <div className="hero-img-sm1">
           <div className="img-placeholder p2">
-            <div>Wayang Kulit</div>
+            <img
+              src={wayangImg}
+              alt="Wayang Kulit"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
           </div>
           <div className="img-tag">Tradisi · 1,000 Tahun</div>
         </div>
+
+        {/* Gambar kecil kanan bawah */}
         <div className="hero-img-sm2">
           <div className="img-placeholder p3">
-            <div>Candi Agung</div>
+            <img
+              src={candiImg}
+              alt="Candi Agung"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
+            />
           </div>
           <div className="img-tag">Sejarah</div>
         </div>

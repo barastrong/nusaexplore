@@ -19,10 +19,23 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero />
+      {/* id="home" untuk scroll Beranda */}
+      <section id="home" style={{ scrollMarginTop: '80px' }}>
+        <Hero />
+      </section>
+
       <Marquee />
-      <CultureGrid />
-      <Features />
+
+      {/* id="culture" untuk scroll Budaya */}
+      <section id="culture" style={{ scrollMarginTop: '80px' }}>
+        <CultureGrid />
+      </section>
+
+      {/* id="features" untuk scroll Fitur */}
+      <section id="features" style={{ scrollMarginTop: '80px' }}>
+        <Features />
+      </section>
+
       <Quote />
       <CTA />
     </>

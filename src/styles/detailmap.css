@@ -43,6 +43,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+  z-index: 1;
 }
 
 .detail-hero-content {
@@ -54,12 +55,18 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .detail-back-btn {
   position: absolute;
   top: 40px;
   left: 40px;
+  z-index: 3;
   padding: 12px 24px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -81,7 +88,8 @@
 }
 
 .detail-hero-text {
-  margin-top: 80px;
+  position: relative;
+  z-index: 2;
 }
 
 .detail-badge {
@@ -123,7 +131,7 @@
 /* Section Header */
 .detail-section-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .section-label {
@@ -145,8 +153,9 @@
 
 /* Quick Info Section */
 .detail-quick-info {
-  padding: 80px 0;
+  padding: 60px 0;
   background: var(--bg2);
+  background-image: var(--pattern);
   border-bottom: 1px solid var(--border);
 }
 
@@ -174,8 +183,17 @@
 }
 
 .quick-info-icon {
-  font-size: 2.5rem;
   flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold-dim);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--gold);
+  font-size: 1.6rem;
 }
 
 .quick-info-content h3 {
@@ -195,7 +213,7 @@
 
 /* About Section */
 .detail-about {
-  padding: 100px 0;
+  padding: 64px 0;
 }
 
 .about-content p {
@@ -209,215 +227,171 @@
 
 /* Culture Section */
 .detail-culture {
-  padding: 100px 0;
+  padding: 72px 0;
   background: var(--bg2);
-}
-
-.culture-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.culture-card {
-  padding: 40px 30px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.culture-card:hover {
-  border-color: var(--gold);
-  transform: translateY(-8px);
-  box-shadow: var(--shadow);
-}
-
-.culture-card-icon {
-  font-size: 3.5rem;
-  margin-bottom: 20px;
-}
-
-.culture-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 12px;
-}
-
-.culture-card p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--text2);
+  background-image: var(--pattern);
 }
 
 /* Tourism Section */
 .detail-tourism {
-  padding: 100px 0;
-}
-
-.tourism-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.tourism-card {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: all 0.3s;
-}
-
-.tourism-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-
-.tourism-image {
-  height: 350px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.tourism-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
-  transition: all 0.3s;
-}
-
-.tourism-card:hover .tourism-image::before {
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
-}
-
-.tourism-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px;
-  color: white;
-  z-index: 2;
-}
-
-.tourism-overlay h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.tourism-overlay p {
-  font-size: 0.95rem;
-  opacity: 0.9;
+  padding: 72px 0;
 }
 
 /* Culinary Section */
 .detail-culinary {
-  padding: 100px 0;
+  padding: 72px 0;
   background: var(--bg2);
+  background-image: var(--pattern);
 }
 
-.culinary-grid {
+/* ── Shared Media Grid (Culture / Tourism / Culinary) ── */
+.media-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-.culinary-card {
-  padding: 40px 30px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+.media-card {
   border-radius: 16px;
-  text-align: center;
-  transition: all 0.3s;
-}
-
-.culinary-card:hover {
-  border-color: var(--gold);
-  transform: translateY(-5px);
+  overflow: hidden;
   box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.culinary-emoji {
-  font-size: 4rem;
-  margin-bottom: 20px;
+.media-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
-.culinary-card h3 {
+.media-img {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg2);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.media-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.82));
+  transition: background 0.3s;
+}
+
+.media-card:hover .media-img::after {
+  background: linear-gradient(to bottom, transparent 25%, rgba(0,0,0,0.68));
+}
+
+.media-overlay {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
+  color: #fff;
+  width: 100%;
+}
+
+.media-overlay h3 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 12px;
+  margin: 0 0 6px;
+  line-height: 1.3;
 }
 
-.culinary-card p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--text2);
+.media-overlay p {
+  font-size: 0.85rem;
+  opacity: 0.88;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* Facts Section */
 .detail-facts {
-  padding: 100px 0;
+  padding: 72px 0;
+  background: var(--bg2);
+  background-image: var(--pattern);
 }
 
 .facts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .fact-card {
-  display: flex;
-  gap: 20px;
-  padding: 30px;
+  position: relative;
+  padding: 36px 30px 30px;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  transition: all 0.3s;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.35s;
+}
+
+.fact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .fact-card:hover {
   border-color: var(--gold);
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(201, 168, 76, 0.15);
 }
 
-.fact-number {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--gold-dim);
-  border: 2px solid var(--gold);
-  border-radius: 50%;
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 800;
+.fact-card:hover::before {
+  opacity: 1;
+}
+
+.fact-icon {
+  font-size: 1.4rem;
   color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1;
+}
+
+.fact-index {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.15;
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.fact-card:hover .fact-index {
+  opacity: 0.3;
 }
 
 .fact-card p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--text2);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--text);
   margin: 0;
 }
 
 /* CTA Section */
 .detail-cta {
-  padding: 100px 0;
+  padding: 72px 0;
   background: var(--bg2);
+  background-image: var(--pattern);
   text-align: center;
 }
 
@@ -435,11 +409,124 @@
   margin-bottom: 40px;
 }
 
+/* ================= LIGHT MODE OVERRIDES ================= */
+[data-theme="light"] .detail-map-page {
+  background: var(--bg);
+}
+
+[data-theme="light"] .detail-hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(10,6,2,0.75));
+}
+
+[data-theme="light"] .detail-quick-info {
+  background: #E8DCC8;
+  background-image: var(--pattern);
+  border-bottom: 2px solid rgba(100,64,12,0.18);
+}
+
+[data-theme="light"] .quick-info-card {
+  background: #FAF5EC;
+  border: 1.5px solid rgba(100,64,12,0.2);
+  box-shadow: 0 4px 20px rgba(80,50,10,0.08);
+}
+
+[data-theme="light"] .quick-info-card:hover {
+  background: #fff;
+  border-color: var(--gold);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.2);
+}
+
+[data-theme="light"] .quick-info-icon {
+  background: rgba(201,168,76,0.15);
+  border-color: rgba(201,168,76,0.35);
+}
+
+[data-theme="light"] .quick-info-content h3 {
+  color: #8C6A30;
+}
+
+[data-theme="light"] .quick-info-content p {
+  color: #18120A;
+}
+
+[data-theme="light"] .detail-about {
+  background: #FAF5EC;
+}
+
+[data-theme="light"] .about-content p {
+  color: #4A3820;
+}
+
+[data-theme="light"] .detail-culture,
+[data-theme="light"] .detail-culinary,
+[data-theme="light"] .detail-facts,
+[data-theme="light"] .detail-cta {
+  background: #E8DCC8;
+  background-image: var(--pattern);
+}
+
+[data-theme="light"] .detail-tourism {
+  background: #FAF5EC;
+}
+
+[data-theme="light"] .detail-section-header h2 {
+  color: #18120A;
+}
+
+[data-theme="light"] .media-card {
+  box-shadow: 0 8px 32px rgba(80,50,10,0.18);
+  border: 1.5px solid rgba(100,64,12,0.15);
+}
+
+[data-theme="light"] .media-card:hover {
+  box-shadow: 0 20px 56px rgba(80,50,10,0.28);
+  border-color: var(--gold);
+}
+
+[data-theme="light"] .media-img::after {
+  background: linear-gradient(to bottom, transparent 30%, rgba(10,6,2,0.88));
+}
+
+[data-theme="light"] .fact-card {
+  background: #FAF5EC;
+  border: 1.5px solid rgba(100,64,12,0.18);
+  box-shadow: 0 4px 20px rgba(80,50,10,0.07);
+}
+
+[data-theme="light"] .fact-card:hover {
+  background: #fff;
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.2);
+}
+
+[data-theme="light"] .fact-card p {
+  color: #18120A;
+}
+
+[data-theme="light"] .fact-index {
+  opacity: 0.1;
+}
+
+[data-theme="light"] .fact-card:hover .fact-index {
+  opacity: 0.22;
+}
+
+[data-theme="light"] .cta-content h2 {
+  color: #18120A;
+}
+
+[data-theme="light"] .cta-content p {
+  color: #4A3820;
+}
+
 /* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .detail-container { padding: 0 32px; }
+  .media-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+}
+
 @media (max-width: 968px) {
-  .detail-container {
-    padding: 0 24px;
-  }
+  .detail-container { padding: 0 24px; }
 
   .detail-hero {
     height: 60vh;
@@ -453,84 +540,56 @@
     font-size: 13px;
   }
 
-  .detail-hero-text {
-    margin-top: 60px;
-  }
-
   .detail-quick-info,
   .detail-about,
   .detail-culture,
   .detail-tourism,
   .detail-culinary,
   .detail-facts,
-  .detail-cta {
-    padding: 60px 0;
-  }
+  .detail-cta { padding: 52px 0; }
 
-  .detail-section-header {
-    margin-bottom: 40px;
-  }
+  .detail-section-header { margin-bottom: 32px; }
 
   .quick-info-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 
-  .quick-info-card {
-    padding: 20px;
+  .quick-info-card { padding: 20px; gap: 16px; }
+
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 
-  .quick-info-icon {
-    font-size: 2rem;
-  }
+  .media-img { height: 220px; }
 
-  .culture-grid,
-  .culinary-grid,
   .facts-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
-  .tourism-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .tourism-image {
-    height: 280px;
-  }
+  .detail-section-header h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
 }
 
 @media (max-width: 640px) {
-  .detail-container {
-    padding: 0 16px;
-  }
+  .detail-container { padding: 0 16px; }
 
   .detail-hero {
-    height: 50vh;
-    min-height: 350px;
+    height: 55vh;
+    min-height: 320px;
   }
 
   .detail-back-btn {
-    top: 16px;
-    left: 16px;
-    padding: 8px 16px;
+    top: 14px;
+    left: 14px;
+    padding: 8px 14px;
     font-size: 12px;
   }
 
-  .detail-badge {
-    font-size: 10px;
-    padding: 6px 16px;
-  }
-
-  .detail-title {
-    font-size: clamp(2rem, 8vw, 3rem);
-  }
-
-  .detail-subtitle {
-    font-size: clamp(0.95rem, 3vw, 1.2rem);
-  }
+  .detail-badge { font-size: 10px; padding: 6px 14px; letter-spacing: 1px; }
+  .detail-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .detail-subtitle { font-size: clamp(0.9rem, 3vw, 1.1rem); }
 
   .detail-quick-info,
   .detail-about,
@@ -538,83 +597,70 @@
   .detail-tourism,
   .detail-culinary,
   .detail-facts,
-  .detail-cta {
-    padding: 48px 0;
+  .detail-cta { padding: 40px 0; }
+
+  .detail-section-header { margin-bottom: 28px; }
+  .detail-section-header h2 { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+  .about-content p { font-size: 0.95rem; line-height: 1.8; }
+
+  .quick-info-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .quick-info-card { padding: 16px; gap: 12px; }
+  .quick-info-icon { width: 42px; height: 42px; font-size: 1.3rem; }
+  .quick-info-content h3 { font-size: 11px; }
+  .quick-info-content p { font-size: 15px; }
+
+  .media-grid { grid-template-columns: 1fr; gap: 14px; }
+  .media-img { height: 240px; }
+  .media-overlay h3 { font-size: 1.1rem; }
+
+  .facts-grid { grid-template-columns: 1fr; gap: 12px; }
+  .fact-card { padding: 24px 20px; }
+  .fact-index { font-size: 2.5rem; }
+
+  .cta-content h2 { margin-bottom: 12px; }
+  .cta-content p { font-size: 0.95rem; margin-bottom: 28px; }
+}
+
+@media (max-width: 480px) {
+  .detail-hero {
+    height: 50vh;
+    min-height: 280px;
   }
 
-  .detail-section-header {
-    margin-bottom: 32px;
+  .detail-back-btn {
+    top: 12px;
+    left: 12px;
+    padding: 7px 12px;
+    font-size: 11px;
   }
 
-  .section-label {
-    font-size: 10px;
-  }
+  .detail-title { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+  .detail-subtitle { font-size: 0.88rem; }
+  .detail-badge { font-size: 9px; padding: 5px 12px; }
 
-  .about-content p {
-    font-size: 1rem;
-    line-height: 1.8;
-  }
+  .detail-quick-info,
+  .detail-about,
+  .detail-culture,
+  .detail-tourism,
+  .detail-culinary,
+  .detail-facts,
+  .detail-cta { padding: 32px 0; }
 
-  .quick-info-grid {
-    grid-template-columns: 1fr;
-  }
+  .quick-info-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .quick-info-card { padding: 14px 12px; gap: 10px; }
+  .quick-info-icon { width: 38px; height: 38px; font-size: 1.1rem; border-radius: 10px; }
+  .quick-info-content h3 { font-size: 10px; }
+  .quick-info-content p { font-size: 13px; }
 
-  .quick-info-card {
-    padding: 18px;
-  }
+  .media-img { height: 200px; }
+  .media-overlay { padding: 16px; }
+  .media-overlay h3 { font-size: 1rem; }
+  .media-overlay p { font-size: 0.78rem; }
 
-  .quick-info-content h3 {
-    font-size: 12px;
-  }
+  .fact-card { padding: 20px 16px; }
+  .fact-index { font-size: 2rem; top: 14px; right: 16px; }
+  .fact-card p { font-size: 0.9rem; }
 
-  .quick-info-content p {
-    font-size: 16px;
-  }
-
-  .culture-card,
-  .culinary-card {
-    padding: 30px 20px;
-  }
-
-  .culture-card-icon,
-  .culinary-emoji {
-    font-size: 3rem;
-  }
-
-  .culture-card h3,
-  .culinary-card h3 {
-    font-size: 1.3rem;
-  }
-
-  .tourism-image {
-    height: 240px;
-  }
-
-  .tourism-overlay {
-    padding: 20px;
-  }
-
-  .tourism-overlay h3 {
-    font-size: 1.4rem;
-  }
-
-  .fact-card {
-    padding: 20px;
-    gap: 16px;
-  }
-
-  .fact-number {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
-  }
-
-  .cta-content h2 {
-    margin-bottom: 12px;
-  }
-
-  .cta-content p {
-    font-size: 1rem;
-    margin-bottom: 32px;
-  }
+  .detail-section-header h2 { font-size: clamp(1.2rem, 7vw, 1.6rem); }
 }
