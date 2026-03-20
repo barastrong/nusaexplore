@@ -20,7 +20,7 @@ export default function MapPage() {
   const [zoomCenterY, setZoomCenterY] = useState(170);
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
-  const [unlockedRegions, setUnlockedRegions] = useState(['jawa-timur']); // Jawa Timur already unlocked
+  const [unlockedRegions, setUnlockedRegions] = useState(['']); // Jawa Timur already unlocked
   const [keyValue, setKeyValue] = useState(1);
   const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
   
