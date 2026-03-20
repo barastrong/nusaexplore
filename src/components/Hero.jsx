@@ -22,7 +22,7 @@ export default function Hero() {
         </p>
         <div className="hero-actions">
           <button className="btn-gold" onClick={() => navigate('/map')}>Mulai Eksplorasi</button>
-          <button className="btn-outline" onClick={() => navigate('/games')}>Coba Games</button>
+          <button className="btn-outline" onClick={() => navigate('/map-games')}>Coba Games</button>
         </div>
         <div className="hero-stats">
           <div><div className="stat-num">1,340+</div><div className="stat-label">Suku Bangsa</div></div>
