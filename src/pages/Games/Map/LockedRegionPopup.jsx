@@ -1,54 +1,52 @@
 import '../../../styles/map.css';
-import { FiKey } from "react-icons/fi";
+import { FiKey, FiLock } from "react-icons/fi";
+import { getDifficultyInfo } from '../MapPage';
 
-export default function LockedRegionPopup({ regionName, onClose, onUnlock, keyValue = 0, keyRequired = 100 }) {
+export default function LockedRegionPopup({ regionName, regionId, onClose, onUnlock, keyValue = 0, keyRequired = 1 }) {
   const canUnlock = keyValue >= keyRequired;
-  const keysNeeded = keyRequired - keyValue;
-  
-  const handleUnlock = () => {
-    if (canUnlock) {
-      onUnlock();
-      onClose();
-    }
-  };
+  const { difficulty, label, color, keyReward } = getDifficultyInfo(regionId);
 
   return (
     <div className="region-popup-overlay" onClick={onClose}>
       <div className="region-popup" onClick={(e) => e.stopPropagation()}>
         <button className="popup-close" onClick={onClose}>×</button>
         <div className="popup-content">
-          <h3 className="popup-title">Daerah Terkunci</h3>
-          <p className="popup-section-title">{regionName}</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <FiLock size={16} color={color} />
+            <h3 className="popup-title" style={{ margin: 0, fontSize: 18 }}>Provinsi Terkunci</h3>
+          </div>
+          <p className="popup-section-title" style={{ marginBottom: 8 }}>{regionName}</p>
+
+          {/* Difficulty badge */}
+          <span className="htp-badge" style={{ background: color + '22', color, border: `1px solid ${color}`, marginBottom: 12, display: 'inline-block' }}>
+            Level: {label}
+          </span>
+
           <div className="popup-section">
-            <p className="popup-text">Daerah ini membutuhkan kunci untuk diakses</p>
             <div className="key-requirement-box">
               <span className="key-icon"><FiKey /></span>
-              <span className="key-amount">{keyRequired}</span>
+              <span className="key-amount">{keyRequired} kunci dibutuhkan</span>
             </div>
+            <p style={{ fontSize: 12, color: '#888', marginTop: 8, marginBottom: 0 }}>
+              Kunci kamu: <strong style={{ color: keyValue >= keyRequired ? '#40916C' : '#e74c3c' }}>{keyValue}</strong>
+              {' · '}Reward setelah dibuka: <strong style={{ color: '#C9A84C' }}>{keyReward} 🔑</strong>
+            </p>
             {!canUnlock && (
-              <p className="popup-text popup-warning" style={{ color: '#e74c3c', marginTop: '10px', fontSize: '12px' }}>
-                Kamu membutuhkan {keysNeeded} kunci lagi
+              <p style={{ color: '#e74c3c', marginTop: 6, fontSize: 12 }}>
+                Butuh {keyRequired - keyValue} kunci lagi
               </p>
             )}
-            <p className="popup-text" style={{ fontSize: '12px', color: '#999', marginTop: '8px' }}>
-              Kunci tersediamu: {keyValue}
-            </p>
           </div>
-          <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
-            <button className="popup-btn-secondary" onClick={onClose} style={{ flex: 1 }}>
-              Batal
-            </button>
-            <button 
-              className="popup-btn-primary" 
-              onClick={handleUnlock}
+
+          <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+            <button className="popup-btn-secondary" onClick={onClose} style={{ flex: 1 }}>Batal</button>
+            <button
+              className="popup-btn-primary"
+              onClick={() => { if (canUnlock) { onUnlock(); onClose(); } }}
               disabled={!canUnlock}
-              style={{
-                flex: 1,
-                opacity: canUnlock ? 1 : 0.5,
-                cursor: canUnlock ? 'pointer' : 'not-allowed'
-              }}
+              style={{ flex: 1, opacity: canUnlock ? 1 : 0.5, cursor: canUnlock ? 'pointer' : 'not-allowed' }}
             >
-              {canUnlock ? 'Buka Kunci' : 'Tidak Cukup'}
+              {canUnlock ? 'Buka Provinsi' : 'Kunci Kurang'}
             </button>
           </div>
         </div>

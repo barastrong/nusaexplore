@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { FiLock, FiKey } from 'react-icons/fi';
+import { getDifficultyInfo } from '../MapPage';
 
 const regions = [
   {
@@ -174,63 +175,8 @@ const regions = [
   },
 ];
 
-// Mapping kesulitan region dan biaya kunci
-const regionDifficulty = {
-  // Mudah (1 kunci) - Daerah Yang Mudah Diakses & Populer
-  'aceh': 'mudah',
-  'sumatera-utara': 'mudah',
-  'dki-jakarta': 'mudah',
-  'jawa-barat': 'mudah',
-  'jawa-timur': 'mudah',
-  'bali': 'mudah',
-  'yogyakarta': 'mudah',
-  'riau': 'mudah',
-  'jawa-tengah': 'mudah',
-  
-  // Sedang (1 kunci) - Daerah Standar
-  'sumatera-barat': 'sedang',
-  'sumatera-selatan': 'sedang',
-  'bengkulu': 'sedang',
-  'lampung': 'sedang',
-  'jambi': 'sedang',
-  'banten': 'sedang',
-  'bangka-belitung': 'sedang',
-  'kepulauan-riau': 'sedang',
-  'nusa-tenggara-barat': 'sedang',
-  'nusa-tenggara-timur': 'sedang',
-  'kalimantan-barat': 'sedang',
-  'kalimantan-selatan': 'sedang',
-  'sulawesi-utara': 'sedang',
-  'sulawesi-tengah': 'sedang',
-  'sulawesi-selatan': 'sedang',
-  'sulawesi-tenggara': 'sedang',
-  'sulawesi-barat': 'sedang',
-  'maluku': 'sedang',
-  
-  // Susah (2 kunci) - Daerah Terpencil & Sulit Diakses
-  'kalimantan-tengah': 'susah',
-  'kalimantan-timur': 'susah',
-  'kalimantan-utara': 'susah',
-  'maluku-utara': 'susah',
-  'gorontalo': 'susah',
-  'papua-barat': 'susah',
-  'papua-barat-daya': 'susah',
-  'papua-tengah': 'susah',
-  'papua-selatan': 'susah',
-  'papua-pegunungan': 'susah',
-  'papua': 'susah'
-};
-
-// Konversi kesulitan ke biaya kunci
-const getDifficultyCost = (regionId) => {
-  const difficulty = regionDifficulty[regionId] || 'sedang';
-  const costMap = {
-    'mudah': 1,
-    'sedang': 1,
-    'susah': 2
-  };
-  return costMap[difficulty];
-};
+// Mapping kesulitan region — now sourced from MapPage via getDifficultyInfo
+// (local regionDifficulty and getDifficultyCost removed)
 
 export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, unlockedRegions, keyValue = 1 }) {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
@@ -253,24 +199,16 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   // Hitung posisi gembok setelah render
   useEffect(() => {
     if (!svgRef.current) return;
-    
-    console.log(`🔐 Sistem Kunci Aktif: ${lockedRegions.length} region terkunci, ${unlockedRegions.length} region terbuka`);
-    console.log(`   Unlocked: ${unlockedRegions.join(', ')}`);
-    
     const positions = {};
     regions.forEach((region) => {
       if (lockedRegions.includes(region.id)) {
         const pathElement = svgRef.current.querySelector(`path[data-id="${region.id}"]`);
         if (pathElement) {
           const bbox = pathElement.getBBox();
-          positions[region.id] = {
-            x: bbox.x + bbox.width / 2,
-            y: bbox.y + bbox.height / 2
-          };
+          positions[region.id] = { x: bbox.x + bbox.width / 2, y: bbox.y + bbox.height / 2 };
         }
       }
     });
-    // Update lock positions to reflect current locked regions
     if (Object.keys(positions).length !== Object.keys(lockPositions).length || 
         Object.keys(positions).some(key => !lockPositions[key])) {
       setLockPositions(positions);
@@ -288,23 +226,15 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   };
 
   const handleRegionClick = (regionId, regionName, e) => {
-    // Cek apakah region terkunci
     if (lockedRegions.includes(regionId)) {
-      const cost = getDifficultyCost(regionId);
-      console.log(`🔑 Region "${regionName}" membutuhkan key untuk diakses (Biaya: ${cost})`);
-      if (onLockedRegionClick) {
-        onLockedRegionClick(regionId, regionName, cost);
-      }
+      const { unlockCost } = getDifficultyInfo(regionId);
+      if (onLockedRegionClick) onLockedRegionClick(regionId, regionName, unlockCost);
       return;
     }
-    
     if (onRegionClick) {
       const pathElement = e.target;
       const bbox = pathElement.getBBox();
-      const centerX = bbox.x + bbox.width / 2;
-      const centerY = bbox.y + bbox.height / 2;
-      console.log(`✅ Membuka region: ${regionName}`);
-      onRegionClick(regionId, regionName, centerX, centerY);
+      onRegionClick(regionId, regionName, bbox.x + bbox.width / 2, bbox.y + bbox.height / 2);
     }
   };
 

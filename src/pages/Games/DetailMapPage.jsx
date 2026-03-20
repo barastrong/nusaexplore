@@ -10,26 +10,13 @@ export default function DetailMapPage() {
   const [province, setProvince] = useState(null);
 
   useEffect(() => {
-    console.log('=== DETAIL MAP PAGE DEBUG ===');
-    console.log('URL Param (name):', name);
-    console.log('Available provinces:', provinceDetailData.map(p => p.slug));
-    
-    // Cari data provinsi berdasarkan name dari URL
     const foundProvince = provinceDetailData.find(
       p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
     );
-    
-    console.log('Found Province:', foundProvince ? foundProvince.name : 'NOT FOUND');
-    
     if (foundProvince) {
       setProvince(foundProvince);
-      console.log('Province data loaded successfully!');
     } else {
-      console.warn('Province not found! Redirecting to map...');
-      // Jika tidak ditemukan, redirect ke map
-      setTimeout(() => {
-        navigate('/map-games');
-      }, 2000);
+      setTimeout(() => navigate('/map-games'), 2000);
     }
   }, [name, navigate]);
 
@@ -38,14 +25,9 @@ export default function DetailMapPage() {
       <div className="detail-loading">
         <div className="loading-spinner"></div>
         <p>Memuat data provinsi...</p>
-        <p style={{ fontSize: '12px', color: 'var(--text2)', marginTop: '10px' }}>
-          Mencari: {name}
-        </p>
       </div>
     );
   }
-
-  console.log('Rendering province:', province.name);
 
   return (
     <div className="detail-map-page">
@@ -53,7 +35,7 @@ export default function DetailMapPage() {
       <section className="detail-hero" style={{ backgroundImage: `url(${province.heroImage})` }}>
         <div className="detail-hero-overlay"></div>
         <div className="detail-hero-content">
-          <button className="detail-back-btn" onClick={() => navigate('/map')}>
+          <button className="detail-back-btn" onClick={() => navigate('/map-games')}>
             ← Kembali ke Peta
           </button>
           <div className="detail-hero-text">

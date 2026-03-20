@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { getDifficultyInfo } from '../MapPage';
 
-export default function RegionPopup({ regionName, onClose }) {
+export default function RegionPopup({ regionName, regionId, onClose, onComplete }) {
   const navigate = useNavigate();
+  const { label, color, keyReward } = getDifficultyInfo(regionId);
   
   const handleDetailClick = () => {
     // Map nama provinsi ke slug yang sesuai dengan provinceDetailData
@@ -62,6 +64,10 @@ export default function RegionPopup({ regionName, onClose }) {
         <div className="popup-header">
           <div className="popup-title-section">
             <h3 className="popup-title">{regionName}</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 6 }}>
+              <span className="htp-badge" style={{ background: color + '22', color, border: `1px solid ${color}` }}>Level: {label}</span>
+              <span style={{ fontSize: 12, color: '#C9A84C' }}>+{keyReward} 🔑 reward</span>
+            </div>
           </div>
         </div>
         
@@ -71,11 +77,11 @@ export default function RegionPopup({ regionName, onClose }) {
           </p>
 
           <div className="popup-actions">
-            <button className="popup-btn-primary" onClick={handleDetailClick}>
+            <button className="popup-btn-primary" onClick={() => { if (onComplete) onComplete(regionId); handleDetailClick(); }}>
               Lihat Detail Provinsi →
             </button>
             <button className="popup-btn-secondary" onClick={onClose}>
-              ← Kembali ke Peta Utama
+              ← Kembali ke Peta
             </button>
           </div>
         </div>
