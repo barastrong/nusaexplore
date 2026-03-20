@@ -232,7 +232,7 @@ const getDifficultyCost = (regionId) => {
   return costMap[difficulty];
 };
 
-export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, unlockedRegions = ['jawa-timur'], keyValue = 1 }) {
+export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, onLockedRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0, keyValue = 1 }) {
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   const [lockPositions, setLockPositions] = useState({});
   const svgRef = useRef(null);
@@ -240,10 +240,10 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   // =====================================
   // SISTEM KUNCI MAPS
   // =====================================
-  // Daftar region yang terkunci: SEMUA KECUALI YANG SUDAH DI-UNLOCK
-  // User hanya bisa mengakses region yang di-unlock
+  // Daftar region yang terkunci: SEMUA REGION
+  // User hanya bisa mengakses region dengan membeli kunci
   // =====================================
-  const lockedRegions = regions.filter(r => !unlockedRegions.includes(r.id)).map(r => r.id);
+  const lockedRegions = regions.map(r => r.id);
 
   // Find the hovered region's name
   const hoveredRegion = hoveredRegionId
@@ -254,8 +254,7 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   useEffect(() => {
     if (!svgRef.current) return;
     
-    console.log(`🔐 Sistem Kunci Aktif: ${lockedRegions.length} region terkunci, ${unlockedRegions.length} region terbuka`);
-    console.log(`   Unlocked: ${unlockedRegions.join(', ')}`);
+    console.log(`🔐 Sistem Kunci Aktif: ${lockedRegions.length} region terkunci`);
     
     const positions = {};
     regions.forEach((region) => {
@@ -276,7 +275,7 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
       setLockPositions(positions);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lockedRegions, unlockedRegions]);
+  }, [lockedRegions]);
 
   const handleMouseEnter = (e, regionId) => {
     const pathElement = e.target;
