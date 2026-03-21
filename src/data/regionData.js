@@ -78,7 +78,7 @@ export const regionData = {
     ]
   },
   papua: {
-    province: '2 Provinsi · Tanah di Ujung Timur',
+    province: '6 Provinsi · Tanah di Ujung Timur',
     name: 'Papua',
     emoji: '🦜',
     color: 'linear-gradient(135deg,#0A1A0A,#1A4A1A)',
@@ -140,5 +140,9 @@ export const regionToIslandMap = {
 
   // Papua
   'papua': 'papua',
-  'papua-barat': 'papua'
+  'papua-barat': 'papua',
+  'papua-barat-daya': 'papua',
+  'papua-tengah': 'papua',
+  'papua-selatan': 'papua',
+  'papua-pegunungan': 'papua'
 };

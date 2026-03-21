@@ -67,12 +67,6 @@ export default function GamesPage() {
 
       {activeGame === 'quiz' && <QuizGame onBack={() => setActiveGame(null)} />}
       {activeGame === 'puzzle' && <PuzzleGame onBack={() => setActiveGame(null)} />}
-
-      <footer style={{marginTop:'48px'}}>
-        <div className="footer-logo">Nusa<span>Explore</span></div>
-        <div className="footer-copy">© 2025 NusaExplore · Bangga Budaya Indonesia</div>
-        <div className="footer-links"><a href="#">Beranda</a><a href="#">Peta</a></div>
-      </footer>
     </div>
   );
 }

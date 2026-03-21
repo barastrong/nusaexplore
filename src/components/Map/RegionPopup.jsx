@@ -4,25 +4,52 @@ export default function RegionPopup({ regionName, onClose }) {
   const navigate = useNavigate();
   
   const handleDetailClick = () => {
-    console.log('=== REGION POPUP DEBUG ===');
-    console.log('Region Name:', regionName);
-    
-    // Convert region name to slug format
-    const slug = regionName.toLowerCase().replace(/\s+/g, '-');
-    console.log('Generated Slug:', slug);
-    
+    // Map nama provinsi ke slug yang sesuai dengan provinceDetailData
+    const nameToSlug = {
+      'Aceh': 'aceh',
+      'Sumatera Utara': 'sumatera-utara',
+      'Sumatera Barat': 'sumatera-barat',
+      'Riau': 'riau',
+      'Kepulauan Riau': 'kepulauan-riau',
+      'Jambi': 'jambi',
+      'Sumatera Selatan': 'sumatera-selatan',
+      'Bengkulu': 'bengkulu',
+      'Lampung': 'lampung',
+      'Bangka Belitung': 'bangka-belitung',
+      'DKI Jakarta': 'dki-jakarta',
+      'Jawa Barat': 'jawa-barat',
+      'Banten': 'banten',
+      'Jawa Tengah': 'jawa-tengah',
+      'DIY Yogyakarta': 'yogyakarta',
+      'Jawa Timur': 'jawa-timur',
+      'Bali': 'bali',
+      'Nusa Tenggara Barat': 'nusa-tenggara-barat',
+      'Nusa Tenggara Timur': 'nusa-tenggara-timur',
+      'Kalimantan Barat': 'kalimantan-barat',
+      'Kalimantan Tengah': 'kalimantan-tengah',
+      'Kalimantan Selatan': 'kalimantan-selatan',
+      'Kalimantan Timur': 'kalimantan-timur',
+      'Kalimantan Utara': 'kalimantan-utara',
+      'Sulawesi Utara': 'sulawesi-utara',
+      'Gorontalo': 'gorontalo',
+      'Sulawesi Tengah': 'sulawesi-tengah',
+      'Sulawesi Barat': 'sulawesi-barat',
+      'Sulawesi Selatan': 'sulawesi-selatan',
+      'Sulawesi Tenggara': 'sulawesi-tenggara',
+      'Maluku': 'maluku',
+      'Maluku Utara': 'maluku-utara',
+      'Papua Barat': 'papua-barat',
+      'Papua Barat Daya': 'papua-barat-daya',
+      'Papua Tengah': 'papua-tengah',
+      'Papua Selatan': 'papua-selatan',
+      'Papua Pegunungan': 'papua-pegunungan',
+      'Papua': 'papua',
+    };
+
+    const slug = nameToSlug[regionName] || regionName.toLowerCase().replace(/\s+/g, '-');
     const targetUrl = `/detailmap/${slug}`;
-    console.log('Target URL:', targetUrl);
-    console.log('Navigating...');
-    
-    // Close popup first
     onClose();
-    
-    // Then navigate
-    setTimeout(() => {
-      navigate(targetUrl);
-      console.log('Navigation executed!');
-    }, 100);
+    setTimeout(() => navigate(targetUrl), 100);
   };
   
   return (
