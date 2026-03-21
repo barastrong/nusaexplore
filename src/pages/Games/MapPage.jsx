@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { FiKey, FiInfo, FiX, FiAward, FiMap, FiGift, FiSearch, FiUnlock, FiBookOpen, FiStar } from 'react-icons/fi';
 import { regionData, regionToIslandMap } from '../../data/regionData';
-import { getUserData, updateUserData, unlockRegion as unlockRegionLS, addKeys } from '../../utils/localStorage';
+import { getUserData, unlockRegion as unlockRegionLS, setOnboardingDone } from '../../utils/localStorage';
 import MapSVG from './/Map/MapSVG';
 import RegionPopup from './Map/RegionPopup';
 import LockedRegionPopup from './Map/LockedRegionPopup';
 import '../../styles/map.css';
 
-// Difficulty config
-const DIFFICULTY_CONFIG = {
+export const DIFFICULTY_CONFIG = {
   mudah:  { unlockCost: 1, keyReward: 1, label: 'Mudah',  color: '#40916C' },
   sedang: { unlockCost: 2, keyReward: 1, label: 'Sedang', color: '#C9A84C' },
   susah:  { unlockCost: 3, keyReward: 2, label: 'Susah',  color: '#e74c3c' },
@@ -32,7 +31,7 @@ const regionDifficulty = {
   'kalimantan-utara': 'susah', 'maluku-utara': 'susah',
   'gorontalo': 'susah', 'papua-barat': 'susah', 'papua-barat-daya': 'susah',
   'papua-tengah': 'susah', 'papua-selatan': 'susah',
-  'papua-pegunungan': 'susah', 'papua': 'susah'
+  'papua-pegunungan': 'susah', 'papua': 'susah',
 };
 
 export const getDifficultyInfo = (regionId) => {
@@ -56,39 +55,38 @@ export default function MapPage() {
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
   const [unlockedRegions, setUnlockedRegions] = useState([]);
-  const [keyValue, setKeyValue] = useState(() => {
-    const userData = getUserData();
-    return userData.keys;
-  });
+  const [keyValue, setKeyValue] = useState(1);
   const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
-  const [showHowToPlay, setShowHowToPlay] = useState(true);
-  const [freeKeyUsed, setFreeKeyUsed] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
 
-  // Load data from localStorage on mount
+  // Load from localStorage on mount
   useEffect(() => {
-    const userData = getUserData();
-    console.log('🎮 [MapPage] Loading user data on mount:', userData);
-    setUnlockedRegions(userData.unlockedRegions);
+    const data = getUserData();
+    setUnlockedRegions(data.unlockedRegions);
+    setKeyValue(data.keys);
+    // Show onboarding only if never done before
+    if (!data.onboardingDone) setShowOnboarding(true);
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  const handleDismissOnboarding = () => {
+    setShowOnboarding(false);
+    setOnboardingDone();
+  };
 
   const showRegion = (id) => setHoveredRegionId(id);
 
   const closeDetail = () => {
-    // Smooth zoom out
     setZoom(1);
     setPanX(0);
     setPanY(0);
-    
-    // Reset state setelah animasi selesai
     setTimeout(() => {
       setHoveredRegionId(null);
       setSelectedRegionId(null);
@@ -102,10 +100,8 @@ export default function MapPage() {
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
     const targetZoom = 2.5;
-    const viewBoxCenterX = 403.5;
-    const viewBoxCenterY = 170;
-    const offsetX = (viewBoxCenterX - centerX) / targetZoom;
-    const offsetY = (viewBoxCenterY - centerY) / targetZoom;
+    const offsetX = (403.5 - centerX) / targetZoom;
+    const offsetY = (170 - centerY) / targetZoom;
     setZoom(targetZoom);
     setZoomCenterX(centerX);
     setZoomCenterY(centerY);
@@ -123,39 +119,20 @@ export default function MapPage() {
   };
 
   const handleUnlockRegion = (regionId, keyCost) => {
-    console.log('🔓 [MapPage] Attempting to unlock:', regionId, 'Cost:', keyCost);
     const success = unlockRegionLS(regionId, keyCost);
     if (success) {
-      const userData = getUserData();
-      setKeyValue(userData.keys);
-      setUnlockedRegions(userData.unlockedRegions);
-      if (!freeKeyUsed) setFreeKeyUsed(true);
+      const data = getUserData();
+      setKeyValue(data.keys);
+      setUnlockedRegions(data.unlockedRegions);
       setLockedRegionNamePopup(null);
       setLockedRegionIdPopup(null);
-      console.log('✅ [MapPage] Region unlocked successfully');
-    } else {
-      console.log('❌ [MapPage] Failed to unlock region');
     }
-  };
-
-  // Called when user completes/visits a province — reward keys
-  const handleProvinceComplete = (regionId) => {
-    const { keyReward } = getDifficultyInfo(regionId);
-    console.log('🎁 [MapPage] Province completed:', regionId, 'Reward:', keyReward);
-    addKeys(keyReward);
-    const userData = getUserData();
-    setKeyValue(userData.keys);
   };
 
   if (loading) {
     return (
       <div className="map-loading">
-        <ClipLoader
-          color="#f7b24f"
-          loading={loading}
-          size={60}
-          aria-label="Loading Spinner"
-        />
+        <ClipLoader color="#f7b24f" loading={loading} size={60} aria-label="Loading Spinner" />
         <p className="map-loading-text">Memuat Peta...</p>
       </div>
     );
@@ -182,10 +159,13 @@ export default function MapPage() {
           </div>
         )}
 
-        {/* Top-right controls: Cara Bermain + Kembali */}
+        {/* Top-right controls */}
         <div className="map-top-right">
           <div className="htp-wrapper">
-            <button className="htp-trigger-btn" onClick={() => setShowHowToPlay(v => !v)}>
+            <button
+              className={`htp-trigger-btn ${showOnboarding ? 'htp-trigger-pulse' : ''}`}
+              onClick={() => { setShowHowToPlay(v => !v); if (showOnboarding) handleDismissOnboarding(); }}
+            >
               <FiInfo />
               <span>Cara Bermain</span>
             </button>
@@ -194,7 +174,6 @@ export default function MapPage() {
               <div className="how-to-play-panel">
                 <button className="htp-close" onClick={() => setShowHowToPlay(false)}><FiX /></button>
 
-                {/* Header */}
                 <div className="htp-header">
                   <div className="htp-header-icon"><FiMap /></div>
                   <div>
@@ -203,13 +182,11 @@ export default function MapPage() {
                   </div>
                 </div>
 
-                {/* Free key notice */}
                 <div className="htp-notice">
                   <span className="htp-notice-icon"><FiGift /></span>
                   <span>Kamu dapat <strong>1 kunci gratis</strong> untuk memulai petualangan!</span>
                 </div>
 
-                {/* Flow steps */}
                 <div className="htp-flow">
                   <div className="htp-step">
                     <div className="htp-step-dot">1</div>
@@ -232,20 +209,19 @@ export default function MapPage() {
                     <div className="htp-step-line" />
                     <div className="htp-step-content">
                       <div className="htp-step-title"><FiBookOpen className="htp-step-icon" /> Jelajahi Detail</div>
-                      <div className="htp-step-desc">Baca budaya & info provinsi</div>
+                      <div className="htp-step-desc">Baca budaya & info provinsi sampai selesai</div>
                     </div>
                   </div>
                   <div className="htp-step">
                     <div className="htp-step-dot">4</div>
                     <div className="htp-step-line htp-step-line--last" />
                     <div className="htp-step-content">
-                      <div className="htp-step-title"><FiStar className="htp-step-icon" /> Dapat Reward</div>
-                      <div className="htp-step-desc">Terima kunci baru, buka provinsi berikutnya!</div>
+                      <div className="htp-step-title"><FiStar className="htp-step-icon" /> Klaim Reward</div>
+                      <div className="htp-step-desc">Klik tombol klaim di halaman detail untuk dapat kunci baru</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Level table */}
                 <div className="htp-level-table">
                   <div className="htp-level-header">Level Provinsi</div>
                   {Object.entries(DIFFICULTY_CONFIG).map(([key, cfg]) => (
@@ -259,15 +235,17 @@ export default function MapPage() {
               </div>
             )}
           </div>
-
-          <button className="map-back-btn" onClick={() => navigate('/')}>
-            ← Kembali
-          </button>
         </div>
+
+        {/* Back button positioned at top-right corner */}
+        <button className="map-back-btn" onClick={() => navigate('/')}>
+          ← Kembali
+        </button>
+
         <div className="map-hero-inner">
           <div className="map-container full-map">
-            <MapSVG 
-              onRegionHover={showRegion} 
+            <MapSVG
+              onRegionHover={showRegion}
               hoveredRegionId={hoveredRegionId}
               onRegionClick={handleRegionClick}
               onLockedRegionClick={handleLockedRegionClick}
@@ -284,12 +262,31 @@ export default function MapPage() {
         </div>
       </div>
 
+      {/* Onboarding overlay */}
+      {showOnboarding && (
+        <div className="onboarding-overlay" onClick={handleDismissOnboarding}>
+          <div className="onboarding-content" onClick={e => e.stopPropagation()}>
+            <div className="onboarding-icon"><FiMap /></div>
+            <h3 className="onboarding-title">Selamat Datang di Map Explorer!</h3>
+            <p className="onboarding-desc">
+              Jelajahi seluruh provinsi Indonesia, pelajari budayanya, dan kumpulkan kunci untuk membuka lebih banyak wilayah.
+            </p>
+            <div className="onboarding-arrow-hint">
+              <div className="onboarding-arrow-label">Mulai dari sini</div>
+              <div className="onboarding-arrow">↗</div>
+            </div>
+            <button className="onboarding-btn" onClick={handleDismissOnboarding}>
+              <FiInfo /> Lihat Cara Bermain
+            </button>
+          </div>
+        </div>
+      )}
+
       {selectedRegion && selectedRegionName && (
-        <RegionPopup 
+        <RegionPopup
           regionName={selectedRegionName}
           regionId={selectedRegionId}
           onClose={closeDetail}
-          onComplete={handleProvinceComplete}
         />
       )}
 

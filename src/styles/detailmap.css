@@ -664,3 +664,66 @@
 
   .detail-section-header h2 { font-size: clamp(1.2rem, 7vw, 1.6rem); }
 }
+
+/* ── Claim Reward Box ── */
+.claim-reward-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.claim-reward-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #1a3a2a, #2d6a4f);
+  border: 1.5px solid #40916C;
+  border-radius: 12px;
+  color: #6fcf97;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 20px rgba(64,145,108,0.25);
+}
+.claim-reward-btn:hover {
+  background: linear-gradient(135deg, #2d6a4f, #40916C);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(64,145,108,0.4);
+}
+
+.claim-reward-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: rgba(64,145,108,0.1);
+  border: 1px solid rgba(64,145,108,0.3);
+  border-radius: 12px;
+  color: #6fcf97;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.claim-reward-anim {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  animation: claimPop 2s ease forwards;
+}
+
+@keyframes claimPop {
+  0%   { opacity: 0; transform: translateY(6px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
