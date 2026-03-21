@@ -51,7 +51,9 @@
 }
 
 .map-back-btn {
-  position: static;
+  position: absolute;
+  top: 40px;
+  right: 40px;
   z-index: 10;
   padding: 10px 20px;
   border-radius: 8px;
@@ -664,14 +666,11 @@
 .map-top-right {
   position: absolute;
   top: 40px;
-  right: 40px;
+  right: 160px;
   z-index: 20;
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.map-top-right .map-back-btn {
-  position: static;
 }
 
 /* ── HTP trigger button ── */
@@ -927,9 +926,132 @@
 }
 
 @media (max-width: 768px) {
-  .map-top-right { top: 16px; right: 12px; gap: 6px; }
+  .map-top-right { top: 60px; right: 16px; gap: 6px; }
   .htp-trigger-btn span { display: none; }
   .htp-trigger-btn { padding: 9px 12px; }
-  .how-to-play-panel { width: 280px; }
+  .how-to-play-panel { width: 280px; right: 0; }
   .map-progress-bar { width: 140px; }
+  .map-back-btn { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+}
+
+/* ── Onboarding Overlay ── */
+.onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.onboarding-content {
+  background: linear-gradient(135deg, rgba(15,18,35,0.98), rgba(26,20,8,0.98));
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 20px;
+  padding: 36px 32px 28px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
+  animation: onboardingPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes onboardingPop {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.onboarding-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+  border: 1px solid rgba(201,168,76,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: var(--gold);
+  margin: 0 auto 20px;
+}
+
+.onboarding-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+}
+
+.onboarding-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+
+.onboarding-arrow-hint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-right: 4px;
+}
+
+.onboarding-arrow-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+
+.onboarding-arrow {
+  font-size: 22px;
+  color: var(--gold);
+  animation: arrowBounce 1s ease-in-out infinite;
+  line-height: 1;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(4px, -4px); }
+}
+
+.onboarding-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #C9A84C, #f7b24f);
+  color: #1a1408;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+}
+.onboarding-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201,168,76,0.45);
+}
+
+/* Pulse animation on the trigger button during onboarding */
+.htp-trigger-pulse {
+  animation: htpPulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(201,168,76,0.6);
+}
+@keyframes htpPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(201,168,76,0); }
+  100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
 }
