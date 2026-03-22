@@ -28,28 +28,30 @@ export default function GamesPage() {
 
   return (
     <div className="games-page">
-      <div className="games-header">
-        {slug && (
-          <button className="games-back-btn" onClick={handleBack}>
-            ← Kembali ke Artikel
-          </button>
-        )}
-        <div className="section-label">Mini Games</div>
-        <h2 className="games-title">
-          {province ? <>Tantangan <em>{province.name}</em></> : <>Belajar Sambil <em>Bermain</em></>}
-        </h2>
-        <p className="games-sub">
-          {province
-            ? `Uji pemahamanmu tentang ${province.name} — pilih Quiz atau Puzzle untuk mendapatkan reward!`
-            : 'Dua game seru untuk menguji dan memperdalam pengetahuanmu tentang budaya Indonesia.'}
-        </p>
-        {province && (
-          <div className="games-province-badge">
-            <span className="games-province-region">{province.region}</span>
-            <span className="games-province-name">{province.name}</span>
-          </div>
-        )}
-      </div>
+      {!activeGame && (
+        <div className="games-header">
+          {slug && (
+            <button className="games-back-btn" onClick={handleBack}>
+              ← Kembali ke Artikel
+            </button>
+          )}
+          <div className="section-label">Mini Games</div>
+          <h2 className="games-title">
+            {province ? <>Tantangan <em>{province.name}</em></> : <>Belajar Sambil <em>Bermain</em></>}
+          </h2>
+          <p className="games-sub">
+            {province
+              ? `Uji pemahamanmu tentang ${province.name} — pilih Quiz atau Puzzle untuk mendapatkan reward!`
+              : 'Dua game seru untuk menguji dan memperdalam pengetahuanmu tentang budaya Indonesia.'}
+          </p>
+          {province && (
+            <div className="games-province-badge">
+              <span className="games-province-region">{province.region}</span>
+              <span className="games-province-name">{province.name}</span>
+            </div>
+          )}
+        </div>
+      )}
 
       {!activeGame && (
         <div className="games-select">

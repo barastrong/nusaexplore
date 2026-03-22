@@ -393,4 +393,3 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
     </svg>
   );
 }
-

@@ -133,12 +133,23 @@
 .island-path,
 .island {
   cursor: pointer;
-  fill: #4f577a;
   opacity: .9;
   transition: all .2s ease;
-  stroke: #d6b24d;
   stroke-width: 1.2;
 }
+
+[data-theme="dark"] .island-path,
+[data-theme="dark"] .island { 
+  fill: #4f577a;
+  stroke: #d6b24d;
+}
+
+[data-theme="light"] .island-path,
+[data-theme="light"] .island { 
+  fill: #57534e;
+  stroke: white;
+}
+
 .island-path:hover,
 .island:hover {
   fill: #c7a85c;
@@ -164,7 +175,6 @@
 }
 .map-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; fill: rgba(255,255,255,0.9); pointer-events: none; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); }
 [data-theme="light"] .map-label { fill: rgba(255,255,255,0.9); }
-[data-theme="light"] .map-container { background: var(--bg3); }
 [data-theme="light"] .map-info-title { color: var(--text); }
 [data-theme="light"] .map-info-sub { color: var(--text2); }
 [data-theme="light"] .map-stat-lbl { color: var(--text2); }
@@ -588,6 +598,7 @@
     font-size: 12px;
   }
   
+
   .map-info-title { 
     font-size: clamp(18px, 5vw, 24px); 
   }

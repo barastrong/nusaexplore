@@ -24,10 +24,9 @@ function AppContent() {
         resetUserData();
         window.location.reload();
     };
-    console.log('💡 Ketik resetData() di console untuk reset localStorage');
   }, []);
-  const hideFooter = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/');
-  const hideNavbar = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/');
+  const hideFooter = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/') || location.pathname.startsWith('/games/');
+  const hideNavbar = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/') || location.pathname.startsWith('/games/');
 
   return (
     <>

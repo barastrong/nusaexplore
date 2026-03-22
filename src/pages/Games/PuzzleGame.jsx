@@ -17,12 +17,12 @@ const PROVINCE_PUZZLES = {
   'jawa-barat':       ['/images/provinces/jabar-hero.jpg', '/images/culture/Jawa_Barat/jabar-1.jpg', '/images/culture/Jawa_Barat/jabar-2.jpg'],
   'banten':           ['/images/provinces/banten-hero.jpg', '/images/culture/Banten/banten-1.jpg', '/images/culture/Banten/banten-2.jpg'],
   'jawa-tengah':      ['/images/provinces/jateng-hero.jpg', '/images/culture/Jawa_Tengah/jateng-1.jpg', '/images/culture/Jawa_Tengah/jateng-2.jpg'],
-  'yogyakarta':       ['/images/provinces/jogja-hero.jpg', '/images/culture/jogja-1.jpg', '/images/culture/jogja-2.jpg'],
+  'yogyakarta':       ['/images/provinces/jogja-hero.jpg', '/images/culture/Jogja/jogja-1.jpg', '/images/culture/Jogja/jogja-2.jpg'],
   'jawa-timur':       ['/images/provinces/jatim-hero.jpg', '/images/culture/Jawa_Timur/jatim-1.jpg', '/images/culture/Jawa_Timur/jatim-2.jpg'],
   'bali':             ['/images/provinces/bali-hero.jpg', '/images/culture/Bali/bali-1.jpg', '/images/culture/Bali/bali-2.jpg'],
-  'sulawesi-selatan': ['/images/provinces/sulsel-hero.jpg', '/images/culture/sulsel-1.jpg', '/images/culture/sulsel-2.jpg'],
-  'maluku':           ['/images/provinces/maluku-hero.jpg', '/images/culture/maluku-1.jpg', '/images/culture/maluku-2.jpg'],
-  'papua':            ['/images/provinces/papua-hero.jpg', '/images/culture/papua-1.jpg', '/images/culture/papua-2.jpg'],
+  'sulawesi-selatan': ['/images/provinces/sulsel-hero.jpg', '/images/culture/Sulawesi_Selatan/sulsel-1.jpg', '/images/culture/Sulawesi_Selatan/sulsel-2.jpg'],
+  'maluku':           ['/images/provinces/maluku-hero.jpg', '/images/culture/Maluku/maluku-1.jpg', '/images/culture/Maluku/maluku-2.jpg'],
+  'papua':            ['/images/provinces/papua-hero.jpg', '/images/culture/Papua/papua-1.jpg', '/images/culture/Papua/papua-2.jpg'],
 };
 
 const FALLBACK = ['/images/provinces/bali-hero.jpg', '/images/provinces/jabar-hero.jpg', '/images/provinces/jatim-hero.jpg'];
