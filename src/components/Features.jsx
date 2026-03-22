@@ -20,7 +20,7 @@ export default function Features() {
           <div className="feat-title">Peta Interaktif</div>
           <div className="feat-desc">Klik provinsi manapun di peta Indonesia untuk menjelajahi kekayaan budaya, sejarah, dan tradisi daerah tersebut secara mendalam.</div>
         </div>
-        <div className="feat-card" onClick={() => navigate('/games')}>
+        <div className="feat-card" onClick={() => navigate('/map-games')}>
           <div className="feat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{color:'var(--gold)'}}>
               <circle cx="12" cy="12" r="10"/>
@@ -31,7 +31,7 @@ export default function Features() {
           <div className="feat-title">Quiz Budaya AI</div>
           <div className="feat-desc">Uji pengetahuanmu tentang budaya Indonesia dengan soal-soal yang di-generate AI — segar, beragam, dan tidak pernah sama!</div>
         </div>
-        <div className="feat-card" onClick={() => navigate('/games')}>
+        <div className="feat-card" onClick={() => navigate('/map-games')}>
           <div className="feat-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{color:'var(--gold)'}}>
               <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
