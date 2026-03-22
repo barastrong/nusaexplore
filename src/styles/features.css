@@ -15,7 +15,19 @@
 }
 .feat-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
 .feat-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
-[data-theme="light"] .feat-card { background: var(--card-bg); border-color: var(--border); }
+[data-theme="light"] .feat-card {
+  background: #FFFFFF;
+  border-color: rgba(139,94,32,0.14);
+  box-shadow: 0 2px 16px rgba(60,35,5,0.06);
+}
+[data-theme="light"] .feat-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.15);
+}
+[data-theme="light"] .feat-icon {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.25);
+}
 [data-theme="light"] .feat-title { color: var(--text); }
 [data-theme="light"] .feat-desc { color: var(--text2); }
 

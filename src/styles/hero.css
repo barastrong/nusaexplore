@@ -11,8 +11,9 @@
               radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
 }
 [data-theme="light"] .hero {
-  background: radial-gradient(ellipse at 80% 50%, rgba(45,106,79,0.08) 0%, transparent 55%),
-              radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.06) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 80% 50%, rgba(45,106,79,0.07) 0%, transparent 55%),
+              radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.05) 0%, transparent 50%),
+              linear-gradient(180deg, #FDFAF4 0%, #F5EFE4 100%);
 }
 .hero-left { position: relative; z-index: 2; }
 .hero-eyebrow {
@@ -90,9 +91,6 @@
 .img-placeholder.p1 { background: linear-gradient(135deg,#1A2F1E,#2D6A4F); }
 .img-placeholder.p2 { background: linear-gradient(135deg,#2A1A10,#6B3A1A); }
 .img-placeholder.p3 { background: linear-gradient(135deg,#1A1A35,#3A2A6A); }
-[data-theme="light"] .img-placeholder.p1 { background: linear-gradient(135deg,#C8E6C9,#81C784); color: #1B5E20; }
-[data-theme="light"] .img-placeholder.p2 { background: linear-gradient(135deg,#FFE0B2,#FFAB40); color: #4E2A00; }
-[data-theme="light"] .img-placeholder.p3 { background: linear-gradient(135deg,#E8EAF6,#9FA8DA); color: #1A237E; }
 .img-tag {
   position: absolute; bottom: 12px; left: 12px;
   background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
@@ -100,7 +98,6 @@
   padding: 4px 15px; border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.15);
 }
-[data-theme="light"] .img-tag { background: rgba(255,255,255,0.75); color: #1A1408; border-color: rgba(0,0,0,0.1); }
 .hero-badge {
   position: absolute; top: 24px; left: -16px;
   background: var(--gold); color: #1A1408;
@@ -108,6 +105,10 @@
   padding: 8px 14px; border-radius: 8px;
   box-shadow: 0 4px 16px rgba(201,168,76,0.4);
 }
+[data-theme="light"] .img-placeholder.p1 { background: linear-gradient(135deg,#D4EDDA,#A8D5B5); color: #1B5E20; }
+[data-theme="light"] .img-placeholder.p2 { background: linear-gradient(135deg,#FDE8C8,#F5C07A); color: #4E2A00; }
+[data-theme="light"] .img-placeholder.p3 { background: linear-gradient(135deg,#E8EAF6,#B0BAD9); color: #1A237E; }
+[data-theme="light"] .img-tag { background: rgba(255,255,255,0.85); color: #1A1208; border-color: rgba(0,0,0,0.08); backdrop-filter: blur(8px); }
 [data-theme="light"] .hero-desc { color: var(--text2); }
 [data-theme="light"] .stat-label { color: var(--text2); }
 

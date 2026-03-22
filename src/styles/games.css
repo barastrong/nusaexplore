@@ -147,16 +147,28 @@
 
 [data-theme="light"] .gsc-title { color: var(--text); }
 [data-theme="light"] .gsc-desc { color: var(--text2); }
-[data-theme="light"] .gsc-pill { color: var(--text2); background: var(--bg3); }
-[data-theme="light"] .quiz-opt { color: var(--text); background: var(--bg3); border-color: var(--border); }
-[data-theme="light"] .puz-btn { color: var(--text2); background: var(--bg3); border-color: var(--border); }
+[data-theme="light"] .gsc-pill { color: var(--text2); background: var(--bg2); border-color: var(--border); }
+[data-theme="light"] .quiz-opt { color: var(--text); background: #FFFFFF; border-color: rgba(139,94,32,0.18); }
+[data-theme="light"] .quiz-opt:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+[data-theme="light"] .puz-btn { color: var(--text2); background: var(--bg2); border-color: var(--border); }
 [data-theme="light"] .quiz-question { color: var(--text); }
 [data-theme="light"] .quiz-num { color: var(--text3); }
 [data-theme="light"] .result-label { color: var(--text2); }
 [data-theme="light"] .result-msg { color: var(--text2); }
 [data-theme="light"] .puzzle-img-sub { color: var(--text2); }
 [data-theme="light"] .puzzle-moves { color: var(--text2); }
-[data-theme="light"] .puzzle-piece { color: var(--text); background: var(--bg3); border-color: var(--border); }
+[data-theme="light"] .puzzle-piece { color: var(--text); background: var(--bg2); border-color: var(--border); }
+[data-theme="light"] .game-select-card { background: #FFFFFF; border-color: rgba(139,94,32,0.14); box-shadow: 0 2px 16px rgba(60,35,5,0.06); }
+[data-theme="light"] .game-select-card:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(201,168,76,0.18); }
+[data-theme="light"] .quiz-card { background: #FFFFFF; border-color: rgba(139,94,32,0.14); box-shadow: 0 2px 16px rgba(60,35,5,0.06); }
+[data-theme="light"] .quiz-result { background: #FFFFFF; border-color: rgba(139,94,32,0.14); }
+[data-theme="light"] .games-header { background: linear-gradient(135deg, var(--bg2), var(--bg)); border-bottom-color: var(--border); }
+[data-theme="light"] .games-title { color: var(--text); }
+[data-theme="light"] .games-sub { color: var(--text2); }
+[data-theme="light"] .games-back-btn { background: rgba(0,0,0,0.04); border-color: rgba(139,94,32,0.2); color: var(--text2); }
+[data-theme="light"] .games-back-btn:hover { border-color: var(--gold); color: var(--gold); }
+[data-theme="light"] .games-province-badge { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.28); }
+[data-theme="light"] .quiz-pass-hint { color: var(--text3); }
 
 @media (max-width: 1024px) {
   .games-select {
@@ -497,3 +509,180 @@
     font-size: 16px;
   }
 }
+
+/* ── Reward Toast Popup (kanan atas, auto-dismiss) ── */
+.reward-toast-popup {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a3a1a, #1e4a1e);
+  border: 1.5px solid #40916C;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(64,145,108,0.2);
+  animation: rtpSlide 4s ease forwards;
+  pointer-events: none;
+  min-width: 220px;
+}
+.rtp-icon {
+  font-size: 22px;
+  color: #6fcf97;
+  flex-shrink: 0;
+}
+.rtp-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rtp-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #6fcf97;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.2px;
+}
+.rtp-sub {
+  font-size: 11px;
+  color: rgba(111,207,151,0.65);
+  font-weight: 500;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+@keyframes rtpSlide {
+  0%   { opacity: 0; transform: translateX(60px) scale(0.92); }
+  12%  { opacity: 1; transform: translateX(0) scale(1); }
+  78%  { opacity: 1; transform: translateX(0) scale(1); }
+  100% { opacity: 0; transform: translateX(30px) scale(0.95); }
+}
+
+/* ── Result reward badge ── */
+.result-reward-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(64,145,108,0.12);
+  border: 1px solid rgba(64,145,108,0.35);
+  border-radius: 10px;
+  color: #6fcf97;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 4px 0 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Province-locked game header ── */
+.games-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  margin-bottom: 16px;
+}
+.games-back-btn:hover { border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+.games-province-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 20px;
+}
+.games-province-region {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.6);
+}
+.games-province-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+}
+
+/* ── Quiz result improvements ── */
+.result-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 16px;
+}
+.result-pass {
+  background: rgba(64,145,108,0.15);
+  border: 1px solid rgba(64,145,108,0.4);
+  color: #6fcf97;
+}
+.result-fail {
+  background: rgba(181,56,42,0.12);
+  border: 1px solid rgba(181,56,42,0.35);
+  color: #e57373;
+}
+
+.result-verdict {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.verdict-pass { color: #6fcf97; }
+.verdict-fail { color: #e57373; }
+
+.quiz-reward-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.result-btn-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+.result-btn-retry:hover {
+  border-color: rgba(201,168,76,0.4) !important;
+  color: var(--gold) !important;
+}
+
+.quiz-pass-hint {
+  margin-top: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  font-style: italic;
+}
+[data-theme="light"] .quiz-pass-hint { color: rgba(0,0,0,0.35); }
+[data-theme="light"] .games-back-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); color: #4A3820; }
+[data-theme="light"] .games-province-badge { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); }

@@ -54,16 +54,16 @@ nav.scrolled {
 }
 
 [data-theme="light"] nav {
-  background: rgba(255, 252, 245, 0.84);
-  border-color: rgba(212, 168, 67, 0.28);
+  background: rgba(255, 252, 248, 0.88);
+  border-color: rgba(180, 130, 40, 0.22);
   box-shadow:
-    0 4px 28px rgba(0, 0, 0, 0.1),
-    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    0 4px 28px rgba(60, 35, 5, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
 }
 
 [data-theme="light"] nav.scrolled {
-  background: rgba(255, 252, 245, 0.96);
-  box-shadow: 0 8px 44px rgba(0, 0, 0, 0.13);
+  background: rgba(255, 252, 248, 0.97);
+  box-shadow: 0 8px 44px rgba(60, 35, 5, 0.11);
 }
 
 @keyframes navSlideIn {

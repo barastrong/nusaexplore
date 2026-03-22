@@ -8,8 +8,8 @@ THEME VARIABLES
   --green: #2D6A4F;
   --green-light: #40916C;
   --red: #B5382A;
-  --batik-dark: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='96' height='96' fill='none'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.13' stroke-width='0.7'%3E%3Cellipse cx='48' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='48' rx='9' ry='9'/%3E%3C/g%3E%3Ccircle cx='48' cy='48' r='2.5' fill='%23C9A84C' fill-opacity='0.08'/%3E%3Ccircle cx='48' cy='48' r='0.9' fill='%23C9A84C' fill-opacity='0.18'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.05' stroke-width='0.5'%3E%3Cellipse cx='0' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='96' rx='8' ry='14'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%23C9A84C' fill-opacity='0.07'/%3E%3Ccircle cx='96' cy='0' r='1.5' fill='%23C9A84C' fill-opacity='0.07'/%3E%3Ccircle cx='0' cy='96' r='1.5' fill='%23C9A84C' fill-opacity='0.07'/%3E%3Ccircle cx='96' cy='96' r='1.5' fill='%23C9A84C' fill-opacity='0.07'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.04' stroke-width='0.4'%3E%3Cellipse cx='48' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='48' rx='8' ry='14'/%3E%3C/g%3E%3Cline x1='34' y1='48' x2='15' y2='48' stroke='%23C9A84C' stroke-opacity='0.04' stroke-width='0.4'/%3E%3Cline x1='62' y1='48' x2='81' y2='48' stroke='%23C9A84C' stroke-opacity='0.04' stroke-width='0.4'/%3E%3Cline x1='48' y1='34' x2='48' y2='15' stroke='%23C9A84C' stroke-opacity='0.04' stroke-width='0.4'/%3E%3Cline x1='48' y1='62' x2='48' y2='81' stroke='%23C9A84C' stroke-opacity='0.04' stroke-width='0.4'/%3E%3C/svg%3E");
-  --batik-light: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='96' height='96' fill='none'/%3E%3Cg fill='none' stroke='%238B5E20' stroke-opacity='0.09' stroke-width='0.7'%3E%3Cellipse cx='48' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='48' rx='9' ry='9'/%3E%3C/g%3E%3Ccircle cx='48' cy='48' r='2.5' fill='%238B5E20' fill-opacity='0.05'/%3E%3Ccircle cx='48' cy='48' r='0.9' fill='%238B5E20' fill-opacity='0.13'/%3E%3Cg fill='none' stroke='%238B5E20' stroke-opacity='0.04' stroke-width='0.5'%3E%3Cellipse cx='0' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='96' rx='8' ry='14'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%238B5E20' fill-opacity='0.05'/%3E%3Ccircle cx='96' cy='0' r='1.5' fill='%238B5E20' fill-opacity='0.05'/%3E%3Ccircle cx='0' cy='96' r='1.5' fill='%238B5E20' fill-opacity='0.05'/%3E%3Ccircle cx='96' cy='96' r='1.5' fill='%238B5E20' fill-opacity='0.05'/%3E%3Cg fill='none' stroke='%238B5E20' stroke-opacity='0.03' stroke-width='0.4'%3E%3Cellipse cx='48' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='48' rx='8' ry='14'/%3E%3C/g%3E%3Cline x1='34' y1='48' x2='15' y2='48' stroke='%238B5E20' stroke-opacity='0.03' stroke-width='0.4'/%3E%3Cline x1='62' y1='48' x2='81' y2='48' stroke='%238B5E20' stroke-opacity='0.03' stroke-width='0.4'/%3E%3Cline x1='48' y1='34' x2='48' y2='15' stroke='%238B5E20' stroke-opacity='0.03' stroke-width='0.4'/%3E%3Cline x1='48' y1='62' x2='48' y2='81' stroke='%238B5E20' stroke-opacity='0.03' stroke-width='0.4'/%3E%3C/svg%3E");
+  --batik-dark: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='96' height='96' fill='none'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.18' stroke-width='0.9'%3E%3Cellipse cx='48' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='48' rx='9' ry='9'/%3E%3C/g%3E%3Ccircle cx='48' cy='48' r='2.5' fill='%23C9A84C' fill-opacity='0.12'/%3E%3Ccircle cx='48' cy='48' r='0.9' fill='%23C9A84C' fill-opacity='0.24'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.09' stroke-width='0.6'%3E%3Cellipse cx='0' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='96' rx='8' ry='14'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%23C9A84C' fill-opacity='0.10'/%3E%3Ccircle cx='96' cy='0' r='1.5' fill='%23C9A84C' fill-opacity='0.10'/%3E%3Ccircle cx='0' cy='96' r='1.5' fill='%23C9A84C' fill-opacity='0.10'/%3E%3Ccircle cx='96' cy='96' r='1.5' fill='%23C9A84C' fill-opacity='0.10'/%3E%3Cg fill='none' stroke='%23C9A84C' stroke-opacity='0.06' stroke-width='0.5'%3E%3Cellipse cx='48' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='48' rx='8' ry='14'/%3E%3C/g%3E%3Cline x1='34' y1='48' x2='15' y2='48' stroke='%23C9A84C' stroke-opacity='0.06' stroke-width='0.5'/%3E%3Cline x1='62' y1='48' x2='81' y2='48' stroke='%23C9A84C' stroke-opacity='0.06' stroke-width='0.5'/%3E%3Cline x1='48' y1='34' x2='48' y2='15' stroke='%23C9A84C' stroke-opacity='0.06' stroke-width='0.5'/%3E%3Cline x1='48' y1='62' x2='48' y2='81' stroke='%23C9A84C' stroke-opacity='0.06' stroke-width='0.5'/%3E%3C/svg%3E");
+  --batik-light: url("data:image/svg+xml,%3Csvg width='96' height='96' viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='96' height='96' fill='none'/%3E%3Cg fill='none' stroke='%23A0722A' stroke-opacity='0.22' stroke-width='0.9'%3E%3Cellipse cx='48' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='48' rx='9' ry='9'/%3E%3C/g%3E%3Ccircle cx='48' cy='48' r='2.5' fill='%23A0722A' fill-opacity='0.18'/%3E%3Ccircle cx='48' cy='48' r='0.9' fill='%23A0722A' fill-opacity='0.32'/%3E%3Cg fill='none' stroke='%23A0722A' stroke-opacity='0.14' stroke-width='0.7'%3E%3Cellipse cx='0' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='96' rx='8' ry='14'/%3E%3C/g%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%23A0722A' fill-opacity='0.16'/%3E%3Ccircle cx='96' cy='0' r='1.5' fill='%23A0722A' fill-opacity='0.16'/%3E%3Ccircle cx='0' cy='96' r='1.5' fill='%23A0722A' fill-opacity='0.16'/%3E%3Ccircle cx='96' cy='96' r='1.5' fill='%23A0722A' fill-opacity='0.16'/%3E%3Cg fill='none' stroke='%23A0722A' stroke-opacity='0.10' stroke-width='0.5'%3E%3Cellipse cx='48' cy='0' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='0' rx='8' ry='14'/%3E%3Cellipse cx='48' cy='96' rx='14' ry='8'/%3E%3Cellipse cx='48' cy='96' rx='8' ry='14'/%3E%3Cellipse cx='0' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='0' cy='48' rx='8' ry='14'/%3E%3Cellipse cx='96' cy='48' rx='14' ry='8'/%3E%3Cellipse cx='96' cy='48' rx='8' ry='14'/%3E%3C/g%3E%3Cline x1='34' y1='48' x2='15' y2='48' stroke='%23A0722A' stroke-opacity='0.10' stroke-width='0.5'/%3E%3Cline x1='62' y1='48' x2='81' y2='48' stroke='%23A0722A' stroke-opacity='0.10' stroke-width='0.5'/%3E%3Cline x1='48' y1='34' x2='48' y2='15' stroke='%23A0722A' stroke-opacity='0.10' stroke-width='0.5'/%3E%3Cline x1='48' y1='62' x2='48' y2='81' stroke='%23A0722A' stroke-opacity='0.10' stroke-width='0.5'/%3E%3C/svg%3E");
 }
 
 [data-theme="dark"] {
@@ -29,18 +29,18 @@ THEME VARIABLES
 }
 
 [data-theme="light"] {
-  --bg: #F5EFE4;
-  --bg2: #E8DCC8;
-  --bg3: #D8C9B0;
-  --bg4: #C8B598;
-  --text: #18120A;
-  --text2: #4A3820;
-  --text3: #7A6040;
-  --border: rgba(100,64,12,0.25);
-  --border2: rgba(100,64,12,0.12);
-  --card-bg: #FAF5EC;
-  --nav-bg: rgba(245,239,228,0.96);
-  --shadow: 0 8px 32px rgba(80,50,10,0.14);
+  --bg: #FDFAF4;
+  --bg2: #F5EFE4;
+  --bg3: #EDE4D3;
+  --bg4: #E2D5C0;
+  --text: #1A1208;
+  --text2: #5C4425;
+  --text3: #9A7A50;
+  --border: rgba(139,94,32,0.18);
+  --border2: rgba(139,94,32,0.09);
+  --card-bg: #FFFFFF;
+  --nav-bg: rgba(253,250,244,0.96);
+  --shadow: 0 8px 40px rgba(60,35,5,0.10);
   --pattern: var(--batik-light);
 }
 
@@ -52,6 +52,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   background-image: var(--pattern);
+  background-size: 96px 96px;
   color: var(--text);
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
@@ -67,7 +68,7 @@ a { text-decoration: none; }
 SECTION COMMON
 ============================== */
 .section { padding: 88px 48px; }
-.section-alt { background: var(--bg2); background-image: var(--pattern); }
+.section-alt { background: var(--bg2); background-image: var(--pattern); background-size: 96px 96px; }
 .section-label {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; font-weight: 700; letter-spacing: .14em;

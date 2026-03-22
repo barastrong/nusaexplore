@@ -37,6 +37,7 @@ function AppContent() {
         <Route path="/map" element={<MapPage />} />
         <Route path="/detailmap/:name" element={<DetailMapPage />} />
         <Route path="/games" element={<GamesPage />} />
+        <Route path="/games/:slug" element={<GamesPage />} />
         <Route path="/map-games" element={<MapsPage />} />
         <Route path="/map-games-detail/:name" element={<MapsPageDetail />} />
       </Routes>

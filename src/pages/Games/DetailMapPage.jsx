@@ -18,6 +18,7 @@ export default function DetailMapPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setLoading(true);
     
     const timer = setTimeout(() => {
@@ -44,7 +45,7 @@ export default function DetailMapPage() {
       setClaimed(true);
       setCanClaim(false);
       setShowClaimAnim(true);
-      setTimeout(() => setShowClaimAnim(false), 2000);
+      setTimeout(() => setShowClaimAnim(false), 3000);
     }
   };
 
@@ -68,6 +69,13 @@ export default function DetailMapPage() {
 
   return (
     <div className="detail-map-page">
+      {/* Toast: reward claimed */}
+      {showClaimAnim && (
+        <div className="reward-toast">
+          <FiCheckCircle className="reward-toast-icon" />
+          <span>+{getDifficultyInfo(name).keyReward} Kunci berhasil diklaim!</span>
+        </div>
+      )}
       {/* Hero Section */}
       <section className="detail-hero" style={{ backgroundImage: `url(${province.heroImage})` }}>
         <div className="detail-hero-overlay"></div>
@@ -224,37 +232,26 @@ export default function DetailMapPage() {
             <h2>Jelajahi Provinsi Lainnya</h2>
             <p>Temukan keunikan dan kekayaan budaya dari setiap provinsi di Indonesia</p>
 
-            {/* Play Game Button */}
-            <button className="btn-play-game" onClick={() => navigate('/games')}>
-              🎮 Bermain Game
-            </button>
+            {/* CTA Buttons — sejajar */}
+            <div className="cta-btn-row">
+              <button className="btn-play-game" onClick={() => navigate(`/games/${name}`)}>Mulai Mini Game</button>
 
-            {/* Claim reward button */}
-            <div className="claim-reward-box">
-              {claimed ? (
-                <div className="claim-reward-done">
-                  <FiCheckCircle />
-                  <span>Reward sudah diklaim</span>
-                </div>
-              ) : canClaim ? (
+              {canClaim ? (
                 <button className="claim-reward-btn claim-reward-active" onClick={handleClaim}>
                   <FiKey />
                   <span>Klaim Reward +{getDifficultyInfo(name).keyReward} Kunci</span>
                 </button>
-              ) : (
+              ) : !claimed ? (
                 <button className="claim-reward-btn claim-reward-disabled" disabled>
                   <FiLock />
                   <span>Selesaikan game untuk klaim reward</span>
                 </button>
-              )}
-              {showClaimAnim && (
-                <div className="claim-reward-anim">+{getDifficultyInfo(name).keyReward} <FiKey /> Kunci berhasil diklaim!</div>
-              )}
-            </div>
+              ) : null}
 
-            <button className="btn-gold" onClick={() => navigate('/map-games')}>
-              Kembali ke Peta Indonesia
-            </button>
+              <button className="btn-gold" onClick={() => navigate('/map-games')}>
+                Kembali ke Peta Indonesia
+              </button>
+            </div>
           </div>
         </div>
       </section>

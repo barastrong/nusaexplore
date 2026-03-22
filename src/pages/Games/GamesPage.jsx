@@ -1,17 +1,54 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import QuizGame from './QuizGame';
 import PuzzleGame from './PuzzleGame';
+import { provinceDetailData } from '../../data/provinceDetailData';
 import '../../styles/games.css';
 
 export default function GamesPage() {
+  const { slug } = useParams();
+  const navigate = useNavigate();
   const [activeGame, setActiveGame] = useState(null);
+
+  // Scroll to top on mount
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
+
+  // Province-locked mode
+  const province = slug ? provinceDetailData.find(p => p.slug === slug) : null;
+
+  const handleBack = () => {
+    if (activeGame) {
+      setActiveGame(null);
+    } else if (slug) {
+      navigate(`/map-games-detail/${slug}`);
+    } else {
+      navigate('/');
+    }
+  };
 
   return (
     <div className="games-page">
       <div className="games-header">
+        {slug && (
+          <button className="games-back-btn" onClick={handleBack}>
+            ← Kembali ke Artikel
+          </button>
+        )}
         <div className="section-label">Mini Games</div>
-        <h2 className="games-title">Belajar Sambil <em>Bermain</em></h2>
-        <p className="games-sub">Dua game seru untuk menguji dan memperdalam pengetahuanmu tentang budaya Indonesia.</p>
+        <h2 className="games-title">
+          {province ? <>Tantangan <em>{province.name}</em></> : <>Belajar Sambil <em>Bermain</em></>}
+        </h2>
+        <p className="games-sub">
+          {province
+            ? `Uji pemahamanmu tentang ${province.name} — pilih Quiz atau Puzzle untuk mendapatkan reward!`
+            : 'Dua game seru untuk menguji dan memperdalam pengetahuanmu tentang budaya Indonesia.'}
+        </p>
+        {province && (
+          <div className="games-province-badge">
+            <span className="games-province-region">{province.region}</span>
+            <span className="games-province-name">{province.name}</span>
+          </div>
+        )}
       </div>
 
       {!activeGame && (
@@ -28,12 +65,16 @@ export default function GamesPage() {
               </div>
             </div>
             <div className="gsc-body">
-              <div className="gsc-title">Quiz Budaya Indonesia</div>
-              <div className="gsc-desc">Jawab 10 pertanyaan tentang budaya, sejarah, dan tradisi Indonesia. Seberapa dalam pengetahuanmu?</div>
+              <div className="gsc-title">Quiz Budaya</div>
+              <div className="gsc-desc">
+                {province
+                  ? `Jawab 5 pertanyaan tentang ${province.name}. Jawab semua dengan benar untuk klaim reward!`
+                  : 'Jawab 10 pertanyaan tentang budaya, sejarah, dan tradisi Indonesia.'}
+              </div>
               <div className="gsc-pills">
-                <span className="gsc-pill">10 Soal</span>
+                <span className="gsc-pill">{province ? '5 Soal' : '10 Soal'}</span>
                 <span className="gsc-pill">Pilihan Ganda</span>
-                <span className="gsc-pill">Berbagai Topik</span>
+                {province && <span className="gsc-pill">{province.name}</span>}
                 <span className="gsc-pill">Skor Akhir</span>
               </div>
               <button className="gsc-cta" onClick={() => setActiveGame('quiz')}>Mulai Quiz</button>
@@ -52,11 +93,15 @@ export default function GamesPage() {
             </div>
             <div className="gsc-body">
               <div className="gsc-title">Puzzle Nusantara</div>
-              <div className="gsc-desc">Susun kepingan gambar budaya Indonesia menjadi gambar yang sempurna. Semakin cepat, semakin tinggi skormu!</div>
+              <div className="gsc-desc">
+                {province
+                  ? `Susun gambar budaya ${province.name} menjadi sempurna untuk klaim reward!`
+                  : 'Susun kepingan gambar budaya Indonesia menjadi gambar yang sempurna.'}
+              </div>
               <div className="gsc-pills">
-                <span className="gsc-pill">Klik & Tukar</span>
-                <span className="gsc-pill">3x3 Grid</span>
-                <span className="gsc-pill">Berbagai Tema</span>
+                <span className="gsc-pill">Drag & Drop</span>
+                <span className="gsc-pill">4×4 Grid</span>
+                {province && <span className="gsc-pill">{province.name}</span>}
                 <span className="gsc-pill">Hitung Langkah</span>
               </div>
               <button className="gsc-cta" onClick={() => setActiveGame('puzzle')}>Mulai Puzzle</button>
@@ -65,8 +110,20 @@ export default function GamesPage() {
         </div>
       )}
 
-      {activeGame === 'quiz' && <QuizGame onBack={() => setActiveGame(null)} />}
-      {activeGame === 'puzzle' && <PuzzleGame onBack={() => setActiveGame(null)} />}
+      {activeGame === 'quiz' && (
+        <QuizGame
+          onBack={() => setActiveGame(null)}
+          provinceSlug={slug}
+          provinceName={province?.name}
+        />
+      )}
+      {activeGame === 'puzzle' && (
+        <PuzzleGame
+          onBack={() => setActiveGame(null)}
+          provinceSlug={slug}
+          province={province}
+        />
+      )}
     </div>
   );
 }

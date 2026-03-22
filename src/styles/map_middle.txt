@@ -1,0 +1,80 @@
+
+/* ── Light mode: popup ── */
+[data-theme="light"] .region-popup {
+  background: #FFFFFF;
+  box-shadow: 0 10px 48px rgba(60,35,5,0.14);
+  border: 1px solid rgba(139,94,32,0.16);
+}
+[data-theme="light"] .popup-title-section {
+  border-bottom-color: rgba(139,94,32,0.12);
+}
+[data-theme="light"] .popup-title { color: var(--text); }
+[data-theme="light"] .popup-detail-text {
+  background: var(--bg2);
+  color: var(--text2);
+  border-left-color: var(--gold);
+}
+[data-theme="light"] .popup-close {
+  background: var(--bg2);
+  border-color: rgba(139,94,32,0.18);
+  color: var(--text);
+}
+[data-theme="light"] .popup-btn-secondary {
+  background: var(--bg2);
+  color: var(--text);
+  border-color: rgba(139,94,32,0.18);
+}
+[data-theme="light"] .popup-actions { border-top-color: rgba(139,94,32,0.12); }
+[data-theme="light"] .region-popup::-webkit-scrollbar-track { background: var(--bg2); }
+
+@media (max-width: 768px) {
+  .map-page {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .map-hero {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .map-hero-inner {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .map-container,
+  .full-map,
+  .full-map .map-svg {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .map-hero-header { top: 16px; left: 16px; }
+  .map-back-btn { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+  .map-info-title { font-size: clamp(18px, 5vw, 24px); }
+  .section-label { font-size: 10px; }
+  .region-popup-overlay {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    animation: slideUp 0.3s ease;
+  }
+  .region-popup {
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    max-height: 70vh;
+  }
+  .popup-banner { height: 150px; }
+  .popup-emoji { font-size: 60px; }
+  .popup-title { font-size: 20px; }
+  .popup-cards-grid { grid-template-columns: 1fr; }
+  .region-tooltip { font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+  .map-hero-header { top: 12px; left: 12px; }
+  .map-back-btn { top: 12px; right: 12px; padding: 6px 12px; font-size: 11px; }
+  .map-info-title { font-size: clamp(16px, 5vw, 20px); }
+  .popup-title { font-size: 18px; }
+  .popup-content { padding: 12px; }
+  .popup-title-section { padding: 12px; }
+}
+

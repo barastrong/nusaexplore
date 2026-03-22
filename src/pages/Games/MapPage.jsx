@@ -7,6 +7,7 @@ import { getUserData, unlockRegion as unlockRegionLS } from '../../utils/localSt
 import MapSVG from './/Map/MapSVG';
 import RegionPopup from './Map/RegionPopup';
 import LockedRegionPopup from './Map/LockedRegionPopup';
+import UnlockAnimation from './Map/UnlockAnimation';
 import '../../styles/map.css';
 
 export const DIFFICULTY_CONFIG = {
@@ -58,6 +59,7 @@ export default function MapPage() {
   const [keyValue, setKeyValue] = useState(1);
   const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [unlockAnim, setUnlockAnim] = useState(null); // { name, difficulty, color }
 
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
 
@@ -118,6 +120,9 @@ export default function MapPage() {
       setUnlockedRegions(data.unlockedRegions);
       setLockedRegionNamePopup(null);
       setLockedRegionIdPopup(null);
+      // Trigger unlock animation
+      const { label, color } = getDifficultyInfo(regionId);
+      setUnlockAnim({ name: lockedRegionNamePopup, difficulty: label, color });
     }
   };
 
@@ -270,6 +275,15 @@ export default function MapPage() {
           onUnlock={() => handleUnlockRegion(lockedRegionIdPopup, lockedRegionKeyCost)}
           keyValue={keyValue}
           keyRequired={lockedRegionKeyCost}
+        />
+      )}
+
+      {unlockAnim && (
+        <UnlockAnimation
+          regionName={unlockAnim.name}
+          difficulty={unlockAnim.difficulty}
+          color={unlockAnim.color}
+          onDone={() => setUnlockAnim(null)}
         />
       )}
     </div>

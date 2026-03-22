@@ -30,7 +30,7 @@
   background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
 }
 [data-theme="light"] .cc-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(10,5,0,0.75) 0%, rgba(0,0,0,0.05) 60%, transparent 100%);
 }
 .cc-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; }
 .cc-tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }

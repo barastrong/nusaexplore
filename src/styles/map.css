@@ -512,157 +512,88 @@
   background: var(--gold);
 }
 
+
 /* â”€â”€ Light mode: popup â”€â”€ */
 [data-theme="light"] .region-popup {
-  background: #FAF5EC;
-  box-shadow: 0 10px 48px rgba(80,50,10,0.18);
-  border: 1px solid rgba(100,64,12,0.18);
+  background: #FFFFFF;
+  box-shadow: 0 10px 48px rgba(60,35,5,0.14);
+  border: 1px solid rgba(139,94,32,0.16);
 }
-
 [data-theme="light"] .popup-title-section {
-  border-bottom-color: rgba(100,64,12,0.15);
+  border-bottom-color: rgba(139,94,32,0.12);
 }
-
-[data-theme="light"] .popup-title {
-  color: #18120A;
-}
-
+[data-theme="light"] .popup-title { color: var(--text); }
 [data-theme="light"] .popup-detail-text {
-  background: #EDE5D6;
-  color: #4A3820;
+  background: var(--bg2);
+  color: var(--text2);
   border-left-color: var(--gold);
 }
-
 [data-theme="light"] .popup-close {
-  background: #EDE5D6;
-  border-color: rgba(100,64,12,0.2);
-  color: #18120A;
+  background: var(--bg2);
+  border-color: rgba(139,94,32,0.18);
+  color: var(--text);
 }
-
 [data-theme="light"] .popup-btn-secondary {
-  background: #EDE5D6;
-  color: #18120A;
-  border-color: rgba(100,64,12,0.2);
+  background: var(--bg2);
+  color: var(--text);
+  border-color: rgba(139,94,32,0.18);
 }
-
-[data-theme="light"] .popup-actions {
-  border-top-color: rgba(100,64,12,0.15);
-}
-
-[data-theme="light"] .region-popup::-webkit-scrollbar-track {
-  background: #EDE5D6;
-}
+[data-theme="light"] .popup-actions { border-top-color: rgba(139,94,32,0.12); }
+[data-theme="light"] .region-popup::-webkit-scrollbar-track { background: var(--bg2); }
 
 @media (max-width: 768px) {
   .map-page {
     height: 100vh;
-    height: 100dvh; /* Dynamic viewport height untuk mobile */
+    height: 100dvh;
   }
-  
   .map-hero {
     height: 100vh;
     height: 100dvh;
   }
-  
   .map-hero-inner {
     height: 100vh;
     height: 100dvh;
   }
-  
   .map-container,
   .full-map,
   .full-map .map-svg {
     height: 100vh;
     height: 100dvh;
   }
-  
-  .map-hero-header { 
-    top: 16px; 
-    left: 16px;
-  }
-  
-  .map-back-btn { 
-    top: 16px; 
-    right: 16px; 
-    padding: 8px 14px; 
-    font-size: 12px;
-  }
-  
-  .map-info-title { 
-    font-size: clamp(18px, 5vw, 24px); 
-  }
-  
-  .section-label {
-    font-size: 10px;
-  }
-  
-  .region-popup-overlay { 
+  .map-hero-header { top: 16px; left: 16px; }
+  .map-back-btn { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
+  .map-info-title { font-size: clamp(18px, 5vw, 24px); }
+  .section-label { font-size: 10px; }
+  .region-popup-overlay {
     top: auto;
     bottom: 0;
     right: 0;
     left: 0;
     animation: slideUp 0.3s ease;
   }
-  
-  .region-popup { 
+  .region-popup {
     max-width: 100%;
     border-radius: 16px 16px 0 0;
     max-height: 70vh;
   }
-  
-  .popup-banner {
-    height: 150px;
-  }
-  
-  .popup-emoji {
-    font-size: 60px;
-  }
-  
-  .popup-title {
-    font-size: 20px;
-  }
-  
-  .popup-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .region-tooltip {
-    font-size: 9px;
-  }
+  .popup-banner { height: 150px; }
+  .popup-emoji { font-size: 60px; }
+  .popup-title { font-size: 20px; }
+  .popup-cards-grid { grid-template-columns: 1fr; }
+  .region-tooltip { font-size: 9px; }
 }
 
 @media (max-width: 480px) {
-  .map-hero-header {
-    top: 12px;
-    left: 12px;
-  }
-  
-  .map-back-btn {
-    top: 12px;
-    right: 12px;
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-  
-  .map-info-title {
-    font-size: clamp(16px, 5vw, 20px);
-  }
-  
-  .popup-title {
-    font-size: 18px;
-  }
-  
-  .popup-content {
-    padding: 12px;
-  }
-  
-  .popup-title-section {
-    padding: 12px;
-  }
+  .map-hero-header { top: 12px; left: 12px; }
+  .map-back-btn { top: 12px; right: 12px; padding: 6px 12px; font-size: 11px; }
+  .map-info-title { font-size: clamp(16px, 5vw, 20px); }
+  .popup-title { font-size: 18px; }
+  .popup-content { padding: 12px; }
+  .popup-title-section { padding: 12px; }
 }
 
 
-/* ── Top-right controls group ── */
+/* â”€â”€ Top-right controls group â”€â”€ */
 .map-top-right {
   position: absolute;
   top: 40px;
@@ -673,7 +604,7 @@
   gap: 10px;
 }
 
-/* ── HTP trigger button ── */
+/* â”€â”€ HTP trigger button â”€â”€ */
 .htp-wrapper { position: relative; }
 
 .htp-trigger-btn {
@@ -698,7 +629,7 @@
   border-color: var(--gold);
 }
 
-/* ── How To Play dropdown panel ── */
+/* â”€â”€ How To Play dropdown panel â”€â”€ */
 .how-to-play-panel {
   position: absolute;
   top: calc(100% + 10px);
@@ -737,7 +668,6 @@
 }
 .htp-close:hover { background: rgba(201,168,76,0.2); color: var(--gold); }
 
-/* Panel header */
 .htp-header {
   display: flex;
   align-items: center;
@@ -762,7 +692,6 @@
 .htp-header-title { font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: 0.3px; }
 .htp-header-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 
-/* Free key notice */
 .htp-notice {
   display: flex;
   align-items: center;
@@ -790,7 +719,6 @@
 }
 .htp-notice strong { color: #6fcf97; }
 
-/* Flow steps */
 .htp-flow { padding: 4px 16px 12px; }
 
 .htp-step {
@@ -833,14 +761,9 @@
   align-items: center;
   gap: 6px;
 }
-.htp-step-icon {
-  color: var(--gold);
-  font-size: 13px;
-  flex-shrink: 0;
-}
+.htp-step-icon { color: var(--gold); font-size: 13px; flex-shrink: 0; }
 .htp-step-desc { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.4; }
 
-/* Level table */
 .htp-level-table {
   margin: 0 16px 16px;
   background: rgba(255,255,255,0.04);
@@ -879,7 +802,7 @@
   flex-shrink: 0;
 }
 
-/* ── Progress Bar ── */
+/* â”€â”€ Progress Bar â”€â”€ */
 .map-progress-bar {
   position: relative;
   margin-top: 8px;
@@ -904,7 +827,7 @@
   white-space: nowrap;
 }
 
-/* ── Full Map Complete Banner ── */
+/* â”€â”€ Full Map Complete Banner â”€â”€ */
 .fullmap-complete-banner {
   position: absolute;
   top: 50%;
@@ -934,7 +857,7 @@
   .map-back-btn { top: 16px; right: 16px; padding: 8px 14px; font-size: 12px; }
 }
 
-/* ── Onboarding Overlay ── */
+/* â”€â”€ Onboarding Overlay â”€â”€ */
 .onboarding-overlay {
   position: fixed;
   inset: 0;
@@ -1045,7 +968,6 @@
   box-shadow: 0 8px 24px rgba(201,168,76,0.45);
 }
 
-/* Pulse animation on the trigger button during onboarding */
 .htp-trigger-pulse {
   animation: htpPulse 1.5s ease-in-out infinite;
   box-shadow: 0 0 0 0 rgba(201,168,76,0.6);
