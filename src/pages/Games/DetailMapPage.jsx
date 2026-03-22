@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import { provinceDetailData } from '../../data/provinceDetailData';
 import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineMap, HiOutlineChatAlt2 } from 'react-icons/hi';
-import { FiKey, FiCheckCircle } from 'react-icons/fi';
-import { claimProvinceReward, hasClaimedReward } from '../../utils/localStorage';
+import { FiKey, FiCheckCircle, FiLock } from 'react-icons/fi';
+import { claimProvinceReward, hasClaimedReward, canClaimReward } from '../../utils/localStorage';
 import { getDifficultyInfo } from '../Games/MapPage';
 import '../../styles/detailmap.css';
 
@@ -12,18 +13,28 @@ export default function DetailMapPage() {
   const navigate = useNavigate();
   const [province, setProvince] = useState(null);
   const [claimed, setClaimed] = useState(false);
+  const [canClaim, setCanClaim] = useState(false);
   const [showClaimAnim, setShowClaimAnim] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const foundProvince = provinceDetailData.find(
-      p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
-    );
-    if (foundProvince) {
-      setProvince(foundProvince);
-      setClaimed(hasClaimedReward(name));
-    } else {
-      setTimeout(() => navigate('/map-games'), 2000);
-    }
+    setLoading(true);
+    
+    const timer = setTimeout(() => {
+      const foundProvince = provinceDetailData.find(
+        p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
+      );
+      if (foundProvince) {
+        setProvince(foundProvince);
+        setClaimed(hasClaimedReward(name));
+        setCanClaim(canClaimReward(name));
+      } else {
+        navigate('/map-games');
+      }
+      setLoading(false);
+    }, 1500);
+    
+    return () => clearTimeout(timer);
   }, [name, navigate]);
 
   const handleClaim = () => {
@@ -31,18 +42,28 @@ export default function DetailMapPage() {
     const success = claimProvinceReward(name, keyReward);
     if (success) {
       setClaimed(true);
+      setCanClaim(false);
       setShowClaimAnim(true);
       setTimeout(() => setShowClaimAnim(false), 2000);
     }
   };
 
-  if (!province) {
+  if (loading) {
     return (
-      <div className="detail-loading">
-        <div className="loading-spinner"></div>
-        <p>Memuat data provinsi...</p>
+      <div className="map-loading">
+        <ClipLoader
+          color="#f7b24f"
+          loading={loading}
+          size={60}
+          aria-label="Loading Spinner"
+        />
+        <p className="map-loading-text">Memuat Data Provinsi...</p>
       </div>
     );
+  }
+
+  if (!province) {
+    return null;
   }
 
   return (
@@ -203,6 +224,11 @@ export default function DetailMapPage() {
             <h2>Jelajahi Provinsi Lainnya</h2>
             <p>Temukan keunikan dan kekayaan budaya dari setiap provinsi di Indonesia</p>
 
+            {/* Play Game Button */}
+            <button className="btn-play-game" onClick={() => navigate('/games')}>
+              🎮 Bermain Game
+            </button>
+
             {/* Claim reward button */}
             <div className="claim-reward-box">
               {claimed ? (
@@ -210,10 +236,15 @@ export default function DetailMapPage() {
                   <FiCheckCircle />
                   <span>Reward sudah diklaim</span>
                 </div>
-              ) : (
-                <button className="claim-reward-btn" onClick={handleClaim}>
+              ) : canClaim ? (
+                <button className="claim-reward-btn claim-reward-active" onClick={handleClaim}>
                   <FiKey />
                   <span>Klaim Reward +{getDifficultyInfo(name).keyReward} Kunci</span>
+                </button>
+              ) : (
+                <button className="claim-reward-btn claim-reward-disabled" disabled>
+                  <FiLock />
+                  <span>Selesaikan game untuk klaim reward</span>
                 </button>
               )}
               {showClaimAnim && (

@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 import GamesPage from './pages/Games/GamesPage';
 import MapsPage from './pages/Games/MapPage';
 import MapsPageDetail  from './pages/Games/DetailMapPage';
-import { getUserData, getTheme } from './utils/localStorage';
+import { getUserData, getTheme, resetUserData } from './utils/localStorage';
 
 function AppContent() {
   const location = useLocation();
@@ -18,6 +18,13 @@ function AppContent() {
     getUserData(); // Initialize if not exists
     const theme = getTheme();
     document.documentElement.setAttribute('data-theme', theme);
+    
+    // Console command untuk reset data
+    window.resetData = () => {
+        resetUserData();
+        window.location.reload();
+    };
+    console.log('💡 Ketik resetData() di console untuk reset localStorage');
   }, []);
   const hideFooter = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/');
   const hideNavbar = location.pathname === '/map' || location.pathname.startsWith('/detailmap/') || location.pathname === '/map-games' || location.pathname.startsWith('/map-games-detail/');

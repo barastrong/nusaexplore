@@ -101,7 +101,7 @@ export default function Navbar() {
           </button>
           <button
             className={`nav-btn ${activeLink === 'games' ? 'active' : ''}`}
-            onClick={() => handleNavigation('/games', 'games')}
+            onClick={() => handleNavigation('/map-games', 'games')}
           >
             Games
           </button>

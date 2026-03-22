@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners';
 import { provinceDetailData } from '../../data/provinceDetailData';
 import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineMap, HiOutlineChatAlt2 } from 'react-icons/hi';
 import '../../styles/detailmap.css';
@@ -8,44 +9,44 @@ export default function DetailMapPage() {
   const { name } = useParams();
   const navigate = useNavigate();
   const [province, setProvince] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('=== DETAIL MAP PAGE DEBUG ===');
-    console.log('URL Param (name):', name);
-    console.log('Available provinces:', provinceDetailData.map(p => p.slug));
+    setLoading(true);
     
-    // Cari data provinsi berdasarkan name dari URL
-    const foundProvince = provinceDetailData.find(
-      p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
-    );
-    
-    console.log('Found Province:', foundProvince ? foundProvince.name : 'NOT FOUND');
-    
-    if (foundProvince) {
-      setProvince(foundProvince);
-      console.log('Province data loaded successfully!');
-    } else {
-      console.warn('Province not found! Redirecting to map...');
-      // Jika tidak ditemukan, redirect ke map
-      setTimeout(() => {
+    const timer = setTimeout(() => {
+      const foundProvince = provinceDetailData.find(
+        p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
+      );
+      
+      if (foundProvince) {
+        setProvince(foundProvince);
+      } else {
         navigate('/map');
-      }, 2000);
-    }
+      }
+      setLoading(false);
+    }, 1500);
+    
+    return () => clearTimeout(timer);
   }, [name, navigate]);
 
-  if (!province) {
+  if (loading) {
     return (
-      <div className="detail-loading">
-        <div className="loading-spinner"></div>
-        <p>Memuat data provinsi...</p>
-        <p style={{ fontSize: '12px', color: 'var(--text2)', marginTop: '10px' }}>
-          Mencari: {name}
-        </p>
+      <div className="map-loading">
+        <ClipLoader
+          color="#f7b24f"
+          loading={loading}
+          size={60}
+          aria-label="Loading Spinner"
+        />
+        <p className="map-loading-text">Memuat Data Provinsi...</p>
       </div>
     );
   }
 
-  console.log('Rendering province:', province.name);
+  if (!province) {
+    return null;
+  }
 
   return (
     <div className="detail-map-page">

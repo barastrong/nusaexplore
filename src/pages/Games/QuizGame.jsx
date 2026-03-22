@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { quizData } from '../../data/quizData';
+import { markGameCompleted, getUserData } from '../../utils/localStorage';
 
 export default function QuizGame({ onBack }) {
   const [qIdx, setQIdx] = useState(0);
@@ -19,6 +20,13 @@ export default function QuizGame({ onBack }) {
     setTimeout(() => {
       if (qIdx + 1 >= quizData.length) {
         setShowResult(true);
+        // Mark quiz as completed for current province
+        const userData = getUserData();
+        if (userData.unlockedRegions.length > 0) {
+          const lastUnlocked = userData.unlockedRegions[userData.unlockedRegions.length - 1];
+          markGameCompleted(lastUnlocked, 'quiz');
+          console.log('🎮 Quiz completed for:', lastUnlocked);
+        }
       } else {
         setQIdx(qIdx + 1);
         setAnswered(false);

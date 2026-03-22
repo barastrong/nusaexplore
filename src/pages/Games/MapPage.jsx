@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 import { FiKey, FiInfo, FiX, FiAward, FiMap, FiGift, FiSearch, FiUnlock, FiBookOpen, FiStar } from 'react-icons/fi';
 import { regionData, regionToIslandMap } from '../../data/regionData';
-import { getUserData, unlockRegion as unlockRegionLS, setOnboardingDone } from '../../utils/localStorage';
+import { getUserData, unlockRegion as unlockRegionLS } from '../../utils/localStorage';
 import MapSVG from './/Map/MapSVG';
 import RegionPopup from './Map/RegionPopup';
 import LockedRegionPopup from './Map/LockedRegionPopup';
@@ -58,7 +58,6 @@ export default function MapPage() {
   const [keyValue, setKeyValue] = useState(1);
   const [lockedRegionKeyCost, setLockedRegionKeyCost] = useState(1);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
 
   const selectedRegion = selectedRegionId ? regionData[regionToIslandMap[selectedRegionId]] : null;
 
@@ -67,19 +66,12 @@ export default function MapPage() {
     const data = getUserData();
     setUnlockedRegions(data.unlockedRegions);
     setKeyValue(data.keys);
-    // Show onboarding only if never done before
-    if (!data.onboardingDone) setShowOnboarding(true);
   }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
-
-  const handleDismissOnboarding = () => {
-    setShowOnboarding(false);
-    setOnboardingDone();
-  };
 
   const showRegion = (id) => setHoveredRegionId(id);
 
@@ -163,8 +155,8 @@ export default function MapPage() {
         <div className="map-top-right">
           <div className="htp-wrapper">
             <button
-              className={`htp-trigger-btn ${showOnboarding ? 'htp-trigger-pulse' : ''}`}
-              onClick={() => { setShowHowToPlay(v => !v); if (showOnboarding) handleDismissOnboarding(); }}
+              className="htp-trigger-btn"
+              onClick={() => setShowHowToPlay(v => !v)}
             >
               <FiInfo />
               <span>Cara Bermain</span>
@@ -261,26 +253,6 @@ export default function MapPage() {
           </div>
         </div>
       </div>
-
-      {/* Onboarding overlay */}
-      {showOnboarding && (
-        <div className="onboarding-overlay" onClick={handleDismissOnboarding}>
-          <div className="onboarding-content" onClick={e => e.stopPropagation()}>
-            <div className="onboarding-icon"><FiMap /></div>
-            <h3 className="onboarding-title">Selamat Datang di Map Explorer!</h3>
-            <p className="onboarding-desc">
-              Jelajahi seluruh provinsi Indonesia, pelajari budayanya, dan kumpulkan kunci untuk membuka lebih banyak wilayah.
-            </p>
-            <div className="onboarding-arrow-hint">
-              <div className="onboarding-arrow-label">Mulai dari sini</div>
-              <div className="onboarding-arrow">↗</div>
-            </div>
-            <button className="onboarding-btn" onClick={handleDismissOnboarding}>
-              <FiInfo /> Lihat Cara Bermain
-            </button>
-          </div>
-        </div>
-      )}
 
       {selectedRegion && selectedRegionName && (
         <RegionPopup
