@@ -13,6 +13,11 @@ import { getUserData, getTheme, resetUserData } from './utils/localStorage';
 function AppContent() {
   const location = useLocation();
   
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  
   // Initialize user data and theme from localStorage
   useEffect(() => {
     getUserData(); // Initialize if not exists
@@ -35,7 +40,6 @@ function AppContent() {
         <Route path="/" element={<HomePage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/detailmap/:name" element={<DetailMapPage />} />
-        <Route path="/games" element={<GamesPage />} />
         <Route path="/games/:slug" element={<GamesPage />} />
         <Route path="/map-games" element={<MapsPage />} />
         <Route path="/map-games-detail/:name" element={<MapsPageDetail />} />

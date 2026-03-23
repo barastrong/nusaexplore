@@ -265,24 +265,28 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
       
       {/* Icon gembok untuk region yang terkunci - menggunakan FiLock */}
       <g className="lock-icons" style={{ transformOrigin: `${zoomCenterX}px ${zoomCenterY}px`, transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`, transition: `transform 0.6s ease-in-out` }}>
-        {Object.entries(lockPositions).map(([regionId, pos]) => (
-          <foreignObject
-            key={`lock-${regionId}`}
-            x={pos.x - 8}
-            y={pos.y - 8}
-            width="16"
-            height="16"
-            style={{ 
-              pointerEvents: 'none',
-              transition: 'opacity 0.6s ease-out',
-              cursor: 'pointer'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-              <FiLock size={12} color="#C9A84C" strokeWidth={2} />
-            </div>
-          </foreignObject>
-        ))}
+        {Object.entries(lockPositions).map(([regionId, pos]) => {
+          const isDarkTheme = document.documentElement.getAttribute('data-theme') === 'dark';
+          const lockColor = isDarkTheme ? '#C9A84C' : '#8B6914';
+          return (
+            <foreignObject
+              key={`lock-${regionId}`}
+              x={pos.x - 8}
+              y={pos.y - 8}
+              width="16"
+              height="16"
+              style={{ 
+                pointerEvents: 'none',
+                transition: 'opacity 0.6s ease-out',
+                cursor: 'pointer'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                <FiLock size={12} color={lockColor} strokeWidth={2.5} />
+              </div>
+            </foreignObject>
+          );
+        })}
       </g>
       
       {/* Tooltip text display */}
