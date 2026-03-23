@@ -1320,7 +1320,7 @@ export const provinceDetailData = [
       { image: '/images/culinary/Papua_Barat/papbar-2.jpg', name: 'Papeda', description: 'Makanan pokok olahan sagu.' },
       { image: '/images/culinary/Papua_Barat/papbar-3.jpg', name: 'Ayam Goreng Manokwari', description: 'Ayam goreng sambal mentah.' },
       { image: '/images/culinary/Papua_Barat/papbar-4.jpg', name: 'Sagu Bakar', description: 'Olahan sagu manis gurih.' },
-      { image: '/images/culinary/Papua_Barat/papbar-5.jpg', name: 'Sambal Udang Papbar', description: 'Udang laut sambal rempah.' },
+      { image: '/images/culinary/Papua_Barat/papbar-5.jpg', name: 'Sambal Udang', description: 'Udang laut sambal rempah.' },
       { image: '/images/culinary/Papua_Barat/papbar-6.jpg', name: 'Jus Buah Merah', description: 'Minuman kesehatan buah endemik.' },
     ],
     facts: ['Provinsi Konservasi Pertama', 'Pulau Peradaban Mansinam', 'Gunung Arfak Tinggi', 'Habitat Hiu Paus', 'Asal Burung Pintar'],
