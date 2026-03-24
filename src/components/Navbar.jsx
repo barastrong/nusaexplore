@@ -74,7 +74,7 @@ export default function Navbar() {
         <div className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
           <button
             className={`nav-btn ${activeLink === 'home' ? 'active' : ''}`}
-            onClick={() => handleNavigation('/', 'home')}
+            onClick={() => scrollToSection('home', 'home')}
           >
             Beranda
           </button>
