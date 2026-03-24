@@ -48,6 +48,7 @@ export default function MapPage() {
   const [hoveredRegionId, setHoveredRegionId] = useState(null);
   const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [selectedRegionName, setSelectedRegionName] = useState(null);
+  const [isRegionSelected, setIsRegionSelected] = useState(false);
   const [lockedRegionNamePopup, setLockedRegionNamePopup] = useState(null);
   const [lockedRegionIdPopup, setLockedRegionIdPopup] = useState(null);
   const [zoom, setZoom] = useState(1);
@@ -85,14 +86,21 @@ export default function MapPage() {
       setHoveredRegionId(null);
       setSelectedRegionId(null);
       setSelectedRegionName(null);
+      setIsRegionSelected(false);
       setZoomCenterX(403.5);
       setZoomCenterY(170);
     }, 600);
   };
 
   const handleRegionClick = (regionId, regionName, centerX, centerY) => {
+    if (isRegionSelected) {
+      console.log('Region already selected. Click ignored.');
+      return;
+    }
+    
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
+    setIsRegionSelected(true);
     const targetZoom = 2.5;
     const offsetX = (403.5 - centerX) / targetZoom;
     const offsetY = (170 - centerY) / targetZoom;
@@ -104,12 +112,18 @@ export default function MapPage() {
   };
 
   const handleLockedRegionClick = (regionId, regionName) => {
+    if (isRegionSelected) {
+      console.log('Region already selected. Click ignored.');
+      return;
+    }
+    
     const { unlockCost } = getDifficultyInfo(regionId);
     setSelectedRegionName(null);
     setSelectedRegionId(null);
     setLockedRegionNamePopup(regionName);
     setLockedRegionIdPopup(regionId);
     setLockedRegionKeyCost(unlockCost);
+    setIsRegionSelected(true);
   };
 
   const handleUnlockRegion = (regionId, keyCost) => {
@@ -247,6 +261,7 @@ export default function MapPage() {
               onRegionClick={handleRegionClick}
               onLockedRegionClick={handleLockedRegionClick}
               selectedRegionId={selectedRegionId}
+              isRegionSelected={isRegionSelected}
               zoom={zoom}
               zoomCenterX={zoomCenterX}
               zoomCenterY={zoomCenterY}
@@ -271,7 +286,7 @@ export default function MapPage() {
         <LockedRegionPopup
           regionName={lockedRegionNamePopup}
           regionId={lockedRegionIdPopup}
-          onClose={() => setLockedRegionNamePopup(null)}
+          onClose={() => { setLockedRegionNamePopup(null); setIsRegionSelected(false); }}
           onUnlock={() => handleUnlockRegion(lockedRegionIdPopup, lockedRegionKeyCost)}
           keyValue={keyValue}
           keyRequired={lockedRegionKeyCost}

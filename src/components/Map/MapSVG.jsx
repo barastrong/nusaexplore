@@ -168,7 +168,7 @@ const regions = [
   },
 ];
 
-export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, selectedRegionId, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0 }) {
+export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, selectedRegionId, isRegionSelected, zoom = 1, zoomCenterX = 420, zoomCenterY = 170, panX = 0, panY = 0 }) {
   const computedStyle = useMemo(() => ({}), []);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
@@ -187,6 +187,11 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
   };
 
   const handleRegionClick = (regionId, regionName, e) => {
+    // Jika sudah ada region yang dipilih, jangan izinkan klik
+    if (isRegionSelected) {
+      return;
+    }
+    
     if (onRegionClick) {
       const pathElement = e.target;
       const bbox = pathElement.getBBox();
@@ -213,11 +218,11 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
             data-id={region.id}
             data-name={region.name}
             className={`island ${hoveredRegionId === region.id ? 'active-province' : ''} ${selectedRegionId === region.id ? 'selected-province' : ''} ${selectedRegionId && selectedRegionId !== region.id ? 'unselected-province' : ''}`}
-            onMouseEnter={(e) => handleMouseEnter(e, region.id)}
-            onMouseLeave={() => onRegionHover(null)}
+            onMouseEnter={(e) => !isRegionSelected && handleMouseEnter(e, region.id)}
+            onMouseLeave={() => !isRegionSelected && onRegionHover(null)}
             onClick={(e) => handleRegionClick(region.id, region.name, e)}
             fill="none"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: isRegionSelected && selectedRegionId !== region.id ? 'not-allowed' : 'pointer' }}
           />
         ))}
       </g>

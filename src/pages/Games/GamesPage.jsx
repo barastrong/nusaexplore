@@ -102,7 +102,7 @@ export default function GamesPage() {
               </div>
               <div className="gsc-pills">
                 <span className="gsc-pill">Drag & Drop</span>
-                <span className="gsc-pill">4×4 Grid</span>
+                <span className="gsc-pill">4x4 Grid</span>
                 {province && <span className="gsc-pill">{province.name}</span>}
                 <span className="gsc-pill">Hitung Langkah</span>
               </div>

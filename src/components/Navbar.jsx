@@ -102,10 +102,16 @@ export default function Navbar() {
           >
             Mulai Jelajah
           </button>
+          <button
+            className="nav-btn theme-btn-mobile"
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? '🌙 Mode Terang' : '☀️ Mode Gelap'}
+          </button>
         </div>
 
         <button
-          className="theme-toggle"
+          className="theme-toggle theme-toggle-desktop"
           onClick={toggleTheme}
           title={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
         >

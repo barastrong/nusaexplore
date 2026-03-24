@@ -12,6 +12,7 @@ export default function MapPage() {
   const [hoveredRegionId, setHoveredRegionId] = useState(null);
   const [selectedRegionId, setSelectedRegionId] = useState(null);
   const [selectedRegionName, setSelectedRegionName] = useState(null);
+  const [isRegionSelected, setIsRegionSelected] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [zoomCenterX, setZoomCenterX] = useState(403.5);
   const [zoomCenterY, setZoomCenterY] = useState(170);
@@ -42,12 +43,19 @@ export default function MapPage() {
       setHoveredRegionId(null);
       setSelectedRegionId(null);
       setSelectedRegionName(null);
+      setIsRegionSelected(false);
       setZoomCenterX(403.5);
       setZoomCenterY(170);
     }, 600);
   };
 
   const handleRegionClick = (regionId, regionName, centerX, centerY) => {
+    // Jika sudah ada region yang dipilih, jangan izinkan klik region lain
+    if (isRegionSelected) {
+      console.log('Region already selected. Click ignored.');
+      return;
+    }
+    
     console.log('=== MAP PAGE - REGION CLICKED ===');
     console.log('Region ID:', regionId);
     console.log('Region Name:', regionName);
@@ -56,8 +64,10 @@ export default function MapPage() {
     
     setSelectedRegionId(regionId);
     setSelectedRegionName(regionName);
+    setIsRegionSelected(true);
     
     console.log('State updated - selectedRegionName:', regionName);
+    console.log('State updated - isRegionSelected: true');
     
     // Smooth zoom dengan center ke region yang diklik
     const targetZoom = 2.5;
@@ -106,6 +116,7 @@ export default function MapPage() {
               hoveredRegionId={hoveredRegionId}
               onRegionClick={handleRegionClick}
               selectedRegionId={selectedRegionId}
+              isRegionSelected={isRegionSelected}
               zoom={zoom}
               zoomCenterX={zoomCenterX}
               zoomCenterY={zoomCenterY}

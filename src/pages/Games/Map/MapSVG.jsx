@@ -355,7 +355,7 @@ export default function MapSVG({ onRegionHover, hoveredRegionId, onRegionClick, 
                 height={containerHeight - 4}
                 rx="6"
                 ry="6"
-                fill="#1a1f3a"
+                fill={document.documentElement.getAttribute('data-theme') === 'light' ? '#FFFFFF' : '#1a1f3a'}
                 stroke="none"
               />
               
