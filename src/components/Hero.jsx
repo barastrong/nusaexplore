@@ -41,7 +41,6 @@ export default function Hero() {
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }}
             />
           </div>
-          <div className="img-tag">Seni Tekstil · Warisan UNESCO</div>
         </div>
 
         {/* Gambar kecil kiri bawah */}
