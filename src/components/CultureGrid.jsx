@@ -213,16 +213,6 @@ export default function CultureGrid() {
                 </div>
               </div>
 
-              {/* CTA */}
-              <div className="modal-cta">
-                <button className="btn-gold" onClick={() => { handleClose(); navigate('/map'); }}>
-                  Jelajahi di Peta
-                </button>
-                <button className="btn-outline" onClick={() => { handleClose(); navigate('/games'); }}>
-                  Coba Games
-                </button>
-              </div>
-
             </div>
           </div>
         </div>
