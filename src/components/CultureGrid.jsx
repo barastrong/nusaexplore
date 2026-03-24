@@ -122,7 +122,7 @@ export default function CultureGrid() {
             className={`culture-card ${culture.className}`}
             onClick={() => setSelected(culture)}
           >
-            <div className={`cc-bg ${culture.className.split(' ')[0]}`}>
+            <div className="cc-bg">
               <img src={culture.image} alt={culture.title} className="cc-bg-img" />
             </div>
             <div className="cc-overlay"></div>

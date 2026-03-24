@@ -71,15 +71,6 @@ export default function Navbar() {
 
         <div className="nav-divider" />
 
-        <button
-          className={`nav-hamburger ${isMenuOpen ? 'active' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-        >
-          <span /><span /><span />
-        </button>
-
         <div className={`nav-links ${isMenuOpen ? 'nav-links-open' : ''}`}>
           <button
             className={`nav-btn ${activeLink === 'home' ? 'active' : ''}`}
@@ -111,14 +102,24 @@ export default function Navbar() {
           >
             Mulai Jelajah
           </button>
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
-          >
-            {theme === 'dark' ? '🌙' : '☀️'}
-          </button>
         </div>
+
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
+        >
+          {theme === 'dark' ? '🌙' : '☀️'}
+        </button>
+
+        <button
+          className={`nav-hamburger ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span /><span /><span />
+        </button>
 
       </nav>
     </div>
