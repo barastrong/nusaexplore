@@ -3,8 +3,9 @@
   background: var(--bg);
   background-image: var(--pattern);
   background-size: 96px 96px;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
+
 .games-header {
   background: var(--bg2);
   background-image: var(--pattern);
@@ -35,6 +36,7 @@
   transition: border-color .25s, transform .25s, box-shadow .25s;
   position: relative;
 }
+
 .game-select-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: var(--shadow); }
 .gsc-top {
   padding: 40px; position: relative;
@@ -591,7 +593,8 @@
 
 /* ── Province-locked game header ── */
 .games-back-btn {
-  display: inline-flex;
+  display: block;
+  width: fit-content;
   align-items: center;
   gap: 6px;
   padding: 8px 16px;
@@ -604,8 +607,7 @@
   cursor: pointer;
   transition: all 0.2s;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  margin-bottom: 0;
-  margin-top: 16px;
+  margin-bottom: 20px;
 }
 .games-back-btn:hover { border-color: rgba(201,168,76,0.4); color: var(--gold); }
 

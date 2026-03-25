@@ -4,7 +4,7 @@ import { ClipLoader } from 'react-spinners';
 import { provinceDetailData } from '../../data/provinceDetailData';
 import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineMap, HiOutlineChatAlt2 } from 'react-icons/hi';
 import { FiKey, FiCheckCircle, FiLock } from 'react-icons/fi';
-import { claimProvinceReward, hasClaimedReward, canClaimReward } from '../../utils/localStorage';
+import { claimProvinceReward, hasClaimedReward, canClaimReward, getUserData } from '../../utils/localStorage';
 import { getDifficultyInfo } from '../Games/MapPage';
 import '../../styles/detailmap.css';
 
@@ -25,7 +25,18 @@ export default function DetailMapPage() {
       const foundProvince = provinceDetailData.find(
         p => p.slug === name || p.name.toLowerCase().replace(/\s+/g, '-') === name
       );
+      
       if (foundProvince) {
+        // Check if province is unlocked
+        const userData = getUserData();
+        const isUnlocked = userData.unlockedRegions.includes(name);
+        
+        if (!isUnlocked) {
+          // Province is locked, redirect to map
+          navigate('/map-games');
+          return;
+        }
+        
         setProvince(foundProvince);
         setClaimed(hasClaimedReward(name));
         setCanClaim(canClaimReward(name));
@@ -37,6 +48,16 @@ export default function DetailMapPage() {
     
     return () => clearTimeout(timer);
   }, [name, navigate]);
+
+  // Reveal animation on scroll
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => obs.observe(r));
+    return () => obs.disconnect();
+  }, [loading]);
 
   const handleClaim = () => {
     const { keyReward } = getDifficultyInfo(name);
@@ -77,7 +98,7 @@ export default function DetailMapPage() {
         </div>
       )}
       {/* Hero Section */}
-      <section className="detail-hero" style={{ backgroundImage: `url(${province.heroImage})` }}>
+      <section className="detail-hero reveal" style={{ backgroundImage: `url(${province.heroImage})` }}>
         <div className="detail-hero-overlay"></div>
         <div className="detail-hero-content">
           <button className="detail-back-btn" onClick={() => navigate('/map-games')}>
@@ -92,7 +113,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Quick Info */}
-      <section className="detail-quick-info">
+      <section className="detail-quick-info reveal">
         <div className="detail-container">
           <div className="quick-info-grid">
             <div className="quick-info-card">
@@ -128,7 +149,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* About Section */}
-      <section className="detail-about">
+      <section className="detail-about reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Tentang</span>
@@ -141,7 +162,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Culture Section */}
-      <section className="detail-culture">
+      <section className="detail-culture reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Budaya</span>
@@ -163,7 +184,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Tourism Section */}
-      <section className="detail-tourism">
+      <section className="detail-tourism reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Wisata</span>
@@ -185,7 +206,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Culinary Section */}
-      <section className="detail-culinary">
+      <section className="detail-culinary reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Kuliner</span>
@@ -207,7 +228,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Fun Facts */}
-      <section className="detail-facts">
+      <section className="detail-facts reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Fakta Menarik</span>
@@ -226,7 +247,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="detail-cta">
+      <section className="detail-cta reveal">
         <div className="detail-container">
           <div className="cta-content">
             <h2>Jelajahi Provinsi Lainnya</h2>

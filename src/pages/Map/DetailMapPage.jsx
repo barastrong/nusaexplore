@@ -12,6 +12,7 @@ export default function DetailMapPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setLoading(true);
     
     const timer = setTimeout(() => {
@@ -29,6 +30,16 @@ export default function DetailMapPage() {
     
     return () => clearTimeout(timer);
   }, [name, navigate]);
+
+  // Reveal animation on scroll
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => obs.observe(r));
+    return () => obs.disconnect();
+  }, [loading]);
 
   if (loading) {
     return (
@@ -51,7 +62,7 @@ export default function DetailMapPage() {
   return (
     <div className="detail-map-page">
       {/* Hero Section */}
-      <section className="detail-hero" style={{ backgroundImage: `url(${province.heroImage})` }}>
+      <section className="detail-hero reveal" style={{ backgroundImage: `url(${province.heroImage})` }}>
         <div className="detail-hero-overlay"></div>
         <div className="detail-hero-content">
           <button className="detail-back-btn" onClick={() => navigate('/map')}>
@@ -66,7 +77,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Quick Info */}
-      <section className="detail-quick-info">
+      <section className="detail-quick-info reveal">
         <div className="detail-container">
           <div className="quick-info-grid">
             <div className="quick-info-card">
@@ -102,7 +113,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* About Section */}
-      <section className="detail-about">
+      <section className="detail-about reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Tentang</span>
@@ -115,7 +126,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Culture Section */}
-      <section className="detail-culture">
+      <section className="detail-culture reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Budaya</span>
@@ -137,7 +148,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Tourism Section */}
-      <section className="detail-tourism">
+      <section className="detail-tourism reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Wisata</span>
@@ -159,7 +170,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Culinary Section */}
-      <section className="detail-culinary">
+      <section className="detail-culinary reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Kuliner</span>
@@ -181,7 +192,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* Fun Facts */}
-      <section className="detail-facts">
+      <section className="detail-facts reveal">
         <div className="detail-container">
           <div className="detail-section-header">
             <span className="section-label">Fakta Menarik</span>
@@ -200,7 +211,7 @@ export default function DetailMapPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="detail-cta">
+      <section className="detail-cta reveal">
         <div className="detail-container">
           <div className="cta-content">
             <h2>Jelajahi Provinsi Lainnya</h2>

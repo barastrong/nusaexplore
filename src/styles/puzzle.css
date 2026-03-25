@@ -388,6 +388,19 @@
 }
 .puzzle-progress-item.active .puzzle-progress-num { background: var(--gold); color: #1a1408; }
 .puzzle-progress-item.done .puzzle-progress-num { background: #40916C; color: #fff; }
+
+[data-theme="light"] .puzzle-progress-num {
+  background: rgba(139,94,32,0.12);
+  color: rgba(26,20,8,0.5);
+}
+[data-theme="light"] .puzzle-progress-item.active .puzzle-progress-num {
+  background: var(--gold);
+  color: #1a1408;
+}
+[data-theme="light"] .puzzle-progress-item.done .puzzle-progress-num {
+  background: #40916C;
+  color: #fff;
+}
 .puzzle-progress-lbl {
   font-size: 11px;
   font-weight: 600;

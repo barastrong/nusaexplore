@@ -64,6 +64,14 @@
   min-width: 300px;
   text-align: center;
 }
+
+[data-theme="light"] .unlock-card {
+  background: linear-gradient(160deg, rgba(250,245,236,0.97), rgba(237,229,214,0.97));
+  border: 1px solid rgba(139, 105, 20, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(139,105,20,0.1),
+    0 24px 80px rgba(80,50,10,0.3);
+}
 @keyframes cardPop {
   from { opacity: 0; transform: scale(0.7) translateY(30px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -153,12 +161,20 @@
   animation: textReveal 0.5s 0.7s ease both;
 }
 
+[data-theme="light"] .unlock-label {
+  color: rgba(26, 20, 8, 0.5);
+}
+
 .unlock-name {
   font-family: 'Playfair Display', serif;
   font-size: clamp(22px, 4vw, 32px);
   font-weight: 800;
   line-height: 1.2;
   animation: textReveal 0.5s 0.85s ease both;
+}
+
+[data-theme="light"] .unlock-name {
+  color: #18120A;
 }
 
 .unlock-badge {
@@ -176,6 +192,10 @@
   margin: 6px 0 0;
   font-style: italic;
   animation: textReveal 0.5s 1.3s ease both;
+}
+
+[data-theme="light"] .unlock-hint {
+  color: rgba(26, 20, 8, 0.3);
 }
 
 @keyframes textReveal {

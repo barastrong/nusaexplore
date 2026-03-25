@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import QuizGame from './QuizGame';
 import PuzzleGame from './PuzzleGame';
 import { provinceDetailData } from '../../data/provinceDetailData';
+import { getUserData } from '../../utils/localStorage';
 import '../../styles/games.css';
 
 export default function GamesPage() {
@@ -13,8 +14,31 @@ export default function GamesPage() {
   // Scroll to top on mount
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
 
-  // Province-locked mode
+  // Province-locked mode with route protection
   const province = slug ? provinceDetailData.find(p => p.slug === slug) : null;
+  
+  // Check if province is unlocked when slug is provided
+  useEffect(() => {
+    if (slug && province) {
+      const userData = getUserData();
+      const isUnlocked = userData.unlockedRegions.includes(slug);
+      
+      if (!isUnlocked) {
+        // Province is locked, redirect to map
+        navigate('/map-games');
+      }
+    }
+  }, [slug, province, navigate]);
+
+  // Reveal animation on scroll
+  useEffect(() => {
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => obs.observe(r));
+    return () => obs.disconnect();
+  }, []);
 
   const handleBack = () => {
     if (activeGame) {
@@ -29,7 +53,7 @@ export default function GamesPage() {
   return (
     <div className="games-page">
       {!activeGame && (
-        <div className="games-header">
+        <div className="games-header reveal">
           {slug && (
             <button className="games-back-btn" onClick={handleBack}>
               ← Kembali ke Artikel
@@ -55,7 +79,7 @@ export default function GamesPage() {
 
       {!activeGame && (
         <div className="games-select">
-          <div className="game-select-card">
+          <div className="game-select-card reveal">
             <div className="gsc-top" style={{background:'linear-gradient(135deg,#0A1A14,#1A4A30)'}}>
               <div className="gsc-badge b-quiz">Quiz Budaya</div>
               <div className="gsc-icon" style={{background:'rgba(45,155,94,0.2)'}}>
@@ -83,7 +107,7 @@ export default function GamesPage() {
             </div>
           </div>
 
-          <div className="game-select-card">
+          <div className="game-select-card reveal">
             <div className="gsc-top" style={{background:'linear-gradient(135deg,#1A1508,#3D2E08)'}}>
               <div className="gsc-badge b-puzzle">Puzzle</div>
               <div className="gsc-icon" style={{background:'rgba(201,168,76,0.15)'}}>
