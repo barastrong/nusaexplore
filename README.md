@@ -209,11 +209,6 @@ finishAllGames()
 - Gambar menggunakan placeholder dan referensi dari internet
 - Quiz questions dibuat untuk tujuan edukatif
 
-### Fitur LocalStorage
-- Progress user disimpan di browser localStorage
-- Data meliputi: keys, unlocked regions, completed games, claimed rewards
-- Clear browser data akan menghapus progress
-
 ### Browser Support
 - Chrome/Edge (recommended)
 - Firefox
@@ -236,20 +231,6 @@ finishAllGames()
 
 - Puzzle game mungkin lag pada device low-end
 - SVG map scaling pada screen sangat kecil (<360px)
-
-## 🔮 Future Improvements
-
-- [ ] Leaderboard system
-- [ ] More mini games (memory game, word search)
-- [ ] Social sharing features
-- [ ] Audio narration untuk konten
-- [ ] Multiplayer quiz mode
-- [ ] Achievement badges
-- [ ] Export/import progress data
-
-## 📄 License
-
-MIT License - Feel free to use this project for educational purposes.
 
 ---
 
