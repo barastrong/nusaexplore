@@ -2,11 +2,6 @@
 
 Platform interaktif untuk menjelajahi kekayaan budaya Indonesia dengan peta interaktif dan mini games edukatif.
 
-## 👨‍💻 Developer
-
-**Bintang Bara Adyasta**  
-SMK TELKOM SIDOARJO
-
 ## 🚀 Teknologi yang Digunakan
 
 ### Core Technologies
@@ -177,21 +172,6 @@ npm run preview
 1. Klik icon bulan/matahari di navbar
 2. Theme akan tersimpan otomatis
 
-## 🎮 Console Commands
-
-Buka browser console (F12) untuk menggunakan command berikut:
-
-```javascript
-// Reset semua data user
-resetUserData()
-
-// Selesaikan puzzle game untuk Bali
-finishGameBali()
-
-// Selesaikan semua game untuk semua provinsi
-finishAllGames()
-```
-
 ## 📸 Sumber Referensi
 
 ### Gambar & Media
@@ -231,6 +211,11 @@ finishAllGames()
 
 - Puzzle game mungkin lag pada device low-end
 - SVG map scaling pada screen sangat kecil (<360px)
+
+## 👨‍💻 Developer
+
+**Bintang Bara Adyasta**  
+SMK TELKOM SIDOARJO
 
 ---
 
